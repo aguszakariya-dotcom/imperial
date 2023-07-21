@@ -10,8 +10,8 @@ require_once 'templates/header.php';
 <!-- content -->
 
 
-    <div class="row justify-content-center px-4 mt-5 mb-3">
-        <div class="col-lg-3 px-2 kolom-kiri">
+    <div class="row justify-content-center mt-2 mb-2">
+        <div class="col-lg-3 col-md-6 col-sm-6 mb-3 kolom-kiri">
             <div class="card shadow">
                 <div class="card-header px-2 text-center">
                     <span>Input data Produksi</span>
@@ -160,14 +160,14 @@ require_once 'templates/header.php';
                 <div class="card-body">
                     <table class="table table-sm table-hover table-responsiv" id="table-data">
                             <thead>
-                                <tr class=" fs-6">
+                                <tr>
                                     <th>No.</th>
                                     <th class="col-sm-2">Date</th>
                                     <th>Customer</th>
                                     <th>Code</th>
                                     <th>Style</th>
                                     <th>Warna</th>
-                                    <th>Jumlah</th>
+                                    <th>QTY</th>
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>action</th>
@@ -204,8 +204,8 @@ require_once 'templates/header.php';
                                     </td>
                                     <td class="px-2">
                                         <div class="d-flex">                                        
-                                                <a href="produksi.php?p=ubah&id=<?= $row['id']; ?>" class="btn btn-sm btn-outline-primary" id="editSample"><i class="fa-solid fa-file-pen"></i></a> &nbsp; 
-                                                <a href="produksi.php?p=hapus&id=<?= $row['id']; ?>" class="btn btn-sm btn-outline-danger float-end"><i class="fa-solid fa-trash-can"></i></a>                                        
+                                                <a href="produksi.php?p=ubah&id=<?= $row['id']; ?>" class="text-info" id="editSample"><i class="fa-solid fa-file-pen"></i></a> &nbsp; 
+                                                <a href="produksi.php?p=hapus&id=<?= $row['id']; ?>" class="text-danger float-end"><i class="fa-solid fa-trash-can"></i></a>                                        
                                         </div>
                                     </td>
                                 </tr>

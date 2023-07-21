@@ -43,7 +43,7 @@ $jumlahDataProduksi = $dataProduksi['totalDataProduksi'];
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
   <script src="https://unpkg.com/feather-icons"></script>
   <link rel="stylesheet" href="./css/swal.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/myStyle.css">
     <link rel="stylesheet" href="./css/dataTables.bootstrap5.min.css">
     <script src="./js/jquery-3.5.1.js"></script>
     <script src="./js/jquery.dataTables.min.js"></script>
@@ -51,9 +51,7 @@ $jumlahDataProduksi = $dataProduksi['totalDataProduksi'];
     <script src="./js/swal.js"></script>
   <style>
     
-    body {
-      font-family: 'Poppins', sans-serif;
-      font-size: smaller;
+    body {      
       /* background-image: url('<?= $background['image']; ?>'); */
       background-size: cover;
       background-repeat: no-repeat;
