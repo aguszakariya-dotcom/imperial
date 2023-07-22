@@ -154,37 +154,3 @@ $jumlahDataProduksi = $dataProduksi['totalDataProduksi'];
     return $hari . ', ' . $tgl . ' ' . $bln . ' ' . $thn;
   }
   ?>
-
-
-
-<?php if (isset($_SESSION['sukses'])) { ?>
-    <script>
-        Swal.fire({
-            position: "top-start",
-            icon: "success",
-            title: "<?php echo $_SESSION['sukses']; ?>",
-            showConfirmButton: false,
-            timer: 1500
-        }).then(() => {
-            window.location.href = "sample.php";
-        });
-    </script>
-    <?php unset($_SESSION['sukses']); ?>
-<?php } ?>
-
-<?php if (isset($_SESSION['gagal'])) { ?>
-    <script>
-        Swal.fire({
-            position: "top-end",
-            icon: "error",
-            title: "<?php echo $_SESSION['gagal']; ?>",
-            showConfirmButton: false,
-            timer: 1500
-        }).then(() => {
-            window.location.href = "sample.php";
-        });
-    </script>
-    <?php unset($_SESSION['gagal']); ?>
-<?php } ?>
-
-

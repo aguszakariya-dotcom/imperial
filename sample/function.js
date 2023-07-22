@@ -1,11 +1,31 @@
 $(document).ready(function() {
-    $('.kolom-kiri').hide(2000);
+    // $('.kolom-kiri').hide(2000);
     
-});
+
 
     
     function myFunction() {
-    $('.kolom-kiri').show(1000);
+    // $('.kolom-kiri').show(1000);
+    // $('#save').html('Simpan');
+    if($('#customerNya').val() == '') {
+        $('#tombol').hide();
+    } else {
+        $('#tombol').show()
+    }
+    if ($('#tanggalNya').val() == '') {
+        $('#update').hide();
+    } else {
+        $('#update').show();
+        $('#save').html('Tambahkan Data');
+
+    }
+    if($('#customerNya').keypress(function(){
+            $('#tombol').show()
+        }));
+
+    }
+    function editFunction() {
+    // $('.kolom-kiri').show(1000);
     // $('#save').html('Simpan');
     if($('#customerNya').val() == '') {
         $('#tombol').hide();
@@ -26,7 +46,4 @@ $(document).ready(function() {
     // alert("Tombol diklik!");
 }
 
-function editFunction() {
-    $('#update').show();
-    $('.kolom-kiri').show(1000);
-}
+});

@@ -6,14 +6,223 @@ $bg_img = 'bg.jpg';
 ?>
 <?php 
 require_once 'sample/functions.php';
-require_once 'sample/edit.php';
+// require_once 'sample/edit.php';
 
 ?>
 
 <!-- function -->
+<?php 
+
+if (isset($_GET['s'])) {
+    if ($_GET['s'] == "ubah") {
+        $id = $_GET['id'];
+        $sa = mysqli_query($koneksi, "SELECT * FROM sample WHERE id = '$_GET[id]'");
+        $row = mysqli_fetch_assoc($sa);
+        if ($row) {
+            $vnama_customer = $row['nama_customer'];
+            $vtanggal = $row['tanggal'];
+            // $vtahun = $row['tahun'];
+            $vstyle = $row['style'];
+            $vcode = $row['code'];
+            $vwarna = $row['warna'];
+            $vsize = $row['size'];
+            $vharga = $row['harga'];
+            $vhabis = $row['habis'];
+            $vacc_1 = $row['acc_1'];
+            $vacc_2 = $row['acc_2'];
+            $vketerangan = $row['keterangan'];
+            $vgambar = $row['gambar'];
+            $vgambar2 = $row['gambar2'];
+        }
+    } elseif (isset($_GET['s']) == "hapusSample") {
+        $hapus = mysqli_query($koneksi, "DELETE FROM sample WHERE id = '$_GET[id]'");
+        if ($hapus) {
+            $_SESSION['sukses'] = "Data berhasil dihapus";
+            echo '<script>
+                    Swal.fire({
+                        position: "top-start",
+                        icon: "success",
+                        title: "'. $_SESSION['sukses'] .'",
+                        showConfirmButton: false,
+                        timer: 1500,
+                        
+                    });
+                </script>';
+        } else {
+            $_SESSION['gagal'] = "Data gagal dihapus";
+            echo '<script>
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "'. $_SESSION['gagal'] .'",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                </script>';
+        }
+    }
+}
+
+
+if (isset($_POST['update'])) {
+    if (updateSample($_POST) > 0) {
+        $_SESSION['sukses'] = 'Data Berhasil Diupdate!';
+        
+    } else {
+        $_SESSION['gagal'] = 'Data Gagal Diubah!';
+        
+    }
+}
+
+if (isset($_POST['save'])) {
+    if (saveSample($_POST) > 0) {
+        $_SESSION['sukses'] = 'Data Berhasil Disimpan!';
+        echo '<script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "'. $_SESSION['sukses'] .'",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = "sample.php";
+                });
+            </script>';
+    } else {
+        $_SESSION['gagal'] = 'Data Gagal Disimpan!';
+        echo '<script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "'. $_SESSION['gagal'] .'",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).;
+            </script>';
+    }
+}
+
+if (isset($_POST['savePro'])) {
+    if (saveProduksi($_POST) > 0) {
+        $_SESSION['sukses'] = 'Data Berhasil Disimpan!';
+        echo '<script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "'. $_SESSION['sukses'] .'",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).then(() => {
+                    window.location.href = "produksi.php";
+                });
+            </script>';
+    } else {
+        $_SESSION['gagal'] = 'Data Gagal Disimpan!';
+        echo '<script>
+                Swal.fire({
+                    position: "top-end",
+                    icon: "error",
+                    title: "'. $_SESSION['gagal'] .'",
+                    showConfirmButton: false,
+                    timer: 1500
+                }).;
+            </script>';
+    }
+}
+?>
+
+<?php if (isset($_SESSION['sukses'])) { ?>
+    <script>
+        Swal.fire({
+            position: "top-start",
+            icon: "success",
+            title: "<?php echo $_SESSION['sukses']; ?>",
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            window.location.href = "sample.php";
+        });
+    </script>
+    <?php unset($_SESSION['sukses']); ?>
+<?php } ?>
+
+<?php if (isset($_SESSION['gagal'])) { ?>
+    <script>
+        Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "<?php echo $_SESSION['gagal']; ?>",
+            showConfirmButton: false,
+            timer: 1500
+        }).then(() => {
+            window.location.href = "sample.php";
+        });
+    </script>
+    <?php unset($_SESSION['gagal']); ?>
+<?php } ?>
 <!-- content halaman -->
 
 <div class="row justify-content-center mt-2 mb-2">
+<div class="col-lg-7 col-md-11 col-sm-12 mb-3 px-2">
+        <div class="card shadow">
+            <div class="card-header  p-1">
+                <!-- <div class=""></div> -->
+                <button class="btn btn-sm float-start btn-outline-primary" onclick="myFunction()"><i data-feather="eye-off"></i></button>
+                <div id="importSample">
+                    <button type="submit" class="btn btn-sm btn-outline-success float-end" id="proSample" name="proSample" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">to Produksi</button>
+                </div>
+                <div class="text-center fs-6 fw-bold text-info"><i class="feather" data-feather="users"></i>&nbsp;Jumlah Customer <?= $totalCustomer; ?> &nbsp;&nbsp;&nbsp;&nbsp;
+                <i class="feather text-primary" data-feather="file-text"></i><span class="text-primary">&nbsp;Jumlah Data Sample <?= $totalSample; ?></span></div>
+
+            </div>
+            <div class="card-body ">
+                <table class="table table-sm table-hover" id="table-data">
+                    <thead>
+                        <tr>
+                            <th class="text-center">No.</th>
+                            <th class="col-2">Date</th>
+                            <th class="col-2">Customer</th>
+                            <th class="col-2">Style</th>
+                            <th>Code</th>
+                            <th>Warna</th>
+                            <th>Image</th>
+                            <th>action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        $query = mysqli_query($koneksi, "SELECT * FROM sample ORDER BY id DESC");
+                        while ($row = mysqli_fetch_assoc($query)) {
+                        ?>
+                            <tr>
+                                <td class="text-center"><?= $no++ ?></td>
+                                <td><?= tgl_kita($row['tanggal']) ?></td>
+                                <td><?= $row['nama_customer'] ?></td>
+                                <td><?= $row['style'] ?></td>
+                                <td><?= $row['code'] ?></td>
+                                <td><?= $row['warna'] ?></td>
+                                <td><img src="img/<?= $row['gambar'] ?>" alt="<?= $row['gambar'] ?>" class="zoom" onerror="if (this.src != 'img/nophoto.jpg') this.src = 'img/nophoto.jpg';" width="28px" height="36px"></td>
+                                <td class="px-2">
+                                    <div class="d-flex">
+                                        <?php
+                                        if ($row['harga'] == '0') {
+                                            echo '<span class="text-warning"><i data-feather="shopping-cart"></i></span>';
+                                        } else {
+                                            echo '<span class="text-success"><i data-feather="dollar-sign"></i></span>';
+                                        }
+                                        ?>
+                                        &nbsp;<a href="sample.php?s=ubah&id=<?= $row['id']; ?>" class=" text-primary" id="editSample" onclick="editFunction()"><i data-feather="edit"></i></a> &nbsp; &nbsp;
+                                        <a href="sample.php?s=hapusSample&id=<?= $row['id']; ?>" class="text-danger"><i data-feather="trash-2"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
     <div class="col-lg-3 col-md-6 col-sm-6 mb-3 kolom-kiri">
         <div class="card shadow">
             <div class="card-header text-center text-input">Form Sample</div>
@@ -119,66 +328,7 @@ require_once 'sample/edit.php';
     </div>
 
 
-    <div class="col-lg-7 col-md-11 col-sm-12 mb-3 px-2">
-        <div class="card shadow">
-            <div class="card-header  p-1">
-                <!-- <div class=""></div> -->
-                <button class="btn btn-sm float-start btn-outline-primary" onclick="myFunction()"><i data-feather="eye-off"></i></button>
-                <div id="importSample">
-                    <button type="submit" class="btn btn-sm btn-outline-success float-end" id="proSample" name="proSample" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">to Produksi</button>
-                </div>
-                <div class="text-center fs-6 fw-bold text-info"><i class="feather" data-feather="users"></i>&nbsp;Jumlah Customer <?= $totalCustomer; ?> &nbsp;&nbsp;&nbsp;&nbsp;
-                <i class="feather text-primary" data-feather="file-text"></i><span class="text-primary">&nbsp;Jumlah Data Sample <?= $totalSample; ?></span></div>
-
-            </div>
-            <div class="card-body ">
-                <table class="table table-sm table-hover" id="table-data">
-                    <thead>
-                        <tr>
-                            <th class="text-center">No.</th>
-                            <th class="col-2">Date</th>
-                            <th class="col-2">Customer</th>
-                            <th class="col-2">Style</th>
-                            <th>Code</th>
-                            <th>Warna</th>
-                            <th>Image</th>
-                            <th>action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $no = 1;
-                        $query = mysqli_query($koneksi, "SELECT * FROM sample ORDER BY id DESC");
-                        while ($row = mysqli_fetch_assoc($query)) {
-                        ?>
-                            <tr>
-                                <td class="text-center"><?= $no++ ?></td>
-                                <td><?= tgl_kita($row['tanggal']) ?></td>
-                                <td><?= $row['nama_customer'] ?></td>
-                                <td><?= $row['style'] ?></td>
-                                <td><?= $row['code'] ?></td>
-                                <td><?= $row['warna'] ?></td>
-                                <td><img src="img/<?= $row['gambar'] ?>" alt="<?= $row['gambar'] ?>" class="zoom" onerror="if (this.src != 'img/nophoto.jpg') this.src = 'img/nophoto.jpg';" width="28px" height="36px"></td>
-                                <td class="px-2">
-                                    <div class="d-flex">
-                                        <?php
-                                        if ($row['harga'] == '0') {
-                                            echo '<span class="text-warning"><i data-feather="shopping-cart"></i></span>';
-                                        } else {
-                                            echo '<span class="text-success"><i data-feather="dollar-sign"></i></span>';
-                                        }
-                                        ?>
-                                        &nbsp;<a href="sample.php?s=ubah&id=<?= $row['id']; ?>" class=" text-primary" id="editSample" onclick="editFunction()"><i data-feather="edit"></i></a> &nbsp; &nbsp;
-                                        <a href="sample.php?s=hapusSample&id=<?= $row['id']; ?>" class="text-danger"><i data-feather="trash-2"></i></a>
-                                    </div>
-                                </td>
-                            </tr>
-                        <?php } ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    
 </div>
 
 <?php require_once 'templates/footer.php'; ?>
