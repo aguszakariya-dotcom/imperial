@@ -1,2 +1,0 @@
-# imperial
-just data produksi
