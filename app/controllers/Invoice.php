@@ -14,9 +14,9 @@ class Invoice extends Controller {
         $data['title'] = 'Invoice';
         $data['subTitle'] = 'Karyawan';
         $data['nama'] = $this->model('User_model')->getUser();
-        $this->view('templates/header', $data);
-        $this->view('templates/sidebar', $data);
+        $this->view('templates/header2', $data);
+        $this->view('templates/sidebar2', $data);
         $this->view('invoice/karyawan',$data);
-        $this->view('templates/footer');
+        $this->view('templates/footer2');
     }
 }
