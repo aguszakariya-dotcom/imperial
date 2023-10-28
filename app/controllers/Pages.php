@@ -1,14 +1,13 @@
 <?php 
 
-class Home extends Controller {
-    
+class Pages extends Controller {
     public function index() {
-        $data['title'] = 'Dasboard';
-        $data['subTitle'] = 'Home';
+        $data['title'] = 'Animasi | Pojok Media';
+        $data['subTitle'] = 'Animasi';
         $data['nama'] = $this->model('User_model')->getUser();
         $this->view('templates/header', $data);
         $this->view('templates/sidebar', $data);
-        $this->view('home/index',$data);
+        $this->view('pages/index',$data);
         $this->view('templates/footer');
     }
 }

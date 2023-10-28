@@ -1,3 +1,36 @@
+<?php
+  function tgl_kita($tanggal) {
+    $bulan = array(
+      1 =>   'Jan',
+      2 =>   'Feb',
+      3 =>   'Mar',
+      4 =>   'Apr',
+      5 =>   'Mei',
+      6 =>   'Jun',
+      7 =>   'Jul',
+      8 =>   'Agu',
+      9 =>   'Sep',
+      10 =>  'Okt',
+      11 =>  'Nov',
+      12 =>  'Des'
+    );
+    $hari = array(
+      1 =>   'Sen',
+      2 =>   'Sel',
+      3 =>   'Rab',
+      4 =>   'Kam',
+      5 =>   "Jum",
+      6 =>   'Sab',
+      7 =>   'Min'
+    );
+    $tgl = substr($tanggal, 8, 2);
+    $bln = substr($tanggal, 5, 2);
+    $thn = substr($tanggal, 0, 4);
+    $bln = $bulan[(int) $bln];
+    $hari = $hari[(int) date('N', strtotime($tanggal))];
+    return $hari . ', ' . $tgl . ' ' . $bln . ' ' . $thn;
+  }
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,28 +39,60 @@
   <title><?= $data['title']; ?> | <?= $data['subTitle']; ?></title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet"href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet"> -->
+  <!-- Font Awesome -->
+  <link rel="stylesheet"href="<?= BASEURL; ?>/plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet"href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet"href="<?= BASEURL; ?>/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet"href="<?= BASEURL; ?>/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet"href="<?= BASEURL; ?>/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet"href="dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet"href="<?= BASEURL; ?>/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet"href="<?= BASEURL; ?>/plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet"href="<?= BASEURL; ?>/plugins/summernote/summernote-bs4.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <link rel="stylesheet" href="<?= BASEURL; ?>/css/myStyle.css">
+  <style>
+    body {
+  font-size: 1rem;
+  font-family: "Source Sans Pro", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    /* color: dimgrey; */
+}
+    .animate__animated.animate__fadeOutLeft {
+      /* font-size: large; */
+  --animate-duration: 15s;
+}
+table{
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.9rem;
+        font-weight: 600;
+    }</style>
 </head>
-
-
-
-
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
-  <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="images/logo.png" alt="Logo" height="100" width="100">
-  </div>
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-dark">
+  <!-- <div class="preloader flex-column justify-content-center align-items-center">
+      <img class="animation__shake" src="images/bg.png" alt="sovana" height="100px">
+    </div> -->
+
+  <!-- Navbar -->
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -156,10 +221,33 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+        <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
       </li>
     </ul>
   </nav>
   <!-- /.navbar -->
+    <!-- /.navbar -->
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h4 class="m-0"><?= $data['subTitle']; ?></h4>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active"><?= $data['title']; ?></li>
+            </ol><br>
+            <div class=" float-sm-right animate__animated animate__fadeOutLeft" style="height: fit-content;">
+              <?php Flasher::flash(); ?>
+            </div>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
