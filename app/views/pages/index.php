@@ -4,3 +4,9 @@
                <!-- <iframe src="https://animate.style/" frameborder="0" height="100%"></iframe> -->
                
           </div>
+
+          <script>
+               $(document).ready(function() {
+                    $('body').addClass('sidebar-mini layout-fixed sidebar-closed sidebar-collapse');
+               })
+          </script>

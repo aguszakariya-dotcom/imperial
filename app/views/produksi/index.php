@@ -1,5 +1,5 @@
 <style>
-    .content-wrapper {
+    .content {
         /* font-size: smaller; */
         font-family: 'Times New Roman', Times, serif;
         background-image: url('https://wallpapers.com/images/featured-full/sexy-body-txdajxjfip2a9txg.jpg');

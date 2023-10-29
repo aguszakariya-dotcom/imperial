@@ -1,11 +1,11 @@
 <style>
-    .content-wrapper {
+    .content {
         /* font-size: smaller; */
         font-family: 'Times New Roman', Times, serif;
         background-image: url('https://wallpapers.com/images/hd/black-coffee-in-teacup-dhl1b1hq6yy0tfk7.webp');
         background-size: cover;
         background-repeat: no-repeat;
-        /* background-attachment: fixed; */
+        background-attachment: fixed;
         background-position: center;
         /* background-color: #111; */
         margin: 0;
@@ -32,7 +32,7 @@
 </style>
 
 
-<div class="row mt-2 mb-5 justify-content-center animate__animated animate__fadeInLeft">
+<div class="row mb-5 justify-content-center animate__animated animate__fadeInLeft">
     <div class="col-lg-10 ">
         <div class="card card-secondary">
             <div class="card-header list-group-item d-flex w-100 justify-content-between align-items-center">
