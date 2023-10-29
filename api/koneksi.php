@@ -1,13 +1,13 @@
 <?php 
-// $host = "becik.my.id:3306";
-// $user = "newsovana";
-// $pass = "rzk7!M192";
-// $db = "becikmyi_sovana";
+$host = "becik.my.id:3306";
+$user = "akuntansi_ok";
+$pass = "123/akuntansi";
+$db = "akuntansi";
 // ==========================================/
-$host = "localhost";
-$user = "root";
-$pass = "";
-$db = "mvc_lokal";
+// $host = "localhost";
+// $user = "root";
+// $pass = "";
+// $db = "mvc_lokal";
 // ==========================================/
 
 $koneksi = mysqli_connect($host, $user, $pass, $db);

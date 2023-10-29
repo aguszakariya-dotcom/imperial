@@ -8,7 +8,7 @@ class Akuntansi  extends Controller {
         $data['nama'] = $this->model('User_model')->getUser();
         $data['akun'] = $this->model('Akun_model')->getAllAkun();
         $this->view('templates/header2', $data);
-        $this->view('templates/sidebar', $data);
+        $this->view('templates/sidebar2', $data);
         $this->view('akuntansi/index', $data);
         $this->view('templates/footer2', $data);
     }
