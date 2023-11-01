@@ -1,7 +1,7 @@
 <?php 
 
 define('BASEURL', 'http://localhost/newsovana/public');
-define('BASEAPI', 'http://localhost/newsovana/api');
+define('BASEAPI', 'http://localhost/newsovana/public/api');
 
 // DB
 define('DB_HOST', 'becik.my.id:3306');

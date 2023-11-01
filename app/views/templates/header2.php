@@ -31,30 +31,47 @@
     return $hari . ', ' . $tgl . ' ' . $bln . ' ' . $thn;
   }
   ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?= $data['title']; ?> | <?= $data['subTitle']; ?></title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="<?= BASEURL; ?>/plugins/fontawesome-free/css/all.min.css">
+  <!-- Data Table -->
+  <link rel="stylesheet" href="<?= BASEURL; ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <!-- overlayScrollbars -->
   <link rel="stylesheet" href="<?= BASEURL; ?>/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?= BASEURL; ?>/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <!-- Theme style -->
+  <link rel="apple-touch-icon" sizes="180x180" href="<?= BASEURL; ?>/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="<?= BASEURL; ?>/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="<?= BASEURL; ?>/images/favicon-16x16.png">
+<link rel="shortcut icon" href="<?= BASEURL; ?>/favicon.ico">
+<!-- <link rel="manifest" href="<?= BASEURL; ?>/images/site.webmanifest"> -->
+  <link rel="stylesheet" href="<?= BASEURL; ?>/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="<?= BASEURL; ?>/css/myStyle.css">
+  <style>
+    /* Tambahkan CSS berikut ke file CSS Anda */
+    .users-list img {
+      width: 100px;
+      height: 100px;
+    }
+  </style>
 </head>
 
 
 
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
 
   <!-- Preloader -->
