@@ -53,7 +53,7 @@
 <script src="<?= BASEURL; ?>/plugins/jquery-mapael/maps/usa_states.min.js"></script>
 <!-- ChartJS -->
 <script src="<?= BASEURL; ?>/plugins/chart.js/Chart.min.js"></script>
-<!-- <script src="dist/js/pages/dashboard2.js"></script> -->
+<script src="<?= BASEURL; ?>/dist/js/pages/dashboard2.js"></script>
 <script>
   $(function () {
     $('#dataTable').DataTable();

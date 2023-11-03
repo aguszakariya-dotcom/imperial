@@ -80,7 +80,7 @@
 
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__wobble" src="<?= BASEURL; ?>/images/logo.png" alt="Logo" height="100" width="100">
+    <img class="animation__wobble" src="<?= BASEURL; ?>/images/logo.jpg" alt="Logo" height="100" width="100">
   </div>
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark">
