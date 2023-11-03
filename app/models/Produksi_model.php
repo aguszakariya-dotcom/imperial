@@ -13,6 +13,11 @@ class Produksi_model {
         $this-> db->query('SELECT * FROM ' . $this-> table . ' ORDER BY id DESC');
         return $this-> db-> resultSet();
     }
+    public function getLimitProduksi() 
+    {
+        $this-> db->query('SELECT * FROM ' . $this-> table . ' ORDER BY id DESC LIMIT 7');
+        return $this-> db-> resultSet();
+    }
 
 
 }
