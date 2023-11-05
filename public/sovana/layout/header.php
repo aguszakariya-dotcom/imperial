@@ -14,14 +14,10 @@
   <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-  <style>
-    body {
-        height: 100%;
-    }
-  </style>
+  <!-- <link rel="stylesheet" href="../dist/css/adminlte.min.css"> -->
+
 </head>
-<body class="hold-transition sidebar-mini">
+<body>
 <div class="wrapper ">
         <!-- Main content -->
         <section class="content">

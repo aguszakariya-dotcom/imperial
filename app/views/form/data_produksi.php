@@ -1,9 +1,36 @@
-<?php require_once 'layout/header.php'; ?>
+<style>
+    .content {
+        font-size: smaller;
+        font-family: 'Times New Roman', Times, serif;
+        background-image: url('https://img.freepik.com/free-vector/abstract-colorful-technology-dotted-wave-background_1035-17450.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        /* background-color: #111; */
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
 
-<?php
-$koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', 'akuntansi');
-?>
+    .animate__animated {
+        --animate-duration: 2s;
+    }
 
+    .table {
+        font-size: smaller;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    .table td {
+        font-size: 12px;
+    }
+
+    .icon {
+        display: none;
+    }
+</style>
 <div class="row justify-content-center">
     <div class="col-3 kiri">
         <div class="card ">
@@ -131,7 +158,7 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
             </div>
         </div>
     </div>
-    <div class="col-lg-9 collapse animate__animated animate__backInRight" id="card-kanan">
+    <div class="col-lg-9  animate__animated animate__backInRight" id="card-kanan">
         <div class="card ">
             <div class="card-header"><i data-feather="plus-circle" class="tambah"></i></div>
             <div class="card-body">
@@ -200,7 +227,103 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        // $('#tableIsi').load('<?= BASEURL; ?>/table/tableProduksi.php')
+        $('.ambilData').on('click', function() {
+            $('#card-kanan').removeClass('collapse');
+            // $('#card-kiri').addClass('animate__backInDown');
+            $('body').addClass('sidebar-mini layout-fixed sidebar-closed sidebar-collapse');
+        });
+
+        $('#dataTable').on('mouseenter', 'tr', function() {
+            $(this).find('.icon').show();
+        }).on('mouseleave', 'tr', function() {
+            $(this).find('.icon').hide();
+        });
+        $('#delete-akun').on('click', function(e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            $.ajax({
+                type: 'POST',
+                url: '<?= BASEURL; ?>/akuntansi/hapus',
+                success: function(response) {
+                    // alert ('ok');
+                }
+            })
+        })
+
+        // Fungsi untuk mengisi kolom kiri dengan data
+        function isiKolomKiri(data) {
+            $("#bulan").val(data.bulan);
+            $("#nama_customer").val(data.nama_customer);
+            $("#style").val(data.style);
+            $("#code").val(data.code);
+            $("#size").val(data.size);
+            $("#bahan").val(data.bahan);
+            $("#warna").val(data.warna);
+            $("#qty").val(data.qty);
+            $("#harga").val(data.harga);
+            $("#jahit").val(data.jahit);
+            $("#motong").val(data.motong);
+            $("#naskat").val(data.naskat);
+            $("#status").val(data.status);
+            $("#gambarLama").val(data.gambar);
+            if (data.gambar) {
+                // Gambar tersedia, set atribut src
+                 $("#gambar").attr("src", "<?= BASEURL; ?>/img/" + data.gambar);
+                } else {
+                    // Tidak ada gambar baru, cek apakah gambarLama ada
+                    if (data.gambarLama) {
+                        $("#gambar").attr("src", "<?= BASEURL; ?>/img/" + data.gambar);
+                    } else {
+                        // Jika tidak ada gambar baru atau lama, tampilkan gambar default
+                        $("#gambar").attr("src", "<?= BASEURL; ?>/img/nophoto.jpg");
+                    }
+                }
+
+            $("#keterangan").val(data.keterangan);
+            // Anda mungkin perlu mengisi elemen lain sesuai kebutuhan Anda
+        }
 
 
+        // Fungsi untuk mendapatkan data dari kolom kanan
+        function getDataKanan(id) {
+            $.ajax({
+                url: "<?= BASEAPI; ?>/produksi.php?id=" + id,
+                method: "GET",
+                dataType: "json",
+                success: function(data) {
+                    console.log("gambarLama:", data.gambar);
+                    isiKolomKiri(data);
+                },
+                error: function() {
+                    alert("Gagal mengambil data.");
+                }
+            });
+        }
 
-<?php require_once 'layout/footer.php'; ?>
+        // Tambahkan event click pada ikon "edit" di tabel
+        $(".edit-icon").click(function(event) {
+            event.preventDefault();
+            var id = $(this).data("id");
+            getDataKanan(id);
+        });
+
+        $("#ambilGambar").on("change", function() {
+            var input = this;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Mengatur atribut src elemen img
+                    $("#gambar").attr("src", e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+
+        
+    });
+</script>

@@ -1,0 +1,121 @@
+:root {
+    --primary: #fa9805;
+    --bg: #110f0f;
+    --bg-transp : #f4eaea00;
+
+}
+
+/* * {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    background-color: var(--bg);
+    color: #f4eaea;
+} */
+
+body {
+    font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            background-image: url('images/bg.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            background-color: #0c0b0e;
+}
+
+/* .isinya {
+    box-sizing: border-box;
+    padding: 1, 3rem 7%;
+    justify-content: space-between;
+    align-content: center;
+} */
+
+.row {
+    margin-left: 2%;
+    margin-right: 2%;
+
+}
+
+/* navbar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 50px;
+    background-color: #0c0b0e61;
+    /* padding: 1.4rem 7%; */
+}
+
+.navbar-brand {
+    /* font-size: large; */
+    font-weight: 300;
+    color: #06D9F5;
+    display: flex;
+    /* padding: 1.6rem 7%; */
+    justify-content: space-between;
+}
+
+.navbar-span {
+    color: var(--primary);
+}
+
+.card {
+    background-color: rgba(66, 55, 55, 0.338);
+    border: 1px solid white;
+    border-radius: 16px;
+}
+
+.card-header {
+    background-color: rgba(0, 0, 0, 0,2);
+    color: #f4eaea;
+    /* border: 1px solid white; */
+    /* border-radius: 20px; */
+    /* border-bottom: #f4eaea 1px; */
+}
+
+.table {
+    background-color: rgba(232, 240, 242, 0.193);
+    color: #160101;
+    border-radius: 8px;
+    /* opacity: 0,4; */
+}
+
+.bg-tipis {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #06D9F5;
+}
+
+.table-hover tbody tr:hover td {
+    background-color: #03010f;
+    color: rgb(255, 255, 255) !important;
+}
+
+.table-sement .table-row {
+    font-size: smaller;
+}
+
+.text-pesan {
+    color: #160101;
+}
+
+.pilihan {
+    background-color: #1c0404;
+    color: red;
+}
+@keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  .blinking-text {
+    animation: blink 1s infinite;
+  }
