@@ -15,7 +15,7 @@ class Produksi extends Controller {
         $data['title'] = 'Tables';
         $data['subTitle'] = 'Produksi';
         $data['nama'] = $this->model('User_model')->getUser();
-        $data['produksi'] = $this->model('Produksi_model')->getAllProduksi();
+        // $data['produksi'] = $this->model('Produksi_model')->getAllProduksi();
         $this->view('templates/header2', $data);
         $this->view('templates/sidebar', $data);
         $this->view('produksi/pg', $data);

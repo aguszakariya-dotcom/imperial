@@ -1,20 +1,10 @@
-<?php require_once 'layout/header.php'; ?>
-
-<?php
-$koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', 'akuntansi');
-?>
-
-<div class="row justify-content-center">
-    <div class="col-3 kiri">
-        <div class="card ">
-            <div class="card-header text-center">
-                <h3 class="card-title">Input Data Produksi</h3>
-                <div class="card-tools">
-                    <span class="badge badge-primary ambilData">Ambil Data Produksi</span>
-                </div>
-            </div>
+<?php require './layout/header.php' ?>
+<div class="row mt-5 justify-content-center">
+    <div class="col-lg-3">
+        <div class="card shadow">
+            <div class="card-header">Input Data</div>
             <div class="card-body">
-                <form action="<?= BASEURL; ?>/produksi/tambahProduksi" class="form-horizontal text-bold" method="post" enctype="multipart/form-data">
+                <form action="" class="form-horizontal text-bold" method="post" enctype="multipart/form-data">
                     <!-- <div class="card-body"> -->
                     <div class="form-group form-group-sm row shadow-sm">
                         <label class="col-sm-5" for="bulan">Finish</label>
@@ -108,20 +98,11 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
                     <div class="form-group row mb-2 mt-1 justify-content-center">
                         <div class=" justify-content-center">
                             <img src="<?= BASEURL; ?>/img/nophoto.jpg" class="mb-1" id="gambar" width="100px" height="140px"><br>
-                            <input type="hidden" id="gambarLama" name="gambarLama">
-                            <div class="input-group">
-                                <div class="custom-file text-xs">
-                                    <input type="file" class="custom-file-input" id="ambilGambar" name="gambar">
-                                    <label class="custom-file-label" for="gambar">Pilih Gambar</label>
-                                </div>
-                                <div class="input-group-append">
-                                    <!-- <span class="input-group-text">Upload</span> -->
-                                </div>
-                            </div>
+                            <input type="file" id="gambarLama" name="gambarLama">
                         </div>
                     </div>
                     <!-- </div> -->
-                    <div class="card-footer">
+                    <div class="">
                         <div class="text-center" id="tombol">
                             <button type="submit" class="btn btn-sm btn-info float-end mx-1" id="update" name="update">Update</button> &nbsp; &nbsp;
                             <button type="submit" class="btn btn-sm btn-info float-start" id="save" name="save">Save | Tambahkan</button> &nbsp;
@@ -131,76 +112,26 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
             </div>
         </div>
     </div>
-    <div class="col-lg-9 collapse animate__animated animate__backInRight" id="card-kanan">
-        <div class="card ">
-            <div class="card-header"><i data-feather="plus-circle" class="tambah"></i></div>
+    <div class="col-9 shadow bg-cyan">
+        <div class="card">
+            <div class="card-header">Data Produksi</div>
             <div class="card-body">
-                <table id="dataTable" class="table table-bordered table-striped table-hover">
+                <table class="table table-sm table-bordered">
                     <thead>
                         <tr>
-                            <th>No.</th>
-                            <th class="col-sm-2">Date</th>
-                            <th class="col-sm-2">Customer</th>
-                            <th>Code</th>
-                            <th>Style</th>
-                            <th>Warna</th>
-                            <th>QTY</th>
-                            <th>Image</th>
-                            <th>Status</th>
-                            <th>action</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
                         </tr>
                     </thead>
-                    <tbody id="tableIsi">
-                        <?php $no = 1; ?>
-                        <?php foreach ($data['produksi'] as $produksi) : ?>
-                            <tr>
-                                <th class=""><?= $no++ ?></th>
-                                <td class="text-capitalize"><?= tgl_kita($produksi['bulan']); ?></td>
-                                <td class="text-capitalize"><?= $produksi['nama_customer']; ?></td>
-                                <td><?= $produksi['code']; ?></td>
-                                <!-- <td ><?= $produksi['code']; ?></td> -->
-                                <td class=" col-sm-2 text-capitalize"><?= $produksi['style']; ?></td>
-                                <td class="text-capitalize"><?= $produksi['warna']; ?></td>
-                                <td><?= $produksi['qty']; ?></td>
-                                <td class="">
-                                    <img src="<?= BASEURL; ?>/img/<?= $produksi['gambar']; ?>" alt="" height="30" width="22" class=" zoom">
-                                </td>
-                                <td class="text-capitalize">
-                                    <span class="badge <?php
-                                                        if ($produksi['status'] === 'Proses') {
-                                                            echo 'badge-warning';
-                                                        } elseif ($produksi['status'] === 'Finish') {
-                                                            echo 'badge-success';
-                                                        } elseif ($produksi['status'] === 'Menunggu') {
-                                                            echo 'badge-danger';
-                                                        }
-                                                        ?>">
-                                        <?= $produksi['status']; ?>
-                                    </span>
-                                </td>
-                                <td>
-                                    <!-- Tambahkan link untuk ikon "trash-2" -->
-                                    <a href="#" class="text-info edit-icon" data-id="<?= $produksi['id'] ?>"><i data-feather="edit" class="icon"></i></a>
-                                    <a href="<?= BASEURL; ?>/produksi/hapus/<?= $produksi['id'] ?>" class="text-danger delete-icon" onclick="return confirmDelete();"><i data-feather="trash-2" class="icon"></i></a>
 
-                                    <script>
-                                        function confirmDelete() {
-                                            var confirmResult = confirm("Apakah Anda yakin ingin menghapus data ini?");
-                                            return confirmResult;
-                                        }
-                                    </script>
-
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
                 </table>
             </div>
         </div>
     </div>
+
 </div>
-
-
-
-
-<?php require_once 'layout/footer.php'; ?>
+<?php require './layout/footer.php' ?>

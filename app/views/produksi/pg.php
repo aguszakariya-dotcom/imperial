@@ -1,24 +1,23 @@
 
 <style>
     .content {
+     background-color: #ffffff;
+     /* color: black; */
         font-size: smaller;
         font-family: 'Times New Roman', Times, serif;
-        background-image: url('https://img.freepik.com/free-vector/abstract-colorful-technology-dotted-wave-background_1035-17450.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: center;
-        /* background-color: #111; */
         margin: 0;
         padding: 0;
         width: 100%;
-        height: 100%;
+        height: 880px;
     }
 
     .animate__animated {
         --animate-duration: 2s;
     }
-
+    form {
+     color: black;
+     background-color: beige;
+    }
     .table {
         font-size: smaller;
         font-family: 'Times New Roman', Times, serif;
@@ -33,8 +32,12 @@
     }
 </style>
 
-<div class="row justify-content-center bg-gradient-light">
-     <iframe src="<?= BASEURL; ?>/sovana/produksi.php" frameborder="0" width="100%" height="800px"></iframe>
+     <iframe src="http://localhost/newproject/produksi/" frameborder="0" width="100%" height="900px"></iframe>
      <!-- <iframe src="https://animate.style/" frameborder="0" height="100%"></iframe> -->
 
-</div>
+<script>
+     $(document).ready(function() {
+          $('body').addClass('sidebar-mini layout-fixed sidebar-closed sidebar-collapse');
+     })
+
+</script>
