@@ -1,3 +1,4 @@
+<?php require_once 'koneksi.php' ?>
 <?php require './layout/header.php' ?>
 <div class="row mt-5 justify-content-center">
     <div class="col-lg-3">
@@ -112,22 +113,62 @@
             </div>
         </div>
     </div>
-    <div class="col-9 shadow bg-cyan">
+    <div class="col-8 shadow bg-cyan">
         <div class="card">
             <div class="card-header">Data Produksi</div>
             <div class="card-body">
-                <table class="table table-sm table-bordered">
+            <table class="table table-sm table-hover table-responsiv" id="table-data">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                            <th>No.</th>
+                            <th class="col-sm-2">Date</th>
+                            <th>Customer</th>
+                            <th>Code</th>
+                            <th>Style</th>
+                            <th>Warna</th>
+                            <th>QTY</th>
+                            <th>Image</th>
+                            <th>Status</th>
+                            <th>action</th>
                         </tr>
                     </thead>
-
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        $query = mysqli_query($koneksi, "SELECT * FROM produksi ORDER BY id DESC");
+                        while ($row = mysqli_fetch_assoc($query)) {
+                        ?>
+                            <tr>
+                                <th class="col text-white"><?= $no++ ?></th>
+                                <td><?= tgl_kita($row['bulan']) ?></td>
+                                <td><?= $row['nama_customer'] ?></td>
+                                <td><?= $row['code'] ?></td>
+                                <td><?= $row['style'] ?></td>
+                                <td><?= $row['warna'] ?></td>
+                                <td><?= $row['qty'] ?></td>
+                                <td><img src="./img/<?= $row['gambar'] ?>" alt="<?= $row['gambar'] ?>" class="zoom" onerror="if (this.src != 'img/nophoto.jpg') this.src = 'img/nophoto.jpg';" width="28px" height="36px"></td>
+                                <td>
+                                    <?php
+                                    if ($row['status'] == 'Menunggu') {
+                                        echo '<i data-feather="clock"></i>';
+                                    } else if ($row['status'] == 'Proses') {
+                                        echo '<i class="fa-solid fa-cog fa-spin text-info" style="--fa-animation-duration: 15s; height: 40; width: 40; "></i> Proses';
+                                    } else if ($row['status'] == 'Finish') {
+                                        echo '<img src="images/done.png" width="40">';
+                                    } else if ($row['status'] == '') {
+                                        echo '<span data-feather="badge badge-danger">Finish</span>';
+                                    }
+                                    ?>
+                                </td>
+                                <td class="px-2">
+                                    <div class="d-flex">
+                                        <a href="produksi.php?p=ubah&id=<?= $row['id']; ?>" class="text-info" id="editSample"><i class="fa-solid fa-file-pen" class="edit"></i></a> &nbsp;
+                                        <a href="produksi.php?p=hapus&id=<?= $row['id']; ?>" class="text-danger float-end"><i class="fa-solid fa-trash-can"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
                 </table>
             </div>
         </div>

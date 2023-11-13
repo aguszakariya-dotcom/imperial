@@ -32,7 +32,7 @@
     }
 </style>
 
-     <iframe src="http://localhost/newproject/produksi/" frameborder="0" width="100%" height="900px"></iframe>
+     <iframe src="<?= BASEURL ;?>/sovana/produksi.php" frameborder="0" width="100%" height="900px"></iframe>
      <!-- <iframe src="https://animate.style/" frameborder="0" height="100%"></iframe> -->
 
 <script>

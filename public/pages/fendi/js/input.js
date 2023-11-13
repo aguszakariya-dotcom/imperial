@@ -1,4 +1,4 @@
-$(document).ready(function() {
+π$(document).ready(function() {
     // Tangkap submit form
     $('#myForm').submit(function(event) {
         // Menghentikan perilaku default form submit

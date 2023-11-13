@@ -185,7 +185,7 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
                                 <td class="text-capitalize"><?= $produksi['warna']; ?></td>
                                 <td><?= $produksi['qty']; ?></td>
                                 <td class="">
-                                    <img src="<?= BASEURL; ?>/img/<?= $produksi['gambar']; ?>" alt="" height="30" width="22" class=" zoom">
+                                    <img src="https://raw.githubusercontent.com/aguszakariya-dotcom/img-produksi/main/<?= $produksi['gambar']; ?>" alt="" height="30" width="22" class=" zoom">
                                 </td>
                                 <td class="text-capitalize"><?= $produksi['status']; ?></td>
                                 <td>
