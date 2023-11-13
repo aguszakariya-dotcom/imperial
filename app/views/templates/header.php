@@ -80,9 +80,9 @@
   <div class="wrapper">
 
     <!-- Preloader -->
-    <div class="preloader flex-column justify-content-center align-items-center">
+    <!-- <div class="preloader flex-column justify-content-center align-items-center">
       <img class="animation__wobble" src="images/logo.png" alt="Logo" height="100" width="100">
-    </div>
+    </div> -->
     <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark">
       <!-- Left navbar links -->

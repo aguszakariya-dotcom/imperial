@@ -14,9 +14,10 @@
                     <!-- <div class="card-body"> -->
                     <div class="form-group form-group-sm row shadow-sm mb-2">
                         <input type="hidden" name="gambarSebelumnya" id="gambarSebelumnya">
+                        <input type="hidden" name="gambarSebelumnya" id="gambarSebelumnya2">
                         <label class="col-sm-5" for="bulan">Finish</label>
                         <div class="col-sm-7">
-                            <input type="date" class="form-control form-control-border border-width-2" name="bulan" id="bulan">
+                            <input type="date" class="form-control form-control-border border-width-2" name="tanggal" id="tanggal">
                         </div>
                     </div>
                     <div class="form-group row shadow-sm mb-2">
@@ -44,58 +45,30 @@
                         </div>
                     </div>
                     <div class="form-group row mb-1 shadow-sm mb-2">
-                        <label class="col-sm-5" for="bahan">Fabric</label>
+                        <label class="col-sm-5" for="harga">Cost</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control form-control-border border-width-2" id="bahan" name="bahan">
+                            <input type="number" class="form-control form-control-border border-width-2" id="harga" name="harga">
                         </div>
                     </div>
                     <div class="form-group row mb-1 shadow-sm mb-2">
-                        <label class="col-sm-5" for="warna">Color</label>
+                        <label class="col-sm-5" for="habis">Penghabisan</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control form-control-border border-width-2" id="warna" name="warna">
+                            <input type="number" class="form-control form-control-border border-width-2" id="habis" name="habis">
                         </div>
                     </div>
                     <div class="form-group row mb-1 shadow-sm mb-2">
-                        <label class="col-sm-5" for="qty">Jumlah</label>
+                        <label class="col-sm-5" for="acc_1">Acc 1</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control form-control-border border-width-2" id="qty" name="qty">
+                            <input type="text" class="form-control form-control-border border-width-2" id="acc_1" name="acc_1">
                         </div>
                     </div>
                     <div class="form-group row mb-1 shadow-sm mb-2">
-                        <label class="col-sm-5" for="harga">Cost Sample</label>
+                        <label class="col-sm-5" for="acc_2">Acc 2</label>
                         <div class="col-sm-7">
-                            <input type="text" class="form-control form-control-border border-width-2" id="harga" name="harga">
+                            <input type="text" class="form-control form-control-border border-width-2" id="acc_2" name="acc_2">
                         </div>
                     </div>
-                    <div class="form-group row mb-1 shadow-sm mb-2">
-                        <label class="col-sm-5" for="jahit">Cost Tailor</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control form-control-border border-width-2" id="jahit" name="jahit">
-                        </div>
-                    </div>
-                    <div class="form-group row mb-1 shadow-sm mb-2">
-                        <label class="col-sm-5" for="motong">Cost Cutting</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control form-control-border border-width-2" id="motong" name="motong">
-                        </div>
-                    </div>
-                    <div class="form-group row mb-1 shadow-sm mb-2">
-                        <label class="col-sm-5" for="naskat">Cost Naskat</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control form-control-border border-width-2" id="naskat" name="naskat">
-                        </div>
-                    </div>
-                    <div class="form-group row mb-1 shadow-sm mb-2">
-                        <label class="col-sm-5" for="Naskat">Status</label>
-                        <div class="col-sm-7">
-                            <select class="form-control form-control-border border-width-2 select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="status" name="status">
-                                <option selected="selected">Proses</option>
-                                <option>Finish</option>
-                                <!-- <option>California</option> -->
-                                <option>Menunggu</option>
-                            </select>
-                        </div>
-                    </div>
+                    
                     <div class="form-group row mb-3 shadow-sm mb-2">
                         <label class="col-sm-5" for="Naskat">Description</label>
                         <div class="col-sm-7">
@@ -113,7 +86,6 @@
 
                         </div>
                     </div>
-
                     <div class="">
                         <div class="text-center" id="tombol">
                             <button type="submit" class="btn btn-sm btn-info float-end mx-1" id="update" name="update">Update</button> &nbsp; &nbsp;
@@ -124,12 +96,13 @@
             </div>
         </div>
     </div>
-    <div class="col-8 mt-4 " id="dataProduksi">
+    <div class="col-8 mt-4 " id="dataSample">
         <div class="mx-2 " id="meja">
 
-            </div>    </div>
+        </div>
+    </div>
 
 </div>
 <?php require 'layout/footer.php' ?>
-<script src="functions/produksi.js"></script>
+<script src="functions/sample.js"></script>
 
