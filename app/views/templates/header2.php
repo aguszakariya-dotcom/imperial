@@ -65,6 +65,17 @@
   <link rel="stylesheet" href="<?= BASEURL; ?>/css/myStyle.css">
   <style>
     /* Tambahkan CSS berikut ke file CSS Anda */
+    .content {
+     background-color: #ffffff;
+     /* color: black; */
+        font-size: smaller;
+        font-family: 'Times New Roman', Times, serif;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 880px;
+    }
+
     .users-list img {
       width: 100px;
       height: 100px;

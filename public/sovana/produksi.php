@@ -127,9 +127,59 @@
     <div class="col-8 mt-4 " id="dataProduksi">
         <div class="mx-2 " id="meja">
 
-            </div>    </div>
+            </div>
+    </div>
 
 </div>
 <?php require 'layout/footer.php' ?>
 <script src="functions/produksi.js"></script>
+<script>
+    $(document).ready(function() {
+        var form = document.getElementById('formId');
+         // Fungsi untuk menangani perubahan pada input gambar baru
+    $(document).on('change', '#gambar', function (e) {
+        // Menampilkan gambar baru di elemen img
+        var input = e.target;
+        var reader = new FileReader();
+        reader.onload = function () {
+            $('#gambarLama').attr('src', reader.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    });
 
+    // Fungsi untuk menangani klik tombol Save | Tambahkan
+    $('#save').on('click', function(e) {
+        e.preventDefault();
+
+        // Membuat objek FormData untuk mengumpulkan data formulir
+        var formData = new FormData($('form')[0]);
+
+        // Menambahkan gambarSebelumnya ke FormData (jika ada)
+        formData.append('gambarSebelumnya', $('#gambarSebelumnya').val());
+
+        $.ajax({
+            url: 'functions/saveProduksi.php', // Sesuaikan dengan lokasi file save.php
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                form.reset();
+                $('#kolom-input').addClass('animate__bounce')
+                $('#kolom-input').addClass('collapse')
+                // $('#dataProduksi').addClass('bounceInUp')
+                $("#meja").load("./table/tableProduksi.php");
+                // Menanggapi keberhasilan, bisa ditambahkan logika atau pengalihan halaman
+                console.log('Data berhasil disimpan:', response);
+
+                // Setelah sukses, Anda bisa memperbarui tabel atau melakukan aksi lainnya
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+    })
+</script>

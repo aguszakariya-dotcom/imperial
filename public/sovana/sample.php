@@ -14,7 +14,6 @@
                     <!-- <div class="card-body"> -->
                     <div class="form-group form-group-sm row shadow-sm mb-2">
                         <input type="hidden" name="gambarSebelumnya" id="gambarSebelumnya">
-                        <input type="hidden" name="gambarSebelumnya" id="gambarSebelumnya2">
                         <label class="col-sm-5" for="bulan">Finish</label>
                         <div class="col-sm-7">
                             <input type="date" class="form-control form-control-border border-width-2" name="tanggal" id="tanggal">
@@ -53,7 +52,7 @@
                     <div class="form-group row mb-1 shadow-sm mb-2">
                         <label class="col-sm-5" for="habis">Penghabisan</label>
                         <div class="col-sm-7">
-                            <input type="number" class="form-control form-control-border border-width-2" id="habis" name="habis">
+                            <input type="text" class="form-control form-control-border border-width-2" id="habis" name="habis">
                         </div>
                     </div>
                     <div class="form-group row mb-1 shadow-sm mb-2">
