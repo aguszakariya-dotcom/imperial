@@ -163,12 +163,12 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
             </form>
         </div>
     </div>
-    <div class="col-lg-9 animate__animated animate__backInRight">
+    <div class="col-lg-9 animate__animated animate__backInUp">
         <table id="dataTable" class="table table-bordered table-striped table-hover">
             <thead>
                 <tr class="text-bold">
                     <th><i class="fa-solid fa-user-pen tambah text-primary"></i></th>
-                    <th class="col-sm-2">Date</th>
+                    <th>Date</th>
                     <th class="col-sm-2">Customer</th>
                     <th>Code</th>
                     <th class="col-sm-2">Style</th>
@@ -192,7 +192,7 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
                         <td class="text-capitalize"><?= $produksi['warna']; ?></td>
                         <td><?= $produksi['qty']; ?></td>
                         <td class="">
-                            <img src="https://raw.githubusercontent.com/aguszakariya-dotcom/img-produksi/main/<?= $produksi['gambar']; ?>" alt="" height="30" width="22" class=" zoom">
+                            <img src="http://localhost/img-produksi/<?= $produksi['gambar']; ?>" alt="" height="30" width="22" class=" zoom">
                         </td>
                         <td>
                             <?php

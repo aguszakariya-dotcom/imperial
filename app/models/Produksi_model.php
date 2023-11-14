@@ -35,17 +35,22 @@ class Produksi_model {
         $naskat = $data['naskat'];
         $status = $data['status'];
         
-        // Menyiapkan gambar
-        $gambar = ''; // Gambar default jika tidak ada gambar baru
-        if (!empty($_FILES['gambar']['name'])) {
-            // Mengunggah gambar baru
-            $uploadDir = 'localhost/img-produksi/';
-            $gambar = $uploadDir . basename($_FILES['gambar']['name']);
-            move_uploaded_file($_FILES['gambar']['tmp_name'], $gambar);
-        } elseif (!empty($_POST['gambarSebelumnya'])) {
-            // Menggunakan gambar yang sudah ada jika tidak ada gambar baru
-            $gambar = $_POST['gambarSebelumnya'];
-        }
+// Menyiapkan gambar
+$gambar = ''; // Gambar default jika tidak ada gambar baru
+if (!empty($_FILES['gambar']['name'])) {
+    // Mengunggah gambar baru
+    $uploadDir = 'localhost/img-produksi/';
+    $gambar = $uploadDir . basename($_FILES['gambar']['name']);
+    
+    // Move the uploaded file to the correct directory
+    move_uploaded_file($_FILES['gambar']['tmp_name'], $_SERVER['DOCUMENT_ROOT'] . '/img-produksi/' . basename($_FILES['gambar']['name']));
+
+    // Modify the $gambar variable to store only the filename
+    $gambar = basename($_FILES['gambar']['name']);
+} elseif (!empty($_POST['gambarSebelumnya'])) {
+    // Menggunakan gambar yang sudah ada jika tidak ada gambar baru
+    $gambar = $_POST['gambarSebelumnya'];
+}
     
         // Menyimpan data ke database
         $query = "INSERT INTO produksi (bulan, nama_customer, code, style, bahan, warna, size, qty, gambar, harga, keterangan, jahit, motong, naskat, status)
