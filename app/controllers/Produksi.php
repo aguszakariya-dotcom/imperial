@@ -22,14 +22,14 @@ class Produksi extends Controller {
         $this->view('templates/footer2', $data);
     }
 
-    public function tambahProduksi() {
+    public function tambah() {
         if( $this->model('Produksi_model')->newProduksi($_POST) > 0 ) {
             Flasher::setFlash('berhasil', 'ditambahkan', 'info');
-            header('location: ' . BASEURL . '/form/data_produksi');
+            header('location: ' . BASEURL . '/produksi');
             exit;
         } else {
             Flasher::setFlash('gagal', 'ditambahkan', 'danger');
-            header('location: ' . BASEURL . '/form/data_produksi');
+            header('location: ' . BASEURL . '/produksi');
             exit;            
         }
     }
@@ -41,7 +41,7 @@ class Produksi extends Controller {
         } else {
             Flasher::setFlash('berhasil', 'dihapus', 'info');
         }
-        header('location: ' . BASEURL . '/form/data_produksi');
+        header('location: ' . BASEURL . '/produksi');
         exit;
     }
 

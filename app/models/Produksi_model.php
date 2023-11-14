@@ -20,10 +20,10 @@ class Produksi_model {
     }
     public function newProduksi($data) {
         // Ambil semua data dari $data
-        $finish = $data['bulan'];
-        $cust = $data['nama_customer'];
-        $style = $data['style'];
+        $bulan = $data['bulan'];
+        $nama_customer = $data['nama_customer'];
         $code = $data['code'];
+        $style = $data['style'];
         $bahan = $data['bahan'];
         $warna = $data['warna'];
         $size = $data['size'];
@@ -35,40 +35,59 @@ class Produksi_model {
         $naskat = $data['naskat'];
         $status = $data['status'];
         
-        // Periksa apakah ada gambar baru yang diunggah
-        if (isset($_FILES['gambar']['name']) && !empty($_FILES['gambar']['name'])) {
-            // Proses upload gambar baru
-            $gambar = $_FILES['gambar']['name'];
-            $lokasi_simpan_gambar = '<?= BASEURL ?>/images/' . $gambar;
-            move_uploaded_file($_FILES['gambar']['tmp_name'], $lokasi_simpan_gambar);
-        } else {
-            // Tidak ada gambar baru diunggah, gunakan gambarLama
-            $gambar = $data['gambarLama'];
+        // Menyiapkan gambar
+        $gambar = ''; // Gambar default jika tidak ada gambar baru
+        if (!empty($_FILES['gambar']['name'])) {
+            // Mengunggah gambar baru
+            $uploadDir = 'localhost/img-produksi/';
+            $gambar = $uploadDir . basename($_FILES['gambar']['name']);
+            move_uploaded_file($_FILES['gambar']['tmp_name'], $gambar);
+        } elseif (!empty($_POST['gambarSebelumnya'])) {
+            // Menggunakan gambar yang sudah ada jika tidak ada gambar baru
+            $gambar = $_POST['gambarSebelumnya'];
         }
     
-        $query = "INSERT INTO produksi (bulan, nama_customer, style, code, bahan, warna, size, qty, gambar, harga, keterangan, jahit, motong, naskat, status)
-                  VALUES (:bulan, :nama_customer, :style, :code, :bahan, :warna, :size, :qty, :gambar, :harga, :keterangan, :jahit, :motong, :naskat, :status)";
-    
+        // Menyimpan data ke database
+        $query = "INSERT INTO produksi (bulan, nama_customer, code, style, bahan, warna, size, qty, gambar, harga, keterangan, jahit, motong, naskat, status)
+        VALUES (
+            :bulan, 
+            :nama_customer, 
+            :code, 
+            :style, 
+            :bahan, 
+            :warna, 
+            :size, 
+            :qty, 
+            :gambar,
+            :harga, 
+            :keterangan, 
+            :jahit, 
+            :motong, 
+            :naskat, 
+            :status
+        )";
+        
         $this->db->query($query);
-        $this->db->bind('bulan', $finish);
-        $this->db->bind('nama_customer', $cust);
+        $this->db->bind('bulan', $bulan);
+        $this->db->bind('nama_customer', $nama_customer);
         $this->db->bind('style', $style);
         $this->db->bind('code', $code);
         $this->db->bind('bahan', $bahan);
         $this->db->bind('warna', $warna);
         $this->db->bind('size', $size);
         $this->db->bind('qty', $qty);
-        $this->db->bind('gambar', $gambar); // Menggunakan nilai gambar baru atau gambar lama
+        $this->db->bind('gambar', $gambar);
         $this->db->bind('harga', $harga);
         $this->db->bind('keterangan', $keterangan);
         $this->db->bind('jahit', $jahit);
         $this->db->bind('motong', $motong);
         $this->db->bind('naskat', $naskat);
         $this->db->bind('status', $status);
-    
+        
         $this->db->execute();
         return $this->db->rowCount();
     }
+    
     
     
     

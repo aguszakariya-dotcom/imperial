@@ -44,7 +44,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
   <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="<?= BASEURL; ?>/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <!-- Data Table -->
   <link rel="stylesheet" href="<?= BASEURL; ?>/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <!-- overlayScrollbars -->

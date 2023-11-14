@@ -5,7 +5,7 @@
 
 <?php require 'layout/header.php' ?>
 
-<div class="row mt-5 justify-content-center">
+<div class="row mt-3 justify-content-center">
     <div class="col-lg-3 collapse animate__animated" id="kolom-input">
         <div class="card shadow">
             <div class="card-header">Input Data</div>
@@ -95,7 +95,7 @@
             </div>
         </div>
     </div>
-    <div class="col-8 mt-4 " id="dataSample">
+    <div class="col-7 mt-4 " id="dataSample">
         <div class="mx-2 " id="meja">
 
         </div>
