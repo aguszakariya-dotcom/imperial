@@ -164,11 +164,12 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
         </div>
     </div>
     <div class="col-lg-9 animate__animated animate__backInUp">
+        
         <table id="dataTable" class="table table-bordered table-striped table-hover">
             <thead>
                 <tr class="text-bold">
                     <th><i class="fa-solid fa-user-pen tambah text-primary"></i></th>
-                    <th>Date</th>
+                    <th class="col-sm-2">Date</th>
                     <th class="col-sm-2">Customer</th>
                     <th>Code</th>
                     <th class="col-sm-2">Style</th>
@@ -184,7 +185,7 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
                 <?php foreach ($data['produksi'] as $produksi) : ?>
                     <tr id="tableProduksi">
                         <th class=""><?= $no++ ?></th>
-                        <td class="text-capitalize"><?= tgl_kita($produksi['bulan']); ?></td>
+                        <td><?= tgl_kita($produksi['bulan']); ?></td>
                         <td class="text-capitalize"><?= $produksi['nama_customer']; ?></td>
                         <td><?= $produksi['code']; ?></td>
                         <!-- <td ><?= $produksi['code']; ?></td> -->
@@ -199,7 +200,7 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
                             if ($produksi['status'] == 'Menunggu') {
                                 echo '<i data-feather="clock"></i>';
                             } else if ($produksi['status'] == 'Proses') {
-                                echo '<img src="images/done.png" width="40">';
+                                echo '<img src="images/proses.gif" width="40">';
                             } else if ($produksi['status'] == 'Finish') {
                                 echo '<img src="images/done.png" width="40">';
                             } else if ($produksi['status'] == '') {
@@ -211,7 +212,7 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
                             <div class="d-flex">
                                 <!-- Tambahkan link untuk ikon "trash-2" -->
                                 <a href="#" class="text-primary editProduksi icon" data-id="<?= $produksi['id']; ?>"><i class="fa-solid fa-pen-to-square"></i></a> &nbsp;
-                                <a href="<?= BASEURL; ?>/produksi/hapus/<?= $produksi['id']; ?>" class="text-danger delete-icon icon"><i class="fa-solid fa-trash-can"></i></a>
+                                <a href="<?= BASEURL; ?>/produksi/hapus/<?= $produksi['id']; ?>" class="text-danger delete-icon icon" onclick="return confirm('Yakin Mau menghapus data ini ??');"><i class="fa-solid fa-trash-can"></i></a>
                             </div>
                         </td>
                     </tr>
@@ -224,6 +225,7 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
 
 <script>
     $(document).ready(function() {
+        
         $('.tambah').on('click', function() {
             // $('#dataTable').DataTable();
             $('#card-kiri').removeClass('collapse');
