@@ -1,3 +1,30 @@
+
+<?php 
+require_once 'update.php';
+if (isset($_POST['update'])) {
+    if (updateSample($_POST) > 0) {
+        echo "<script>
+        new Noty({
+            type: 'success',
+            theme: 'nest',
+            layout: 'topRight',
+            text: 'Data Berhasil di Update',
+            timeout: 3000 
+        }).show();
+        </script>";
+    } else {
+        echo "<script>
+        new Noty({
+            type: 'error',
+            theme: 'nest',
+            layout: 'topRight',
+            text: 'Data GAGAL di Edit',
+            timeout: 3000 
+        }).show();
+        </script>";
+    }
+}
+?>
 <style>
     .content {
         /* font-size: smaller; */
@@ -14,9 +41,9 @@
         height: 100%;
     }
 
-    .animate__animated {
+    /* .animate__animated {
         --animate-duration: 2s;
-    }
+    } */
 
     .table {
         font-size: smaller;
@@ -43,6 +70,7 @@
             <div class="card body p-3">
                 <form action="<?= BASEURL; ?>/sample/tambah" class="form-horizontal text-bold" method="post" enctype="multipart/form-data" id="formId">
                     <!-- <div class="card-body"> -->
+                        <input type="hidden" name="id" id="id">
                     <div class="form-group form-group-sm row mb-2">
                         <input type="hidden" name="gambarSebelumnya" id="gambarSebelumnya">
                         <label class="col-sm-5" for="bulan">Finish</label>
@@ -133,18 +161,28 @@
         </div>
     </div>
     <div class="col-lg-8 animate__animated animate__backInUp">
-        <?php require_once 'tableSample.php' ?>
-        
+        <table id="dataTable" class="table table-striped" style="width:100%">
+            <?php require_once 'tableSample.php' ?>
+        </table>
     </div >
 </div>
 
 <script>
     $(document).ready(function() {
+        $('#save').click(function() {
+            // Mengganti nilai atribut action menjadi <?= BASEURL; ?>/sample/tambah
+            $('#formId').attr('action', '<?= BASEURL; ?>/sample/tambah');
+        });
 
+        // Aksi ketika tombol "Update" diklik
+        $('#update').click(function() {
+            // Mengganti nilai atribut action menjadi #
+            $('#formId').attr('action', '<?= BASEURL; ?>/sample/update');
+        });
 
 
         $('.tambah').on('click', function() {
-            // $('#dataTable').DataTable();
+            $('#update').addClass('collapse');
             $('#card-kiri').removeClass('collapse');
             $('#card-kiri').addClass('animate__backInDown');
             $('body').addClass('sidebar-mini layout-fixed sidebar-closed sidebar-collapse');
@@ -157,7 +195,7 @@
 
         $(document).on('click', '.editSample', function(e) {
             $('#card-kiri').removeClass('collapse');
-            $('#card-kiri').addClass('animate__backInDown');
+            $('#card-kiri').addClass('animate__bounce');
             $('body').addClass('sidebar-mini layout-fixed sidebar-closed sidebar-collapse');
             e.preventDefault();
             var id = $(this).data('id');
@@ -170,6 +208,7 @@
                 success: function(response) {
                     console.log(response);
                     // Mengisi nilai formulir dengan data yang diterima
+                    $('#id').val(response.id);
                     $('#tanggal').val(response.tanggal);
                     $('#nama_customer').val(response.nama_customer);
                     $('#style').val(response.style);

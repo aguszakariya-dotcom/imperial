@@ -81,6 +81,82 @@ if (!empty($_FILES['gambar']['name'])) {
             return $this->db->rowCount();
         }
 
+        public function upload() {
+            $namaFile = $_FILES['gambar']['name'];
+            $ukuranFile = $_FILES['gambar']['size'];
+            $tmpName = $_FILES['gambar']['tmp_name'];
+            
+            // Setel lokasi direktori untuk menyimpan file yang diupload
+            $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/img-produksi/';
+            $gambar = $uploadDir . $namaFile;
+            
+            // Periksa ukuran file
+            if ($ukuranFile > 6000000) {
+                echo "<script>alert('Maaf, ukuran gambar terlalu besar!');</script>";
+                return false;
+            }
+    
+            // Pindahkan file yang diupload ke direktori yang ditentukan
+            move_uploaded_file($tmpName, $gambar);
+            
+            return $namaFile;
+        }
+
+        public function updateSample($data) {
+            $id = $data["id"];
+            $tanggal = $data["tanggal"];
+            $nama_customer = htmlspecialchars(ucwords($data["nama_customer"]));
+            $style = htmlspecialchars(ucwords($data["style"]));
+            $code = htmlspecialchars(strtoupper($data["code"]));
+            $warna = htmlspecialchars(ucwords($data["warna"]));
+            $size = htmlspecialchars(strtoupper($data["size"]));
+            $harga = $data["harga"];
+            $gambarSebelumnya = $data["gambarSebelumnya"];
+            $habis = htmlspecialchars($data["habis"]);
+            $acc_1 = htmlspecialchars(ucwords($data["acc_1"]));
+            $acc_2 = htmlspecialchars(ucwords($data["acc_2"]));
+            $keterangan = htmlspecialchars($data["keterangan"]);
+            
+            if ($_FILES['gambar']['error'] === 4) {
+                $gambar = $gambarSebelumnya;
+            } else {
+                $gambar = $this->upload();
+            }
+    
+            $query = "UPDATE sample SET
+                        tanggal = :tanggal,
+                        nama_customer = :nama_customer,
+                        style = :style,
+                        code = :code,
+                        warna = :warna,
+                        size = :size,
+                        harga = :harga,
+                        gambar = :gambar,
+                        habis = :habis,
+                        acc_1 = :acc_1,
+                        acc_2 = :acc_2,
+                        keterangan = :keterangan
+                        WHERE id = :id";
+            
+            $this->db->query($query);
+            $this->db->bind('id', $id);
+            $this->db->bind('tanggal', $tanggal);
+            $this->db->bind('nama_customer', $nama_customer);
+            $this->db->bind('style', $style);
+            $this->db->bind('code', $code);
+            $this->db->bind('warna', $warna);
+            $this->db->bind('size', $size);
+            $this->db->bind('harga', $harga);
+            $this->db->bind('gambar', $gambar);
+            $this->db->bind('habis', $habis);
+            $this->db->bind('acc_1', $acc_1);
+            $this->db->bind('acc_2', $acc_2);
+            $this->db->bind('keterangan', $keterangan);
+            
+            $this->db->execute();
+            return $this->db->rowCount();
+        }
+
         public function hapusDataSample($id) {
             $query = "DELETE FROM sample WHERE id = :id";
         $this->db->query($query);
@@ -95,15 +171,7 @@ if (!empty($_FILES['gambar']['name'])) {
         return $this->db->rowCount();
         }
 
-            // Contoh metode untuk mendapatkan data terbaru dari tabel
-        public function getLatestData() {
-            // Implementasi untuk mendapatkan data terbaru dari tabel
-            // Gantilah dengan logika sesuai dengan kebutuhan Anda
-            $query = "SELECT * FROM sample ORDER BY id DESC LIMIT 10";
-            $this->db->query($query);
-            return $this->db->resultSet();
-        }
 
-
+        
 
 }

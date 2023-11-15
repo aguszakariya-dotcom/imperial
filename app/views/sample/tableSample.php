@@ -1,4 +1,4 @@
-<table id="dataTable" class="table table-striped" style="width:100%">
+
     <thead>
     <tr class="text-bold">
         <th><i class="fa-solid fa-user-pen tambah text-primary"></i></th>
@@ -46,4 +46,3 @@
             </tr>
         <?php } ?>
     </tbody>
-</table>

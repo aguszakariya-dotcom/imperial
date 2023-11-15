@@ -23,6 +23,46 @@ class Sample extends Controller {
         }
     }
 
+
+    public function update() {
+        if (isset($_POST['update'])) {
+            $id = $_POST['id'];
+            $data = [
+                'id' => $id,
+                'tanggal' => $_POST['tanggal'],
+                'nama_customer' => $_POST['nama_customer'],
+                'style' => $_POST['style'],
+                'code' => $_POST['code'],
+                'warna' => $_POST['warna'],
+                'size' => $_POST['size'],
+                'harga' => $_POST['harga'],
+                'gambarSebelumnya' => $_POST['gambarSebelumnya'],
+                'habis' => $_POST['habis'],
+                'acc_1' => $_POST['acc_1'],
+                'acc_2' => $_POST['acc_2'],
+                'keterangan' => $_POST['keterangan'],
+            ];
+
+            $sample_model = $this->model('Sample_model');
+            $result = $sample_model->updateSample($data);
+
+            if ($result > 0) {
+                // Update berhasil
+                Flasher::setFlash('berhasil', 'diupdate', 'info');
+            } else {
+                // Update gagal
+                Flasher::setFlash('gagal', 'diupdate', 'danger');
+            }
+
+            header('location: ' . BASEURL . '/sample');
+            exit;
+        } else {
+            // Jika tidak ada POST data, mungkin tampilkan form update
+            // Tambahkan logika atau tindakan lain yang diperlukan
+            echo "Tampilkan Form Update";
+        }
+    }
+
     public function hapus($id) {
         $result = $this->model('Sample_model')->hapusDataSample($id);
         if ($result === 0) {
@@ -43,4 +83,5 @@ class Sample extends Controller {
             echo json_encode($data);
         }
 
+        
 }

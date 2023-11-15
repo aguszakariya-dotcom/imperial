@@ -93,7 +93,88 @@ if (!empty($_FILES['gambar']['name'])) {
         return $this->db->rowCount();
     }
     
+    public function upload() {
+        $namaFile = $_FILES['gambar']['name'];
+        $ukuranFile = $_FILES['gambar']['size'];
+        $tmpName = $_FILES['gambar']['tmp_name'];
+        
+        // Setel lokasi direktori untuk menyimpan file yang diupload
+        $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/img-produksi/';
+        $gambar = $uploadDir . $namaFile;
+        
+        // Periksa ukuran file
+        if ($ukuranFile > 6000000) {
+            echo "<script>alert('Maaf, ukuran gambar terlalu besar!');</script>";
+            return false;
+        }
+
+        // Pindahkan file yang diupload ke direktori yang ditentukan
+        move_uploaded_file($tmpName, $gambar);
+        
+        return $namaFile;
+    }
     
+    public function updateProduksi($data) {
+        $id = $data["id"];
+        $bulan = $data['bulan'];
+        $nama_customer = htmlspecialchars(ucwords($data["nama_customer"]));
+        $code = htmlspecialchars(strtoupper($data["code"]));
+            $style = htmlspecialchars(ucwords($data["style"]));
+            $bahan = htmlspecialchars(strtoupper($data["bahan"]));
+            $warna = htmlspecialchars(ucwords($data["warna"]));
+            $size = htmlspecialchars(strtoupper($data["size"]));
+        $qty = $data['qty'];
+        $gambarSebelumnya = $data["gambarSebelumnya"];
+        $harga = $data['harga'];
+        $keterangan = htmlspecialchars($data["keterangan"]);
+        $jahit = $data['jahit'];
+        $motong = $data['motong'];
+        $naskat = $data['naskat'];
+        $status = $data['status'];
+        if ($_FILES['gambar']['error'] === 4) {
+            $gambar = $gambarSebelumnya;
+        } else {
+            $gambar = $this->upload();
+        }
+        $query = "UPDATE produksi SET
+            bulan = :bulan,
+            nama_customer = :nama_customer,
+            code = :code,
+            style = :style,
+            bahan = :bahan,
+            warna = :warna,
+            size = :size,
+            qty = :qty,
+            gambar = :gambar,
+            harga = :harga,
+            keterangan = :keterangan,
+            jahit = :jahit,
+            motong = :motong,
+            naskat = :naskat,
+            status = :status
+            WHERE id = :id";
+    
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+        $this->db->bind('bulan', $bulan);
+        $this->db->bind('nama_customer', $nama_customer);
+        $this->db->bind('code', $code);
+        $this->db->bind('style', $style);
+        $this->db->bind('bahan', $bahan);
+        $this->db->bind('warna', $warna);
+        $this->db->bind('size', $size);
+        $this->db->bind('qty', $qty);
+        $this->db->bind('gambar', $gambar);
+        $this->db->bind('harga', $harga);
+        $this->db->bind('keterangan', $keterangan);
+        $this->db->bind('jahit', $jahit);
+        $this->db->bind('motong', $motong);
+        $this->db->bind('naskat', $naskat);
+        $this->db->bind('status', $status);
+    
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
     
     
 
@@ -111,61 +192,6 @@ if (!empty($_FILES['gambar']['name'])) {
         return $this->db->rowCount();
     }
 
-    public function updateProduksi($id, $data) {
-        $finish = $data['bulan'];
-        $cust = $data['nama_customer'];
-        $style = $data['style'];
-        $code = $data['code'];
-        $bahan = $data['bahan'];
-        $warna = $data['warna'];
-        $size = $data['size'];
-        $qty = $data['qty'];
-        $gambar = $data['gambar'];
-        $harga = $data['harga'];
-        $keterangan = $data['keterangan'];
-        $jahit = $data['jahit'];
-        $motong = $data['motong'];
-        $naskat = $data['naskat'];
-        $status = $data['status'];
-    
-        $query = "UPDATE produksi SET
-            bulan = :bulan,
-            style = :style,
-            code = :code,
-            bahan = :bahan,
-            warna = :warna,
-            size = :size,
-            qty = :qty,
-            gambar = :gambar,
-            harga = :harga,
-            keterangan = :keterangan,
-            jahit = :jahit,
-            motong = :motong,
-            naskat = :naskat,
-            status = :status
-            WHERE id = :id";
-    
-        $this->db->query($query);
-        $this->db->bind('id', $id);
-        $this->db->bind('bulan', $finish);
-        $this->db->bind('nama_customer', $cust);
-        $this->db->bind('style', $style);
-        $this->db->bind('code', $code);
-        $this->db->bind('bahan', $bahan);
-        $this->db->bind('warna', $warna);
-        $this->db->bind('size', $size);
-        $this->db->bind('qty', $qty);
-        $this->db->bind('gambar', $gambar);
-        $this->db->bind('harga', $harga);
-        $this->db->bind('keterangan', $keterangan);
-        $this->db->bind('jahit', $jahit);
-        $this->db->bind('motong', $motong);
-        $this->db->bind('naskat', $naskat);
-        $this->db->bind('status', $status);
-    
-        $this->db->execute();
-        return $this->db->rowCount();
-    }
-    
+
 
 }

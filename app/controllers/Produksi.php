@@ -45,18 +45,20 @@ class Produksi extends Controller {
         exit;
     }
 
-    public function updateProduksi($id) {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    public function update() {
+        if (isset($_POST['update'])) {
+            $id = $_POST['id'];
             $data = [
+                'id' => $id,
                 'bulan' => $_POST['bulan'],
                 'nama_customer' => $_POST['nama_customer'],
-                'style' => $_POST['style'],
                 'code' => $_POST['code'],
+                'style' => $_POST['style'],
                 'bahan' => $_POST['bahan'],
                 'warna' => $_POST['warna'],
                 'size' => $_POST['size'],
                 'qty' => $_POST['qty'],
-                'gambar' => $_POST['gambar'],
+                'gambarSebelumnya' => $_POST['gambarSebelumnya'],
                 'harga' => $_POST['harga'],
                 'keterangan' => $_POST['keterangan'],
                 'jahit' => $_POST['jahit'],
@@ -65,20 +67,23 @@ class Produksi extends Controller {
                 'status' => $_POST['status']
             ];
     
-            if ($this->model('produksiModel')->updateProduksi($id, $data) > 0) {
-                Flasher::setFlash('berhasil', 'diperbarui', 'info');
-                header('location: ' . BASEURL . '/form/data_produksi');
-                exit;
+            $produksi_model = $this->model('Produksi_model');
+            $result = $produksi_model->updateProduksi($data);
+
+            if ($result > 0) {
+                // Update berhasil
+                Flasher::setFlash('berhasil', 'diupdate', 'info');
             } else {
-                Flasher::setFlash('gagal', 'diperbarui', 'danger');
-                header('location: ' . BASEURL . '/form/data_produksi');
-                exit;
+                // Update gagal
+                Flasher::setFlash('gagal', 'diupdate', 'danger');
             }
+
+            header('location: ' . BASEURL . '/produksi');
+            exit;
         } else {
-            // Jika bukan metode POST, mungkin tampilkan formulir pengeditan di sini.
-            // Anda dapat mengambil data berdasarkan $id dan menampilkannya pada formulir.
-            $data = $this->model('produksiModel')->getProduksiById($id);
-            $this->view('produk/edit', $data);
+            // Jika tidak ada POST data, mungkin tampilkan form update
+            // Tambahkan logika atau tindakan lain yang diperlukan
+            echo "Tampilkan Form Update";
         }
     }
     

@@ -45,8 +45,10 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
             <div class="card-header text-center">
                 <span>Input data Produksi</span>
             </div>
-            <form action="<?= BASEURL; ?>/produksi/tambah" class="form-horizontal" method="post" enctype="multipart/form-data">
+            <form action="<?= BASEURL; ?>/produksi/tambah" class="form-horizontal" method="post" enctype="multipart/form-data" id="formId">
                 <div class="card-body">
+                    <input type="hidden" name="id" id="id">
+                    <input type="hidden" class="custom-file-input" id="gambarSebelumnya" name="gambarSebelumnya">
                     <div class="form-group form-group-sm row shadow-sm">
                         <label class="col-sm-5" for="bulan">Finish</label>
                         <div class="col-sm-7">
@@ -144,7 +146,7 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
                                     <div class="custom-file text-xs">
                                         <input type="file" class="custom-file-input" id="gambar" name="gambar">
                                         <label class="custom-file-label" for="gambar">Pilih Gambar</label>
-                                        <input type="hidden" class="custom-file-input" id="gambarSebelumnya" name="gambarSebelumnya">
+                                        
                                     </div>
                                     <div class="input-group-append">
                                         <!-- <span class="input-group-text">Upload</span> -->
@@ -163,61 +165,10 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
             </form>
         </div>
     </div>
-    <div class="col-lg-9 animate__animated animate__backInUp">
+    <div class="col-lg-9 animate__animated animate__headShake">
         
         <table id="dataTable" class="table table-bordered table-striped table-hover">
-            <thead>
-                <tr class="text-bold">
-                    <th><i class="fa-solid fa-user-pen tambah text-primary"></i></th>
-                    <th class="col-sm-2">Date</th>
-                    <th class="col-sm-2">Customer</th>
-                    <th>Code</th>
-                    <th class="col-sm-2">Style</th>
-                    <th>Warna</th>
-                    <th>QTY</th>
-                    <th>Image</th>
-                    <th>Status</th>
-                    <th>action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php $no = 1; ?>
-                <?php foreach ($data['produksi'] as $produksi) : ?>
-                    <tr id="tableProduksi">
-                        <th class=""><?= $no++ ?></th>
-                        <td><?= tgl_kita($produksi['bulan']); ?></td>
-                        <td class="text-capitalize"><?= $produksi['nama_customer']; ?></td>
-                        <td><?= $produksi['code']; ?></td>
-                        <!-- <td ><?= $produksi['code']; ?></td> -->
-                        <td class="text-capitalize"><?= $produksi['style']; ?></td>
-                        <td class="text-capitalize"><?= $produksi['warna']; ?></td>
-                        <td><?= $produksi['qty']; ?></td>
-                        <td class="">
-                            <img src="http://localhost/img-produksi/<?= $produksi['gambar']; ?>" alt="" height="30" width="22" class=" zoom">
-                        </td>
-                        <td>
-                            <?php
-                            if ($produksi['status'] == 'Menunggu') {
-                                echo '<i data-feather="clock"></i>';
-                            } else if ($produksi['status'] == 'Proses') {
-                                echo '<img src="images/proses.gif" width="40">';
-                            } else if ($produksi['status'] == 'Finish') {
-                                echo '<img src="images/done.png" width="40">';
-                            } else if ($produksi['status'] == '') {
-                                echo '<span data-feather="badge badge-danger">Finish</span>';
-                            }
-                            ?>
-                        </td>
-                        <td>
-                            <div class="d-flex">
-                                <!-- Tambahkan link untuk ikon "trash-2" -->
-                                <a href="#" class="text-primary editProduksi icon" data-id="<?= $produksi['id']; ?>"><i class="fa-solid fa-pen-to-square"></i></a> &nbsp;
-                                <a href="<?= BASEURL; ?>/produksi/hapus/<?= $produksi['id']; ?>" class="text-danger delete-icon icon" onclick="return confirm('Yakin Mau menghapus data ini ??');"><i class="fa-solid fa-trash-can"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
+            <?php require_once 'tableProduksi.php' ?>
         </table>
     </div>
 
@@ -225,13 +176,17 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
 
 <script>
     $(document).ready(function() {
-        
-        $('.tambah').on('click', function() {
-            // $('#dataTable').DataTable();
-            $('#card-kiri').removeClass('collapse');
-            $('#card-kiri').addClass('animate__backInDown');
-            $('body').addClass('sidebar-mini layout-fixed sidebar-closed sidebar-collapse');
+        $('#save').click(function() {
+            // Mengganti nilai atribut action menjadi <?= BASEURL; ?>/sample/tambah
+            $('#formId').attr('action', '<?= BASEURL; ?>/produksi/tambah');
         });
+
+        // Aksi ketika tombol "Update" diklik
+        $('#update').click(function() {
+            // Mengganti nilai atribut action menjadi #
+            $('#formId').attr('action', '<?= BASEURL; ?>/produksi/update');
+        });
+        
 
         $('#dataTable').on('mouseenter', 'tr', function() {
             $(this).find('.icon').show();
@@ -265,6 +220,7 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
                 success: function(response) {
                     console.log(response);
                     // Mengisi nilai formulir dengan data yang diterima
+                    $('#id').val(response.id);
                     $('#bulan').val(response.bulan);
                     $('#nama_customer').val(response.nama_customer);
                     $('#style').val(response.style);
@@ -282,7 +238,7 @@ $koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', '
                     $('#gambarSebelumnya').val(response.gambar);
 
                     // Menampilkan gambar di elemen img
-                    $('#gambarLama').attr('src', 'https://raw.githubusercontent.com/aguszakariya-dotcom/img-produksi/main/' + response.gambar);
+                    $('#gambarLama').attr('src', 'http://localhost/img-produksi/' + response.gambar);
 
                     // $('#gambar').attr('src', 'https://raw.githubusercontent.com/aguszakariya-dotcom/img-produksi/main/' + response.gambar);
                 },
