@@ -1,6 +1,6 @@
 <div class="row mt-2 mb-5 justify-content-center animate__animated animate__fadeInLeft">
-    <div class="col-lg-10 ">
-        <div class="card card-secondary">
+    <div class="col-lg-10 mb5">
+        <div class="card card-secondary mb-5">
             <div class="card-header list-group-item d-flex w-100 justify-content-between align-items-center">
                 <div class="col-4 ">
                     <i data-feather="credit-card"></i>

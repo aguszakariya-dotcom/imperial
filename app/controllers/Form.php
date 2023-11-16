@@ -29,31 +29,26 @@ class Form extends Controller {
         $this->view('templates/footer2', $data);
     }
     // Forms Salary
-    public function salary_tailor() {
+    public function salary_karyawan() {
         $data['title'] = 'Forms Salary';
         $data['subTitle'] = 'Salary Tailor';
         $data['nama'] = $this->model('User_model')->getUser();
+        $data['produksi'] = $this->model('Form_model')->getLimitProduksi();
+        $data['gajian'] = $this->model('Form_model')->getAllGajian();
         $this->view('templates/header2', $data);
         $this->view('templates/sidebar', $data);
-        $this->view('form/salary_tailor', $data);
+        $this->view('form/salary_karyawan', $data);
         $this->view('templates/footer2', $data);
     }
-    public function salary_naskat() {
-        $data['title'] = 'Forms Salary';
-        $data['subTitle'] = 'Salary Naskat';
-        $data['nama'] = $this->model('User_model')->getUser();
-        $this->view('templates/header2', $data);
-        $this->view('templates/sidebar', $data);
-        $this->view('form/salary_naskat', $data);
-        $this->view('templates/footer2', $data);
-    }
-    public function salary_tkPotong() {
-        $data['title'] = 'Forms Salary';
-        $data['subTitle'] = 'Salary Tk Potong';
-        $data['nama'] = $this->model('User_model')->getUser();
-        $this->view('templates/header2', $data);
-        $this->view('templates/sidebar', $data);
-        $this->view('form/salary_tkpotong', $data);
-        $this->view('templates/footer2', $data);
+    public function tambahGaji() {
+        if( $this->model('Form_model')->tambahGajiKaryawan($_POST) > 0 ) {
+            Flasher::setFlash('berhasil', 'ditambahkan', 'info');
+            header('location: ' . BASEURL . '/form/salary_karyawan');
+            exit;
+        } else {
+            Flasher::setFlash('gagal', 'ditambahkan', 'danger');
+            header('location: ' . BASEURL . '/form/salary_karyawan');
+            exit;            
+        }
     }
 }
