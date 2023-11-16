@@ -193,16 +193,16 @@
           </div>
      </div>
      <!-- kanan -->
-     <div class="col-lg-6  animate__animated " id="card-kanan">
+     <div class="col-lg-7  animate__animated " id="card-kanan">
           <div class="card shadow">
                <div class="card-header text-center">Data Gaji Karyawan</div>
                <div class="card-body">
                <table class="table table-striped" id="table-gaji" width="100%">
                <thead>
                     <tr>
-                         <th class="col-sm-3">Nama</th>
+                         <th class="col-sm-2">Nama</th>
                          <th class="col-sm-2">Item</th>
-                         <th>Description</th>
+                         <th class="col-sm-3">Description</th>
                          <th>Cost</th>
                          <th>Qty</th>
                          <th>Total</th>
@@ -224,9 +224,9 @@
                          <td><?= $gaji['nama']; ?></td>
                          <td class="col-sm-2 text-capitalize"><?= $gaji['item']; ?></td>
                          <td class="text-capitalize"><?= $gaji['description']; ?></td>
-                         <td><?= $gaji['cost']; ?></td>
+                         <td class="text-bold"><?= number_format($gaji['qty'], 0, ',', '.'); ?></td>
                          <td><?= $gaji['qty']; ?></td>
-                         <td><?= $gaji['total']; ?></td>
+                         <td class="text-bold"><?= number_format($gaji['total'], 0, ',', '.'); ?></td>
                          <td><a href="" class="text-danger"> <i class="fa-solid fa-user-slash"></i></a></td>
                     </tr>
                     <?php endforeach ; ?>

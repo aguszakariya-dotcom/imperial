@@ -34,7 +34,7 @@ class Form extends Controller {
         $data['subTitle'] = 'Salary Tailor';
         $data['nama'] = $this->model('User_model')->getUser();
         $data['produksi'] = $this->model('Form_model')->getLimitProduksi();
-        $data['gajian'] = $this->model('Form_model')->getAllGajian();
+        $data['gajian'] = $this->model('Form_model')->getAllGajianToday();
         $this->view('templates/header2', $data);
         $this->view('templates/sidebar', $data);
         $this->view('form/salary_karyawan', $data);

@@ -35,6 +35,18 @@ class Form_model {
         $this-> db->query('SELECT * FROM gajian ORDER BY id DESC');
         return $this-> db-> resultSet();
     }
+    public function getAllGajianToday() 
+{
+    // Mengambil tanggal hari ini dalam format Y-m-d
+    $today = date('d-M-Y');
+
+    // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
+    $this->db->query('SELECT * FROM gajian WHERE date = :today ORDER BY id DESC');
+    $this->db->bind(':today', $today);
+    
+    return $this->db->resultSet();
+}
+
     public function tambahGajiKaryawan($data) {
         $nama = $data['nama'];
         $date = $data['tanggal'];
