@@ -1,53 +1,65 @@
-<?php 
+<?php
 
-class Form_model {
+class Form_model
+{
     private $table = 'karyawan';
     private $db;
 
     public function __construct()
     {
-        $this-> db = new Database;
+        $this->db = new Database;
     }
 
-    public function getNomerUrut() 
+    public function getNomerUrut()
     {
-        $this-> db->query('SELECT * FROM ' . $this-> table . ' ORDER BY id DESC');
-        return $this-> db-> resultSet();
+        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id DESC');
+        return $this->db->resultSet();
     }
-    public function getAllKaryawan() 
+    public function getAllKaryawan()
     {
-        $this-> db->query('SELECT * FROM ' . $this-> table . ' ORDER BY id DESC');
-        return $this-> db-> resultSet();
+        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id DESC');
+        return $this->db->resultSet();
     }
 
-    public function getLimitProduksi() 
+    public function getLimitProduksi()
     {
-        $this-> db->query('SELECT * FROM produksi ORDER BY id DESC LIMIT 30');
-        return $this-> db-> resultSet();
+        $this->db->query('SELECT * FROM produksi ORDER BY id DESC LIMIT 30');
+        return $this->db->resultSet();
     }
-    public function getAllPoduksi() 
+    public function getAllPoduksi()
     {
-        $this-> db->query('SELECT * FROM ' . $this-> table . ' ORDER BY id DESC');
-        return $this-> db-> resultSet();
+        $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id DESC');
+        return $this->db->resultSet();
     }
-    public function getAllGajian() 
+    public function getAllGajian()
     {
-        $this-> db->query('SELECT * FROM gajian ORDER BY id DESC');
-        return $this-> db-> resultSet();
+        $this->db->query('SELECT * FROM gajian ORDER BY id DESC');
+        return $this->db->resultSet();
     }
-    public function getAllGajianToday() 
+    public function getAllGajianToday()
 {
-    // Mengambil tanggal hari ini dalam format Y-m-d
     $today = date('d-M-Y');
-
     // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
     $this->db->query('SELECT * FROM gajian WHERE date = :today ORDER BY id DESC');
-    $this->db->bind(':today', $today);
-    
+    $this->db->bind(':today', $today);        
     return $this->db->resultSet();
 }
 
-    public function tambahGajiKaryawan($data) {
+public function getTotalGajianToday()
+{
+    $today = date('d-M-Y');
+    // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
+    $this->db->query('SELECT SUM(total) as total FROM gajian WHERE date = :today');
+    $this->db->bind(':today', $today);
+    $result = $this->db->single(); // Menggunakan single() karena kita hanya mengambil satu nilai total
+    return $result['total'];
+}
+
+   
+
+
+    public function tambahGajiKaryawan($data)
+    {
         $nama = $data['nama'];
         $date = $data['tanggal'];
         $item = $data['style'];
@@ -76,4 +88,20 @@ class Form_model {
         $this->db->execute();
         return $this->db->rowCount();
     }
+    public function hapusDtGaji($id) {
+        $query = "DELETE FROM gajian WHERE id = :id";
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+        try {
+            $this->db->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage(); // Tampilkan pesan error lengkap
+            die(); // Hentikan eksekusi skrip
+        }
+
+        return $this->db->rowCount();
+    }
+
+
+
 }

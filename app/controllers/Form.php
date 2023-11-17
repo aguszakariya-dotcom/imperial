@@ -30,11 +30,13 @@ class Form extends Controller {
     }
     // Forms Salary
     public function salary_karyawan() {
-        $data['title'] = 'Forms Salary';
-        $data['subTitle'] = 'Salary Tailor';
+        
+        $data['title'] = 'Forms';
+        $data['subTitle'] = 'Salary Karyawan';
         $data['nama'] = $this->model('User_model')->getUser();
         $data['produksi'] = $this->model('Form_model')->getLimitProduksi();
         $data['gajian'] = $this->model('Form_model')->getAllGajianToday();
+        $data['totalHariIni'] = $this->model('Form_model')->getTotalGajianToday();
         $this->view('templates/header2', $data);
         $this->view('templates/sidebar', $data);
         $this->view('form/salary_karyawan', $data);
@@ -51,4 +53,16 @@ class Form extends Controller {
             exit;            
         }
     }
+    public function hapusGaji($id) {
+        $result = $this->model('Form_model')->hapusDtGaji($id);
+        if ($result === 0) {
+            Flasher::setFlash('gagal', 'dihapus: ' . $result, 'danger');
+        } else {
+            Flasher::setFlash('berhasil', 'dihapus', 'info');
+        }
+        header('location: ' . BASEURL . '/form/salary_karyawan');
+        exit;
+    }
+
+    
 }

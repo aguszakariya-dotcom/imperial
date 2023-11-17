@@ -122,6 +122,7 @@
     $(document).ready(function() {
         feather.replace();
         // $("#data-table").DataTable();
+        
         $('#data-table').on('mouseenter', 'tr', function () {
             $(this).find('.icon').show();
         }).on('mouseleave', 'tr', function () {

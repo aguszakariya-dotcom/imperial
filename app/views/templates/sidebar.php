@@ -218,18 +218,18 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link <?= (strpos($data['title'], 'Forms Input Data') !== false) ? 'active' : ''; ?>">
+            <a href="#" class="nav-link <?= (strpos($data['title'], 'Forms') !== false) ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-edit"></i>
               <p>
-                Forms Input Data 
+                Forms 
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item">
-              <a href="<?= BASEURL; ?>/form/data_produksi" class="nav-link <?= (strpos($data['subTitle'], 'Input Data Produksi') !== false) ? 'active' : ''; ?>">
-                  <i class="far fa-circle nav-icon text-green"></i>
-                  <p>Input Data Produksi</p>
+            <li class="nav-item">
+              <a href="<?= BASEURL; ?>/form/salary_karyawan" class="nav-link <?= (strpos($data['subTitle'], 'Salary Karyawan') !== false) ? 'active' : ''; ?>">
+                  <i class="far fa-circle nav-icon text-fuchsia"></i>
+                  <p>Salary Karyawan</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -241,30 +241,30 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link <?= (strpos($data['title'], 'Forms Salary') !== false) ? 'active' : ''; ?>">
+            <a href="#" class="nav-link <?= (strpos($data['title'], 'Invoice') !== false) ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-cart-plus"></i>
               <p>
-                Forms Salary
+                Invoice
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/form/salary_tailor" class="nav-link <?= (strpos($data['subTitle'], 'Salary Tailor') !== false) ? 'active' : ''; ?>">
-                  <i class="far fa-circle nav-icon text-fuchsia"></i>
-                  <p>Salary Tailor</p>
-                </a>
-              </li>
-              <li class="nav-item">
-              <a href="<?= BASEURL; ?>/form/salary_tkpotong" class="nav-link <?= (strpos($data['subTitle'], 'Salary Tk Potong') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/invoice/karyawan" class="nav-link <?= (strpos($data['subTitle'], 'Salary Karyawan') !== false) ? 'active' : ''; ?>">
                   <i class="far fa-circle nav-icon text-warning"></i>
-                  <p>Salary Tk Potong</p>
+                  <p>Salary Karyawan</p>
                 </a>
               </li>
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/form/salary_naskat" class="nav-link <?= (strpos($data['subTitle'], 'Salary Naskat') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/form/sovana" class="nav-link <?= (strpos($data['subTitle'], 'Sovana') !== false) ? 'active' : ''; ?>">
+                  <i class="far fa-circle nav-icon text-warning"></i>
+                  <p>Sovana</p>
+                </a>
+              </li>
+              <li class="nav-item">
+              <a href="<?= BASEURL; ?>/form/other" class="nav-link <?= (strpos($data['subTitle'], 'Other') !== false) ? 'active' : ''; ?>">
                   <i class="far fa-circle nav-icon text-danger"></i>
-                  <p>Salary Naskat</p>
+                  <p>Other</p>
                 </a>
               </li>
             </ul>
@@ -298,7 +298,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-header">EXAMPLES</li>
+          <!-- <li class="nav-header">EXAMPLES</li> -->
           <li class="nav-item">
             <a href="pages/calendar.html" class="nav-link">
               <i class="nav-icon fas fa-calendar-alt"></i>
@@ -317,7 +317,7 @@
             </a>
           </li>
           <li class="nav-item">
-          <a href="<?= BASEURL; ?>/pages/karyawan.php" class="nav-link <?= (strpos($data['subTitle'], 'Karyawan') !== false) ? 'active' : ''; ?>">
+          <a href="<?= BASEURL; ?>/pages/karyawan.php" class="nav-link <?= (strpos($data['subTitle'], 'Data Karyawan') !== false) ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Karyawan

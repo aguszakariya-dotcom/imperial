@@ -56,9 +56,9 @@
           font-size: large;
      }
 </style>
-<div class="row justify-content-center pt-3 ml-5">
+<div class="row justify-content-center pt-3 ">
      <!-- kiri -->
-     <div class="col-lg-5  animate__animated collapse" id="card-kiri">
+     <div class="col-lg-4  animate__animated collapse" id="card-kiri">
           <div class="card shadow">
                <div class="card-header text-center">Data Produksi</div>
                <div class="card-body">
@@ -74,17 +74,7 @@
                          </thead>
                          <tbody>
                               <?php foreach ($data['produksi'] as $produksi) : ?>
-                                   <tr id="tableHargaProduksi" 
-                                   data-id="<?= $produksi['id']; ?>" 
-                                   data-nama_customer="<?= $produksi['nama_customer']; ?>" data-code="<?= $produksi['code']; ?>" 
-                                   data-style="<?= $produksi['style']; ?>" 
-                                   data-warna="<?= $produksi['warna']; ?>" 
-                                   data-size="<?= $produksi['size']; ?>" 
-                                   data-qty="<?= $produksi['qty']; ?>" 
-                                   data-harga="<?= $produksi['harga']; ?>" 
-                                   data-jahit="<?= $produksi['jahit']; ?>" 
-                                   data-motong="<?= $produksi['motong']; ?>" 
-                                   data-naskat="<?= $produksi['naskat']; ?>">
+                                   <tr id="tableHargaProduksi" data-id="<?= $produksi['id']; ?>" data-nama_customer="<?= $produksi['nama_customer']; ?>" data-code="<?= $produksi['code']; ?>" data-style="<?= $produksi['style']; ?>" data-warna="<?= $produksi['warna']; ?>" data-size="<?= $produksi['size']; ?>" data-qty="<?= $produksi['qty']; ?>" data-harga="<?= $produksi['harga']; ?>" data-jahit="<?= $produksi['jahit']; ?>" data-motong="<?= $produksi['motong']; ?>" data-naskat="<?= $produksi['naskat']; ?>">
                                         <td class="text-capitalize"><?= $produksi['nama_customer']; ?></td>
                                         <td class="text-capitalize"><?= $produksi['style']; ?></td>
                                         <td><?= $produksi['code']; ?></td>
@@ -98,9 +88,13 @@
           </div>
      </div>
      <!-- tengah -->
-     <div class="col-lg-4  animate__animated " id="card-tengah">
-          <div class="card shadow">
-               <div class="card-header text-center">Input data Salary</div>
+     <div class="col-lg-3  animate__animated " id="card-tengah">
+          <div class="card shadow ">
+               <div class="card-header text-center bg-secondary">
+
+                    Input data Salary
+                    <div class="float-right"><i class="fa-solid fa-users-between-lines" id="jumlahGaji"></i> <?= number_format($data['totalHariIni'], 0, ',', '.'); ?></div>
+               </div>
                <div class="card-body">
                     <form action="<?= BASEURL; ?>/form/tambahGaji" method="POST" id="formSalary">
                          <div class="mb-3 row">
@@ -165,7 +159,7 @@
                          <div class="mb-3 row">
                               <label for="qty" class="col-sm-4 col-form-label">Jumlah</label>
                               <div class="col-sm-8">
-                                   <input type="text" class="form-control animate__animated " name="qty" id="qty">
+                                   <input type="number" class="form-control animate__animated " name="qty" id="qty">
                               </div>
                          </div>
                          <!-- Tambahkan form-group untuk input Harga -->
@@ -183,67 +177,92 @@
                               </div>
                          </div>
                          <hr>
-                         <div class="text-center" id="tombol">
-                              <button type="submit" class="btn btn-sm btn-info float-end mx-1" name="save" id="save">Submit</button>
-                              <a class="btn btn-sm btn-outline-info" href="print.php">Cetak</a>
-                              <button type="button" class="btn btn-sm btn-outline-danger float-start" id="hapusData">Hapus</button>
+                         <div class="text-center">                              
+                              <button type="submit" class="btn btn-sm btn-info float-left" name="save" id="save">Submit</button>
+                              <a class="btn btn-sm btn-outline-info float-right" href="<?= BASEURL; ?>/invoice/karyawan">Cetak</a>
+                              <!-- <button type="button" class="btn btn-sm btn-outline-danger float-start" id="hapusData">Hapus</button> -->
                          </div>
                     </form>
                </div>
           </div>
      </div>
      <!-- kanan -->
-     <div class="col-lg-7  animate__animated " id="card-kanan">
-          <div class="card shadow">
-               <div class="card-header text-center">Data Gaji Karyawan</div>
+     <div class="col-lg-5  animate__animated " id="card-kanan">
+          <div class="card shadow">               
+               <div class="card-header">
+               <div class="float-left text-large text-bold"> <i class="fa-solid fa-user-tie text-primary"></i> <span id="namaNya" class="text-secondary"></span> <span id="totalByNama" class="text-bold"></span></div>
+                    <div class="float-right text-bold"><i class="fa-solid fa-users-between-lines"></i> <?= number_format($data['totalHariIni'], 0, ',', '.'); ?></div>
+               </div>
                <div class="card-body">
-               <table class="table table-striped" id="table-gaji" width="100%">
-               <thead>
-                    <tr>
-                         <th class="col-sm-2">Nama</th>
-                         <th class="col-sm-2">Item</th>
-                         <th class="col-sm-3">Description</th>
-                         <th>Cost</th>
-                         <th>Qty</th>
-                         <th>Total</th>
-                         <th>Action</th>
-                    </tr>
-               </thead>
-               <tbody>
-                    <?php foreach ($data['gajian'] as $gaji) : ?>
-                    <tr id="tableGajian" 
-                         data-id="<?= $gaji['id']; ?>" 
-                         data-nama="<?= $gaji['nama']; ?>" 
-                         data-date="<?= $gaji['date']; ?>" 
-                         data-item="<?= $gaji['item']; ?>" 
-                         data-description="<?= $gaji['description']; ?>" 
-                         data-cost="<?= $gaji['cost']; ?>" 
-                         data-qty="<?= $gaji['qty']; ?>" 
-                         data-total="<?= $gaji['total']; ?>">
-          
-                         <td><?= $gaji['nama']; ?></td>
-                         <td class="col-sm-2 text-capitalize"><?= $gaji['item']; ?></td>
-                         <td class="text-capitalize"><?= $gaji['description']; ?></td>
-                         <td class="text-bold"><?= number_format($gaji['qty'], 0, ',', '.'); ?></td>
-                         <td><?= $gaji['qty']; ?></td>
-                         <td class="text-bold"><?= number_format($gaji['total'], 0, ',', '.'); ?></td>
-                         <td><a href="" class="text-danger"> <i class="fa-solid fa-user-slash"></i></a></td>
-                    </tr>
-                    <?php endforeach ; ?>
-               </tbody>
-          </table>
+                    <table class="table table-striped" id="table-gaji" width="100%">
+                         <thead>
+                              <tr>
+                                   <th class="col-sm-2">Nama</th>
+                                   <th class="col-sm-2">Item</th>
+                                   <th class="col-sm-3">Description</th>
+                                   <th>Cost</th>
+                                   <th>Qty</th>
+                                   <th>Total</th>
+                                   <th>Action</th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                              <?php foreach ($data['gajian'] as $gaji) : ?>
+                                   <tr id="tableGajian" data-id="<?= $gaji['id']; ?>" data-nama="<?= $gaji['nama']; ?>" data-date="<?= $gaji['date']; ?>" data-item="<?= $gaji['item']; ?>" data-description="<?= $gaji['description']; ?>" data-cost="<?= $gaji['cost']; ?>" data-qty="<?= $gaji['qty']; ?>" data-total="<?= $gaji['total']; ?>">
+
+                                        <td class="text-capitalize"><?= $gaji['nama']; ?></td>
+                                        <td class="col-sm-2 text-capitalize"><?= $gaji['item']; ?></td>
+                                        <td class="text-capitalize"><?= $gaji['description']; ?></td>
+                                        <td class="text-bold"><?= number_format($gaji['qty'], 0, ',', '.'); ?></td>
+                                        <td><?= $gaji['qty']; ?></td>
+                                        <td class="text-bold"><?= $gaji['total']; ?></td>
+                                        <td><a href="<?= BASEURL; ?>/form/hapusGaji/<?= $gaji['id']; ?>" class="text-danger delete-icon icon" onclick="return confirm('Yakin Mau menghapus data ini ??');"> <i class="fa-solid fa-user-slash"></i></a></td>
+                                   </tr>
+                              <?php endforeach; ?>
+                         </tbody>
+                    </table>
                </div>
           </div>
      </div>
 </div>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <script>
      $(document).ready(function() {
+          $('body').addClass('sidebar-mini layout-fixed sidebar-closed sidebar-collapse');
+          $('#table-gaji').DataTable();
+          $('#table-gaji').on('mouseenter', 'tr', function() {
+               $(this).find('.icon').show();
+          }).on('mouseleave', 'tr', function() {
+               $(this).find('.icon').hide();
+          });
+
           $('#nama').change(function() {
                $('#card-kiri').removeClass('collapse');
+               var selectedNama = $(this).val();
+               $('#table-gaji').DataTable().search(selectedNama).draw();
+               // Set nilai pencarian DataTables dengan nilai terpilih
+               var table = $('#table-gaji').DataTable();
+               var nm = $('#namaNya');
+               var total = table
+               .column(5, { search: 'applied' }) // 5 adalah indeks kolom 'total', sesuaikan jika perlu
+               .data()
+               .reduce(function (acc, val) {
+                    // Bersihkan format angka dan tambahkan ke total
+                    var cleanTotal = parseFloat(val.replace(/[^0-9.-]+/g, '')) || 0;
+                    return acc + cleanTotal;
+               }, 0);
+
+               // Tampilkan total
+               // $('#totalByNama').text(total);
+               $('#totalByNama').text(total.toLocaleString('id-ID')); // Format angka sesuai dengan bahasa Indonesia
+               nm.text(selectedNama);
+              
+
+
           })
 
+
           $('#table-data tbody').on('click', 'tr', function() {
-               
                // Get data from the clicked row
                var customer = $(this).data('nama_customer');
                var style = $(this).data('style');
@@ -259,22 +278,22 @@
                var isi = 0;
 
                // Check the value of #nama
-                    // Mendapatkan nilai yang dipilih dari dropdown
-                    var selectedNama = $("#nama").val();
+               // Mendapatkan nilai yang dipilih dari dropdown
+               var selectedNama = $("#nama").val();
 
-                    // Cek apakah nilai yang dipilih adalah "nama tertentu"
-                    if (selectedNama === "Abdullah hafidz") {
-                         harga = naskat;
-                         
-                         console.log (jmlh)
-                    } else if (selectedNama === "Aulia margareta") {
-                         harga = motong;
-                         // qty = qty;
-                    } else {
-                         harga = jahit;
-                         $('#qty').addClass('btn-outline-danger shadow text-danger animate__bounce');
+               // Cek apakah nilai yang dipilih adalah "nama tertentu"
+               if (selectedNama === "Abdullah hafidz") {
+                    harga = naskat;
 
-                    }
+                    console.log(jmlh)
+               } else if (selectedNama === "Aulia margareta") {
+                    harga = motong;
+                    // qty = qty;
+               } else {
+                    harga = jahit;
+                    $('#qty').addClass('btn-outline-danger shadow text-danger animate__bounce');
+
+               }
 
 
                // Set the values to the input fields
@@ -291,34 +310,34 @@
           var isi = 0;
           $('#total').val();
           $('#qty').change(function() {
-        var harga = parseFloat($('#harga').val());
-        var jumlah = parseFloat($('#qty').val());
-        var total = harga * jumlah;
-        $('#total').val(total);
-        calculateTotal();
-    });
+               var harga = parseFloat($('#harga').val());
+               var jumlah = parseFloat($('#qty').val());
+               var total = harga * jumlah;
+               $('#total').val(total);
+               calculateTotal();
+          });
 
-    // Menghitung total saat nilai harga diubah
-    $('#harga').change(function() {
-        var harga = parseFloat($('#harga').val());
-        var jumlah = parseFloat($('#qty').val());
-        var total = harga * jumlah;
-        $('#total').val(total);
-        calculateTotal();
-    });
+          // Menghitung total saat nilai harga diubah
+          $('#harga').change(function() {
+               var harga = parseFloat($('#harga').val());
+               var jumlah = parseFloat($('#qty').val());
+               var total = harga * jumlah;
+               $('#total').val(total);
+               calculateTotal();
+          });
 
-    // Calculate total
-    function calculateTotal() {
-        var jumlah = parseInt($('#qty').val() || 0); // Handle empty input
-        var harga = parseFloat($('#harga').val().replace(/[^0-9.-]+/g, ''));
-        var total = jumlah * harga;
-        $('#total').val(total);
-    }
+          // Calculate total
+          function calculateTotal() {
+               var jumlah = parseInt($('#qty').val() || 0); // Handle empty input
+               var harga = parseFloat($('#harga').val().replace(/[^0-9.-]+/g, ''));
+               var total = jumlah * harga;
+               $('#total').val(total);
+          }
 
-    // Handle input change event for jumlah and harga
-    $('#qty, #harga').on('input', function() {
-        calculateTotal();
-    });
+          // Handle input change event for jumlah and harga
+          $('#qty, #harga').on('input', function() {
+               calculateTotal();
+          });
 
      });
 </script>
