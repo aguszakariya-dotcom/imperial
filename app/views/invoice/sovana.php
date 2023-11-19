@@ -1,158 +1,170 @@
 
+<?php
+// Mendapatkan tanggal hari ini
+$tanggal = date('d/m/Y'); // Format: YYYY-MM-DD
+$TgInvoive = date('ydm');
+$bulan = date('F');
+$bln = date('m');
+$th = date('y');
 
-            <div class="row m-3 bg-light">
-                <!-- Main content -->
-            <div class="invoice p-3 mb-3 bg-light">
-              <!-- title row -->
-              <div class="row bg-light">
-                <div class="col-12">
-                  <h4>
-                    <i class="fas fa-globe"></i> AdminLTE, Inc.
-                    <small class="float-right">Date: 2/10/2014</small>
-                  </h4>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- info row -->
-              <div class="row invoice-info">
-                <div class="col-sm-4 invoice-col">
-                  From
-                  <address>
-                    <strong>Admin, Inc.</strong><br>
-                    795 Folsom Ave, Suite 600<br>
-                    San Francisco, CA 94107<br>
-                    Phone: (804) 123-5432<br>
-                    Email: info@almasaeedstudio.com
-                  </address>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
-                  To
-                  <address>
-                    <strong>John Doe</strong><br>
-                    795 Folsom Ave, Suite 600<br>
-                    San Francisco, CA 94107<br>
-                    Phone: (555) 539-1037<br>
-                    Email: john.doe@example.com
-                  </address>
-                </div>
-                <!-- /.col -->
-                <div class="col-sm-4 invoice-col">
-                  <b>Invoice #007612</b><br>
-                  <br>
-                  <b>Order ID:</b> 4F3S8J<br>
-                  <b>Payment Due:</b> 2/22/2014<br>
-                  <b>Account:</b> 968-34567
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
+?>
+<div class="row mt-2 justify-content-center">
+  <div class="col-lg-7 px-3 mb-5">
+    <div class="invoice p-3 mb-3 mt-1 card-bg">
+      <!-- title row -->
+      <div class="row">
+        <div class="col-12">
+          <h4>
+            <img src="<?= BASEURL; ?>/images/logo.jpg" alt="sovana Logo" class="brand-image" style="opacity: .8" height="50" width="50"> SOVANA BALI
+            <small class="float-right">Date: <?= $tanggal; ?></small>
+          </h4>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- info row -->
+      <div class="row invoice-info">
+        <div class="col-sm-4 invoice-col">
+          From
+          <address>
+            <strong>Supervisor, Inc.</strong><br>
+            Jl. Gunung Tangkuban Perahu, <br>
+            BUANA PERMAI, Blok 1/20<br>
+            Phone: (62) 817-977-7607<br>
+            Email: zack77@sovanabali.my.id
+          </address>
+        </div>
+        <!-- /.col -->
+        <div class="col-sm-4 invoice-col">
+          To
+          <address>
+            <span class="text-bold text-capitalize" id="namaNya">wahyuningsih</span><br>
+            <span id="alamat">PT. SOVANA BALI GARMEN</span>.<br>
+            Phone: <span id="tlp">(+62) 859 4089 7837</span><br>
+            Email:<span id="mail">wahyuningsih@sovanabali.com</span>
+          </address>
+        </div>
+        <!-- /.col -->
 
-              <!-- Table row -->
-              <div class="row">
-                <div class="col-12 table-responsive">
-                  <table class="table table-striped">
-                    <thead>
-                    <tr>
-                      <th>Qty</th>
-                      <th>Product</th>
-                      <th>Serial #</th>
-                      <th>Description</th>
-                      <th>Subtotal</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Call of Duty</td>
-                      <td>455-981-221</td>
-                      <td>El snort testosterone trophy driving gloves handsome</td>
-                      <td>$64.50</td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Need for Speed IV</td>
-                      <td>247-925-726</td>
-                      <td>Wes Anderson umami biodiesel</td>
-                      <td>$50.00</td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Monsters DVD</td>
-                      <td>735-845-642</td>
-                      <td>Terry Richardson helvetica tousled street art master</td>
-                      <td>$10.70</td>
-                    </tr>
-                    <tr>
-                      <td>1</td>
-                      <td>Grown Ups Blue Ray</td>
-                      <td>422-568-642</td>
-                      <td>Tousled lomo letterpress</td>
-                      <td>$25.99</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
+        <div class="col-sm-4 invoice-col">
+          <b>Invoice #S<?= $TgInvoive; ?></b><br>
+          <br>
+          <b>Order ID:</b> <?= $th; ?>SBG<?= $bln; ?><br>
+          <b>Payment Due:</b> <?= $tanggal; ?><br>
+          <!-- <b>Account:</b> 923-0<span id="idNya"></span> -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
 
-              <div class="row">
-                <!-- accepted payments column -->
-                <div class="col-6">
-                  <p class="lead">Payment Methods:</p>
-                  <img src="<?= BASEURL; ?>/dist/img/credit/visa.png" alt="Visa">
-                  <img src="<?= BASEURL; ?>/dist/img/credit/mastercard.png" alt="Mastercard">
-                  <img src="<?= BASEURL; ?>/dist/img/credit/american-express.png" alt="American Express">
-                  <img src="<?= BASEURL; ?>/dist/img/credit/paypal2.png" alt="Paypal">
+      <!-- Table row -->
+      <div class="row trans">
+        <div class="col-12 table-responsive ">
+          <table class="table table-striped bg-transparent" id="table-invoice" width="100%">
+            <thead>
+              <tr>
+                <!-- <th id="tdNama">Nama</th> -->
+                <th>Qty</th>
+                <th class="col-sm-2">Item</th>
+                <th class="col-sm-">Description</th>
+                <th>Cost</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach ($data['invoice'] as $inv) : ?>
+                <tr id="invKaryawan" data-qty="<?= $inv['qty']; ?>" data-item="<?= $inv['item']; ?>" data-description="<?= $inv['description']; ?>" data-cost="<?= $inv['cost']; ?>" data-total="<?= $inv['total']; ?>">
+                  <td><?= $inv['qty']; ?></td>
+                  <td><?= $inv['item']; ?></td>
+                  <td><?= $inv['description']; ?></td>
+                  <td><?= $inv['cost']; ?></td>
+                  <td><?= $inv['total']; ?></td>
+                </tr>
+              <?php endforeach; ?>
 
-                  <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles, weebly ning heekya handango imeem
-                    plugg
-                    dopplr jibjab, movity jajah plickers sifteo edmodo ifttt zimbra.
-                  </p>
-                </div>
-                <!-- /.col -->
-                <div class="col-6">
-                  <p class="lead">Amount Due 2/22/2014</p>
+            </tbody>
+          </table>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
 
-                  <div class="table-responsive">
-                    <table class="table">
-                      <tr>
-                        <th style="width:50%">Subtotal:</th>
-                        <td>$250.30</td>
-                      </tr>
-                      <tr>
-                        <th>Tax (9.3%)</th>
-                        <td>$10.34</td>
-                      </tr>
-                      <tr>
-                        <th>Shipping:</th>
-                        <td>$5.80</td>
-                      </tr>
-                      <tr>
-                        <th>Total:</th>
-                        <td>$265.24</td>
-                      </tr>
-                    </table>
-                  </div>
-                </div>
-                <!-- /.col -->
-              </div>
-              <!-- /.row -->
+      <div class="row trans">
+        <!-- accepted payments column -->
+        <div class="col-6 shadow-none justify-content-center">
+          <p class="lead">Payment Methods:</p>
+          <img src="<?= BASEURL; ?>/dist/img/credit/visa.png" alt="Visa">
+          <img src="<?= BASEURL; ?>/dist/img/credit/mastercard.png" alt="Mastercard">
+          <img src="<?= BASEURL; ?>/dist/img/credit/american-express.png" alt="American Express">
+          <img src="<?= BASEURL; ?>/dist/img/credit/paypal2.png" alt="Paypal">
+          <img src="<?= BASEURL; ?>/dist/img/credit/tunai.png" alt="Tunai" height="32" width="51" style="border: 1px solid cyan;">
+          <img src="<?= BASEURL; ?>/dist/img/credit/transfer.png" alt="Tunai" height="32" width="51" style="border: 1px solid cyan;">
 
-              <!-- this row will not appear when printing -->
-              <div class="row no-print">
-                <div class="col-12">
-                  <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                  <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
-                    Payment
-                  </button>
-                  <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
-                    <i class="fas fa-download"></i> Generate PDF
-                  </button>
-                </div>
-              </div>
-            </div>
-            <!-- /.invoice -->
-            </div>
+          <div class="text-muted well well-sm " style="margin-top: 10px;">
+            <img class="text-center" src="<?= BASEURL; ?>/images/ttd.png" alt="tanda tangan" width="200px" height="150px"><br>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="text-center">( Agus zakariya )</span>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-6">
+          <!-- <p class="lead">Amount Due 2/22/2014</p> -->
+
+          <div class="table-responsive trans">
+            <table class="table trans">
+              <tr>
+                <th style="width:50%">Total:</th>
+                <td class="" id="subTtl">2000000</td>
+              </tr>
+              <!-- <tr>
+                <th>Tunjangan Hadir:</th>
+                <td id="tHadir">100.000</td>
+              </tr>
+              <tr>
+                <th>Tunjangan Lembur:</th>
+                <td id="tLembur">0</td>
+              </tr>
+              <tr>
+                <th>Total:</th>
+                <td id="gTotal" class="text-bold"></td>
+              </tr> -->
+            </table>
+          </div>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+      <!-- this row will not appear when printing -->
+      <div class="row no-print">
+        <div class="col-12">
+          <a href="#" class="btn btn-default" onclick="window.print()"><i class="fas fa-print"></i> Print</a>
+          <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
+            Payment
+          </button>
+          <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+            <i class="fas fa-download"></i> Generate PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    jumlahSubTtlNya()
+        // Fungsi untuk menghitung subtotal dari tabel-invoice
+        function jumlahSubTtlNya() {
+        var totalSum = 0;
+
+        // Loop melalui setiap baris pada tbody tabel-invoice
+        $('#table-invoice tbody tr').each(function() {
+            var totalCell = $(this).find('td:eq(4)');
+            var totalSubNya = parseInt(totalCell.text().replace(/\D/g, '')) || 0;
+            totalSum += totalSubNya;
+        });
+
+        // Set nilai pada elemen dengan ID subTtl
+        $('#subTtl').text('Rp. ' + totalSum.toLocaleString("id-ID"));
+    }
+  })
+</script>

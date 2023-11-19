@@ -38,7 +38,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link <?= (strpos($data['title'], 'Dasboard') !== false) ? '' : ''; ?>">
+            <a href="#" class="nav-link <?= (strpos($data['title'], 'Dasboard') !== false) ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -233,9 +233,9 @@
                 </a>
               </li>
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/form/data_sample" class="nav-link <?= (strpos($data['subTitle'], 'Input Data Sample') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/form/sovana" class="nav-link <?= (strpos($data['subTitle'], 'Breakdown Salary') !== false) ? 'active' : ''; ?>">
                   <i class="far fa-circle nav-icon text-warning"></i>
-                  <p>Input Data Sample</p>
+                  <p>Breakdown Salary</p>
                 </a>
               </li>
             </ul>
@@ -256,13 +256,13 @@
                 </a>
               </li>
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/form/sovana" class="nav-link <?= (strpos($data['subTitle'], 'Sovana') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/invoice/sovana" class="nav-link <?= (strpos($data['subTitle'], 'Sovana') !== false) ? 'active' : ''; ?>">
                   <i class="far fa-circle nav-icon text-warning"></i>
                   <p>Sovana</p>
                 </a>
               </li>
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/form/other" class="nav-link <?= (strpos($data['subTitle'], 'Other') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/invoice/other" class="nav-link <?= (strpos($data['subTitle'], 'Other') !== false) ? 'active' : ''; ?>">
                   <i class="far fa-circle nav-icon text-danger"></i>
                   <p>Other</p>
                 </a>
@@ -395,7 +395,7 @@
             </ul>
           </li>  
           <li class="nav-item">
-            <a href="#" class="nav-link">
+          <a href="#" class="nav-link <?= (strpos($data['title'], 'Extras') !== false) ? 'active' : ''; ?>">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
                 Extras
@@ -403,14 +403,24 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+            <li class="nav-item">
+            <a href="<?= BASEURL; ?>/pages" class="nav-link <?= (strpos($subTitle, 'Animasi') !== false) ? 'active' : ''; ?>">
+                <i class="nav-icon far fa-circle text-danger"></i>
+                <p class="text">Animasi</p>
+              </a>
+            </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>
-                    Login & Register v1
-                    <i class="fas fa-angle-left right"></i>
-                  </p>
-                </a>
+              <a href="<?= BASEURL; ?>/pages/fendi" class="nav-link <?= (strpos($subTitle, 'Tahapan Fendi') !== false) ? 'active' : ''; ?>">
+                <i class="nav-icon far fa-circle text-success"></i>
+                <p class="text">Fendi</p>
+              </a>
+              </li>
+              <li class="nav-item">
+              <a href="<?= BASEURL; ?>/pages/hafidz" class="nav-link <?= (strpos($subTitle, 'Tahapan Hafidz') !== false) ? 'active' : ''; ?>">
+                <i class="nav-icon far fa-circle text-warning"></i>
+                <p class="text">Hafidz</p>
+              </a>
+              </li>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
                     <a href="pages/examples/login.html" class="nav-link">

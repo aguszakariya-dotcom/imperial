@@ -2,8 +2,6 @@
 session_start();
 include_once 'koneksi.php';
 
-
-
 // Ambil saldo terakhir dari tabel
 $querySaldoTerakhir = mysqli_query($koneksi, 'SELECT saldo FROM hfd ORDER BY id DESC LIMIT 1');
 $saldoTerakhir = mysqli_fetch_assoc($querySaldoTerakhir)['saldo'];
@@ -52,12 +50,13 @@ $totalSetor = mysqli_fetch_assoc($queryTotalSetor)['totalSetor'];
         body {
             font-family: 'Poppins', sans-serif;
             font-size: small;
-            background-image: url("bgatas.jpg");
-            background-color: darkslategrey;
+            /* background-image: url("bgatas.jpg"); */
+            /* background-color: darkslategrey; */
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
+            width: 100%;
         }
 
 
@@ -102,7 +101,7 @@ $totalSetor = mysqli_fetch_assoc($queryTotalSetor)['totalSetor'];
 
 <body>
 
-    <div class="mt-5 px-1">
+    <div class="mt-5 px-5">
         <div class="row justify-content-center">
             <!-- form -->
             <div class="col-md-3 col-sm-11 col-md-8 col-xl-3 mt-3 px-2 mx-3">
@@ -240,13 +239,14 @@ $totalSetor = mysqli_fetch_assoc($queryTotalSetor)['totalSetor'];
                 $saldoTerakhir = mysqli_fetch_assoc($querySaldoTerakhir)['saldo'];
 
                 ?>
-                <div class="card shadow">
+                <div class="card">
                     <div class="card-header row  justify-content-center text-center">
                         <?php
                         $queryPenarikan = mysqli_query($koneksi, 'SELECT SUM(tarik) AS totalTarik FROM hfd');
                         $totalPenarikan = mysqli_fetch_assoc($queryPenarikan)['totalTarik'];
                         ?>
                         <table>
+                            
                             <tr>
                                 <th></th>
                                 <th><i data-feather="battery-charging"></i>Pinjaman</th>
@@ -281,7 +281,7 @@ $totalSetor = mysqli_fetch_assoc($queryTotalSetor)['totalSetor'];
                                     <th>Aksi</th>
                                 </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="isi-table">
                             <?php
                             $no = 1;
                             $query = mysqli_query($koneksi, 'SELECT * FROM hfd ORDER BY id ASC');
@@ -308,6 +308,15 @@ $totalSetor = mysqli_fetch_assoc($queryTotalSetor)['totalSetor'];
 
     <script>
         feather.replace()
+        function scrollToBottom() {
+  var tbody = document.querySelector("tbody");
+  tbody.scrollIntoView({
+    behavior: "smooth",
+  });
+}
+
+document.addEventListener("DOMContentLoaded", scrollToBottom);
+
     </script>
 
             <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

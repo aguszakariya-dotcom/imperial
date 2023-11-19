@@ -9,28 +9,9 @@ class Form extends Controller {
         $this->view('invoice/index',$data);
         $this->view('templates/footer');
     }
-    public function data_produksi() {
-        $data['title'] = 'Forms Input Data';
-        $data['subTitle'] = 'Input Data Produksi';
-        $data['nama'] = $this->model('User_model')->getUser();
-        $data['produksi'] = $this->model('Produksi_model')->getAllProduksi();
-        $this->view('templates/header2', $data);
-        $this->view('templates/sidebar', $data);
-        $this->view('form/data_produksi',$data);
-        $this->view('templates/footer2', $data);
-    }
-    public function data_sample() {
-        $data['title'] = 'Forms Input Data';
-        $data['subTitle'] = 'Input Data Sample';
-        $data['nama'] = $this->model('User_model')->getUser();
-        $this->view('templates/header2', $data);
-        $this->view('templates/sidebar', $data);
-        $this->view('form/data_sample',$data);
-        $this->view('templates/footer2', $data);
-    }
+
     // Forms Salary
-    public function salary_karyawan() {
-        
+    public function salary_karyawan() {        
         $data['title'] = 'Forms';
         $data['subTitle'] = 'Salary Karyawan';
         $data['nama'] = $this->model('User_model')->getUser();
@@ -42,6 +23,23 @@ class Form extends Controller {
         $this->view('form/salary_karyawan', $data);
         $this->view('templates/footer2', $data);
     }
+
+    // Forms Salary
+    public function sovana() {        
+        $data['title'] = 'Forms';
+        $data['subTitle'] = 'Breakdown Salary';
+        $data['nama'] = $this->model('User_model')->getUser();
+        $data['produksi'] = $this->model('Form_model')->getLimitProduksi();
+        $data['invSovana'] = $this->model('Invoice_model')->getInvSovana();
+        $data['totalHariIni'] = $this->model('Form_model')->getTotalGajianToday();
+        $this->view('templates/header2', $data);
+        $this->view('templates/sidebar', $data);
+        $this->view('form/sovana', $data);
+        $this->view('templates/footer2', $data);
+    }
+
+    // Form Other
+
     public function tambahGaji() {
         if( $this->model('Form_model')->tambahGajiKaryawan($_POST) > 0 ) {
             Flasher::setFlash('berhasil', 'ditambahkan', 'info');
@@ -64,5 +62,5 @@ class Form extends Controller {
         exit;
     }
 
-    
+
 }

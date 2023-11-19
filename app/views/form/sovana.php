@@ -58,7 +58,7 @@
 </style>
 <div class="row justify-content-center pt-3 ">
      <!-- kiri -->
-     <div class="col-lg-4  animate__animated collapse" id="card-kiri">
+     <div class="col-lg-4 animate__animated" id="card-kiri">
           <div class="card shadow">
                <div class="card-header text-center">Data Produksi</div>
                <div class="card-body">
@@ -96,31 +96,8 @@
                     <div class="float-right"><i class="fa-solid fa-users-between-lines" id="jumlahGaji"></i> <?= number_format($data['totalHariIni'], 0, ',', '.'); ?></div>
                </div>
                <div class="card-body">
-                    <form action="<?= BASEURL; ?>/form/tambahGaji" method="POST" id="formSalary">
-                         <div class="mb-3 row">
-                              <?php
-                              $servername = "becik.my.id:3306";
-                              $username = "akuntansi_ok";
-                              $password = "123/akuntansi";
-                              $dbname = "akuntansi";
-
-                              $koneksi = mysqli_connect($servername, $username, $password, $dbname);
-
-                              // Mengambil data nama dari tabel
-                              $queryNama = mysqli_query($koneksi, 'SELECT DISTINCT nama FROM karyawan ORDER BY nama ASC');
-                              $namaOptions = '';
-                              while ($row = mysqli_fetch_assoc($queryNama)) {
-                                   $namaOptions .= '<option value="' . $row['nama'] . '">' . $row['nama'] . '</option>';
-                              }
-                              ?>
-                              <label for="nama" class="col-sm-4 col-form-label">Nama</label>
-                              <div class="col-sm-8">
-                                   <select class="form-select form-control form-control-sm text-capitalize" name="nama" id="nama">
-                                        <option>Pilih Nama Pegawai</option>
-                                        <?= $namaOptions; ?>
-                                   </select>
-                              </div>
-                         </div>
+                    <form action="<?= BASEURL; ?>/invoice/tambahInv" method="POST" id="formSalary">
+                              
                          <div class="mb-3 row">
                               <label for="tanggal" class="col-sm-4 col-form-label">Tanggal</label>
                               <div class="col-sm-8">
@@ -179,7 +156,7 @@
                          <hr>
                          <div class="text-center">                              
                               <button type="submit" class="btn btn-sm btn-info float-left" name="save" id="save">Submit</button>
-                              <a class="btn btn-sm btn-outline-info float-right" href="<?= BASEURL; ?>/invoice/karyawan">Cetak</a>
+                              <a class="btn btn-sm btn-outline-info float-right" href="<?= BASEURL; ?>/invoice/sovana">Cetak</a>
                               <!-- <button type="button" class="btn btn-sm btn-outline-danger float-start" id="hapusData">Hapus</button> -->
                          </div>
                     </form>
@@ -207,16 +184,16 @@
                               </tr>
                          </thead>
                          <tbody>
-                              <?php foreach ($data['gajian'] as $gaji) : ?>
-                                   <tr id="tableGajian" data-id="<?= $gaji['id']; ?>" data-nama="<?= $gaji['nama']; ?>" data-date="<?= $gaji['date']; ?>" data-item="<?= $gaji['item']; ?>" data-description="<?= $gaji['description']; ?>" data-cost="<?= $gaji['cost']; ?>" data-qty="<?= $gaji['qty']; ?>" data-total="<?= $gaji['total']; ?>">
+                              <?php foreach ($data['invSovana'] as $invS) : ?>
+                                   <tr>
 
-                                        <td class="text-capitalize"><?= $gaji['nama']; ?></td>
-                                        <td class="col-sm-2 text-capitalize"><?= $gaji['item']; ?></td>
-                                        <td class="text-capitalize"><?= $gaji['description']; ?></td>
-                                        <td class="text-bold"><?= number_format($gaji['cost'], 0, ',', '.'); ?></td>
-                                        <td><?= $gaji['qty']; ?></td>
-                                        <td class="text-bold"><?= $gaji['total']; ?></td>
-                                        <td><a href="<?= BASEURL; ?>/form/hapusGaji/<?= $gaji['id']; ?>" class="text-danger delete-icon icon" onclick="return confirm('Yakin Mau menghapus data ini ??');"> <i class="fa-solid fa-user-slash"></i></a></td>
+                                        <td class="text-capitalize"><?= $invS['tanggal']; ?></td>
+                                        <td class="col-sm-2 text-capitalize"><?= $invS['item']; ?></td>
+                                        <td class="text-capitalize"><?= $invS['description']; ?></td>
+                                        <td class="text-bold"><?= number_format($invS['cost'], 0, ',', '.'); ?></td>
+                                        <td><?= $invS['qty']; ?></td>
+                                        <td class="text-bold"><?= $invS['total']; ?></td>
+                                        <td><a href="<?= BASEURL; ?>/form/hapusInvSovana/<?= $invS['id']; ?>" class="text-danger delete-icon icon" onclick="return confirm('Yakin Mau menghapus data ini ??');"> <i class="fa-solid fa-user-slash"></i></a></td>
                                    </tr>
                               <?php endforeach; ?>
                          </tbody>
@@ -236,37 +213,14 @@
                $(this).find('.icon').hide();
           });
 
-          $('#nama').change(function() {
-               $('#card-kiri').removeClass('collapse');
-               var selectedNama = $(this).val();
-               $('#table-gaji').DataTable().search(selectedNama).draw();
-               // Set nilai pencarian DataTables dengan nilai terpilih
-               var table = $('#table-gaji').DataTable();
-               var nm = $('#namaNya');
-               var total = table
-               .column(5, { search: 'applied' }) // 5 adalah indeks kolom 'total', sesuaikan jika perlu
-               .data()
-               .reduce(function (acc, val) {
-                    // Bersihkan format angka dan tambahkan ke total
-                    var cleanTotal = parseFloat(val.replace(/[^0-9.-]+/g, '')) || 0;
-                    return acc + cleanTotal;
-               }, 0);
-
-               // Tampilkan total
-               // $('#totalByNama').text(total);
-               $('#totalByNama').text(total.toLocaleString('id-ID')); // Format angka sesuai dengan bahasa Indonesia
-               nm.text(selectedNama);
-              
-
-
-          })
-
+         
 
           $('#table-data tbody').on('click', 'tr', function() {
                // Get data from the clicked row
                var customer = $(this).data('nama_customer');
                var style = $(this).data('style');
                var code = $(this).data('code');
+               var size = $(this).data('size');
                var warna = $(this).data('warna');
                var jmlh = $(this).data('qty');
 
@@ -300,6 +254,7 @@
                $('#customer').val(customer);
                $('#style').val(style);
                $('#code').val(code);
+               $('#size').val(size);
                $('#warna').val(warna);
                $('#qty').val(jmlh);
 
