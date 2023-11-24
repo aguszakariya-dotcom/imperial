@@ -369,7 +369,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= BASEURL; ?>/entri_jurnal" class="nav-link <?= (strpos($data['subTitle'], 'Entri Jurnal') !== false) ? 'active' : ''; ?>">
+                <a href="<?= BASEURL; ?>/entri" class="nav-link <?= (strpos($data['subTitle'], 'Entri Jurnal') !== false) ? 'active' : ''; ?>">
                   <i class="far fa-circle nav-icon text-warning"></i>
                   <p>Entri Jurnal</p>
                 </a>
@@ -665,5 +665,5 @@
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid pt-5 pt-5 justify-content-center">
+    <section class="content py-2">
+      <div class="container-fluid mt-5 pb-5 justify-content-center">
