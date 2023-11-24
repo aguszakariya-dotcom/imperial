@@ -160,7 +160,7 @@ $TgInvoive = date('ydm');
           <br>
           <b>Order ID:</b> 4F3S8J<br>
           <b>Payment Due:</b> <?= $tanggal; ?><br>
-          <b>Account:</b> 923-0<span id="idNya"></span>
+          <b>Account:</b> 923-0<span id="idNya">34</span>
         </div>
         <!-- /.col -->
       </div>
