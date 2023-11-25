@@ -84,6 +84,7 @@
       <img class="animation__wobble" src="images/logo.png" alt="Logo" height="100" width="100">
     </div> -->
     <!-- Navbar -->
+    <!-- <nav class="main-header navbar navbar-expand navbar-white navbar-light"> -->
     <nav class="main-header navbar navbar-expand navbar-dark">
       <!-- Left navbar links -->
       <ul class="navbar-nav">

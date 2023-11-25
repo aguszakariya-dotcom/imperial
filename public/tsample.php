@@ -1,9 +1,27 @@
+<div class="card-body">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="chart-responsive"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+                      <canvas id="pieChart" height="120" width="240" style="display: block; width: 240px; height: 120px;" class="chartjs-render-monitor"></canvas>
+                    </div>
+                    <!-- ./chart-responsive -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-md-4">
+                    <ul class="chart-legend clearfix">
+                      <li><i class="far fa-circle text-danger"></i> Chrome</li>
+                      <li><i class="far fa-circle text-success"></i> IE</li>
+                      <li><i class="far fa-circle text-warning"></i> FireFox</li>
+                      <li><i class="far fa-circle text-info"></i> Safari</li>
+                      <li><i class="far fa-circle text-primary"></i> Opera</li>
+                      <li><i class="far fa-circle text-secondary"></i> Navigator</li>
+                    </ul>
+                  </div>
+                  <!-- /.col -->
+                </div>
+                <!-- /.row -->
+              </div>
 
 
-<div class="dataTables_length" id="table-invoice_length"><label>Show <select name="table-invoice_length" aria-controls="table-invoice" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>
 
-<div id="table-invoice_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="table-invoice"></label></div>
-
-<div class="dataTables_paginate paging_simple_numbers" id="table-invoice_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="table-invoice_previous"><a href="#" aria-controls="table-invoice" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="table-invoice" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item next disabled" id="table-invoice_next"><a href="#" aria-controls="table-invoice" data-dt-idx="2" tabindex="0" class="page-link">Next</a></li></ul></div>
-
-<div class="dataTables_info" id="table-invoice_info" role="status" aria-live="polite">Showing 1 to 9 of 9 entries</div>
+              <th class="sorting sorting_desc" tabindex="0" aria-controls="table-gaji" rowspan="1" colspan="1" aria-label="Cost: activate to sort column ascending" style="width: 32px;" aria-sort="descending">Cost</th>

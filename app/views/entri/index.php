@@ -16,6 +16,11 @@
                         <div class="col-sm-4">
                         <label>Tanggal:</label>                        
                         <input type="date" class="form-control datetimepicker-input input-group-append" id="tanggal" name="tanggal">
+                        <script>
+                        const inputDate = document.getElementById('tanggal');
+                        const formattedDate = date('d-m-Y');
+                        inputDate.value = formattedDate;
+                        </script>
                         </div>
                         <div class="col-sm-8">
                             <label for="rincian" class="col-sm-4 form-lable">keterangan Transaksi</label>
@@ -131,6 +136,19 @@
         </div>
     </div>
 </div>
+<!-- batas isi  -->
+</div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    
+  </aside>
+  <!-- /.control-sidebar Kanan-->
 <style>
     .cilik {
         font-size: x-small;

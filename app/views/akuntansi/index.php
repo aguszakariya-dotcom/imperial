@@ -1,7 +1,7 @@
 
 
 
-<div class="row mt-2 mb-5 justify-content-center animate__animated fadeIndownBig">
+<div class="row mt-5 mb-5 justify-content-center animate__animated fadeIndownBig">
     <div class="col-lg-8 ">
         <div class="card card-secondary">
             <div class="card-header "><i data-feather="plus-circle" class="text-light tambahAkun"></i></div>
@@ -70,6 +70,19 @@
         </div>
     </div>
 </div>
+<!-- batas isi  -->
+</div><!--/. container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+    
+  </aside>
+  <!-- /.control-sidebar Kanan-->
 <style>
     .delete-icon .icon {
         display: none;

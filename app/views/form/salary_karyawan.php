@@ -237,6 +237,7 @@
           });
 
           $('#nama').change(function() {
+               
                $('#card-kiri').removeClass('collapse');
                var selectedNama = $(this).val();
                $('#table-gaji').DataTable().search(selectedNama).draw();
@@ -288,10 +289,12 @@
                     console.log(jmlh)
                } else if (selectedNama === "Aulia margareta") {
                     harga = motong;
+               // } else if (selectedNama === "Noor efendi zakariya") {
+               //      harga = 7000;
                     // qty = qty;
                } else {
                     harga = jahit;
-                    $('#qty').addClass('btn-outline-danger shadow text-danger animate__bounce');
+                    $('#qty').addClass('btn-outline-danger shadow text-primary animate__bounce');
 
                }
 
@@ -306,6 +309,7 @@
                // Set #harga based on the value of #nama
                $('#harga').val(harga);
                calculateTotal();
+               $("#size").focus();
           });
           var isi = 0;
           $('#total').val();

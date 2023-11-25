@@ -22,9 +22,9 @@ class Invoice extends Controller {
     }
     public function other() {
         $data['title'] = 'Invoice';
-        $data['subTitle'] = 'Salary Karyawan';
+        $data['subTitle'] = 'Other';
         $data['nama'] = $this->model('User_model')->getUser();
-        $data['invoice'] = $this->model('Form_model')->getInvSovana();
+        $data['imperial'] = $this->model('Invoice_model')->getDataImperial();
         $this->view('templates/header2', $data);
         $this->view('templates/sidebar', $data);
         $this->view('invoice/other',$data);
@@ -49,6 +49,17 @@ class Invoice extends Controller {
         } else {
             Flasher::setFlash('gagal', 'ditambahkan', 'danger');
             header('location: ' . BASEURL . '/form/sovana');
+            exit;            
+        }
+    }
+    public function tambahImperial() {
+        if( $this->model('Invoice_model')->tambahInvImperial($_POST) > 0 ) {
+            Flasher::setFlash('berhasil', 'ditambahkan', 'info');
+            header('location: ' . BASEURL . '/invoice/other');
+            exit;
+        } else {
+            Flasher::setFlash('gagal', 'ditambahkan', 'danger');
+            header('location: ' . BASEURL . '/invoice/other');
             exit;            
         }
     }

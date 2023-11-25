@@ -5,29 +5,39 @@ $TgInvoive = date('ydm');
 
 ?>
 <style>
-    @media print {
+  @media print {
     body {
-        font-size: 16px; /* Sesuaikan ukuran font sesuai kebutuhan */
+      font-size: 16px;
+      /* Sesuaikan ukuran font sesuai kebutuhan */
     }
 
     .table td {
-        font-size: large;
+      font-size: large;
     }
+
     .invoice-info {
-        font-size: large;
+      font-size: large;
     }
 
-}
+  }
 
-
+  .card-bg {
+            background-image: url('<?= BASEURL; ?>/images/greyLogo.png');
+            background-color: white;
+            background-repeat: no-repeat;
+            /* background-size: cover; */
+            background-position: center;
+        }
   .table th {
     font-size: 16px;
     font-weight: 600;
   }
-#isiNama,
-#tdNama {
+
+  #isiNama,
+  #tdNama {
     display: none;
-}
+  }
+
   /* .table td {
     font-size: 12px;
   } */
@@ -35,9 +45,11 @@ $TgInvoive = date('ydm');
   .dataTables_length {
     display: none;
   }
+
   .trans {
-  background-color: rgba(255, 255, 255, 0.1); /* Putih dengan tingkat transparansi 70% */
-}
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Putih dengan tingkat transparansi 70% */
+  }
 
   .dataTables_paginate {
     display: none;
@@ -46,9 +58,11 @@ $TgInvoive = date('ydm');
   .dataTables_info {
     display: none;
   }
+
   option {
     font-size: medium;
   }
+
   .table-invoice_filter,
   .dataTables_filter {
     display: none;
@@ -56,58 +70,52 @@ $TgInvoive = date('ydm');
 </style>
 <div class="row justify-content-center mb-5">
   <!-- Main content -->
-  <div class="col-lg-3 d-print-none" >
+  <div class="col-lg-3 d-print-none">
     <div class="card mt-5">
       <div class="card-header bg-gradient-secondary">
-      <div class="text-bold text-center">Grand Total = <span id="Semua"></span></div>
+        <div class="text-bold text-center">Grand Total = <span id="semua">1.000.000.000</span></div>
       </div>
       <div class="card-body">
+      <form action="<?= BASEURL; ?>/invoice/tambahImperial" method="post">
+        <?php $hr = date('d-M-Y'); ?>
+        <input type="hidden" name="tanggal" value="<?= $hr; ?>">
         <div class="mb-3 row">
-          <label for="nama" class="col-sm-3 col-form-label">Nama</label>
-          <div class="col-sm-9">
-            <select class="form-select form-control" id="nama">
-              <option>Pilih Nama Pegawai</option>
-            </select>
+          <label for="item" class="col-sm-4 col-form-label">Item</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control text-capitalize" name="item" id="item">
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="descripsi" class="col-sm-4 col-form-label">Description</label>
+          <div class="col-sm-8">
+            <input type="text" class="form-control text-capitalize" name="descripsi" id="descripsi">
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="cost" class="col-sm-4 col-form-label">Cost</label>
+          <div class="col-sm-8">
+            <input type="number" class="form-control" name="cost" id="cost" onchange="calculateTotal()">
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label for="qty" class="col-sm-4 col-form-label">Qty</label>
+          <div class="col-sm-8">
+            <input type="number" class="form-control" name="qty" id="qty" onchange="calculateTotal()">
           </div>
         </div>
 
-        <div class="mb-3 row">
-          <label class="col-sm-5" for="hadir">Hadir</label>
-          <div class="col-sm-7">
-            <select class="form-control form-control-border border-width-2 select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="hadir">
-              <option selected="selected">Pilih</option>
-              <option value="0">Tidak hadir</option>
-              <option value="10000">1 Hari</option>
-              <option value="20000">2 Hari</option>
-              <option value="30000">3 Hari</option>
-              <option value="40000">4 Hari</option>
-              <option value="50000">5 Hari</option>
-              <option value="60000">6 Hari</option>
-              <option value="70000">7 Hari</option>
-            </select>
-          </div>
-        </div>
-        <div class="mb-3 row">
-          <label class="col-sm-5" for="lembur">Lembur</label>
-          <div class="col-sm-7">
-            <select class="form-control form-control-border border-width-2 select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="lembur">
-              <option selected="selected">Pilih</option>
-              <option value="0">Tidak ada lembur</option>
-              <option value="10000">1 X</option>
-              <option value="20000">2 X</option>
-              <option value="30000">3 X</option>
-              <option value="40000">4 X</option>
-              <option value="50000">5 X</option>
-              <option value="60000">6 X</option>
-              <option value="70000">7 X</option>
-            </select>
-          </div>
-        </div>
-        
       </div>
       <div class="card-footer">
-        
+        <div class="row">
+        <label for="total" class="col-sm-4 col-form-label">Total</label>
+        <div class="col-sm-8">
+          <input type="number" class="form-control" name="total" id="total" readonly>
+          <br>
+          <button type="submit" class="btn btn-sm btn-primary">Save</button>
+        </div>
+        </div>
       </div>
+</form>
     </div>
   </div>
   <div class="col-lg-8 px-3 mb-5">
@@ -116,7 +124,7 @@ $TgInvoive = date('ydm');
       <div class="row">
         <div class="col-12">
           <h4>
-            <img src="<?= BASEURL; ?>/images/logo.jpg" alt="sovana Logo" class="brand-image" style="opacity: .8" height="50" width="50"> SOVANABALI
+            <img src="<?= BASEURL; ?>/images/logoPojokMedia.png" alt="Pojok Logo" class="brand-image" style="opacity: .9" height="90" width="150">
             <small class="float-right">Date: <?= $tanggal; ?></small>
           </h4>
         </div>
@@ -127,22 +135,22 @@ $TgInvoive = date('ydm');
         <div class="col-sm-4 invoice-col">
           From
           <address>
-            <strong>Supervisor, Inc.</strong><br>
+            <strong>Pojok media, Inc.</strong><br>
             Jl. Gunung Tangkuban Perahu, <br>
             BUANA PERMAI, Blok 1/20<br>
             Phone: (62) 817-977-7607<br>
-            Email: zack77@sovanabali.my.id
+            Email: zack77@pojokmedia.my.id
           </address>
         </div>
         <!-- /.col -->
         <div class="col-sm-4 invoice-col">
           To
           <address>
-            <span class="text-bold text-capitalize" id="namaNya">John Doe</span><br>
+            <span class="text-bold text-capitalize" id="namaNya">IMPERIAL</span><br>
             <span id="alamat">795 Folsom Ave, Suite 600<br>
               San Francisco, CA 94107</span>.<br>
-            Phone: <span id="tlp">(555) 539-1037</span><br>
-            Email:<span id="mail">john.doe@example.com</span>
+            Phone: <span id="tlp">+62 821-4401-5052 </span><br>
+            Email:<span id="mail">adivicious@yahoo.com</span>
           </address>
         </div>
         <!-- /.col -->
@@ -152,7 +160,7 @@ $TgInvoive = date('ydm');
           <br>
           <b>Order ID:</b> 4F3S8J<br>
           <b>Payment Due:</b> <?= $tanggal; ?><br>
-          <b>Account:</b> 923-0<span id="idNya"></span>
+          <b>Account:</b> 923-0<span id="idNya">34</span>
         </div>
         <!-- /.col -->
       </div>
@@ -161,7 +169,7 @@ $TgInvoive = date('ydm');
       <!-- Table row -->
       <div class="row trans">
         <div class="col-12 table-responsive ">
-          <table class="table table-striped bg-transparent" id="table-invoice" width ="100%">
+          <table class="table table-striped bg-transparent" id="table-invoice" width="100%">
             <thead>
               <tr>
                 <th id="tdNama">Nama</th>
@@ -173,12 +181,12 @@ $TgInvoive = date('ydm');
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($data['invoice'] as $inv) : ?>
-                <tr id="invKaryawan" data-qty="<?= $inv['qty']; ?>" data-item="<?= $inv['item']; ?>" data-description="<?= $inv['description']; ?>" data-cost="<?= $inv['cost']; ?>" data-total="<?= $inv['total']; ?>">
+              <?php foreach ($data['imperial'] as $inv) : ?>
+                <tr id="id" data-qty="<?= $inv['qty']; ?>" data-item="<?= $inv['item']; ?>" data-description="<?= $inv['descripsi']; ?>" data-cost="<?= $inv['cost']; ?>" data-total="<?= $inv['total']; ?>">
                   <td id="isiNama"><?= $inv['nama']; ?></td>
                   <td><?= $inv['qty']; ?></td>
                   <td><?= $inv['item']; ?></td>
-                  <td><?= $inv['description']; ?></td>
+                  <td><?= $inv['descripsi']; ?></td>
                   <td><?= $inv['cost']; ?></td>
                   <td><?= $inv['total']; ?></td>
                 </tr>
@@ -199,10 +207,12 @@ $TgInvoive = date('ydm');
           <img src="<?= BASEURL; ?>/dist/img/credit/mastercard.png" alt="Mastercard">
           <img src="<?= BASEURL; ?>/dist/img/credit/american-express.png" alt="American Express">
           <img src="<?= BASEURL; ?>/dist/img/credit/paypal2.png" alt="Paypal">
+          <img src="<?= BASEURL; ?>/dist/img/credit/tunai.png" alt="Tunai" height="32" width="51" style="border: 1px solid cyan;">
+          <img src="<?= BASEURL; ?>/dist/img/credit/transfer.png" alt="Tunai" height="32" width="51" style="border: 1px solid cyan;">
 
           <div class="text-muted well well-sm " style="margin-top: 10px;">
-          <img class="text-center" src="<?= BASEURL; ?>/images/ttd.png" alt="tanda tangan" width="200px" height="150px"><br>
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="text-center">( Agus zakariya )</span>
+            <img class="text-center" src="<?= BASEURL; ?>/images/ttd.png" alt="tanda tangan" width="200px" height="150px"><br>
+            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span class="text-center">( Agus zakariya )</span>
           </div>
         </div>
         <!-- /.col -->
@@ -212,20 +222,12 @@ $TgInvoive = date('ydm');
           <div class="table-responsive trans">
             <table class="table trans">
               <tr>
-                <th style="width:50%">Subtotal:</th>
-                <td class="" id="subTtl">2000000</td>
+                <th style="width:50%">Total:</th>
+                <td class="text-bold" id="subTtl">2000000</td>
               </tr>
               <tr>
-                <th>Tunjangan Hadir:</th>
-                <td id="tHadir">100.000</td>
-              </tr>
-              <tr>
-                <th>Tunjangan Lembur:</th>
-                <td id="tLembur">0</td>
-              </tr>
-              <tr>
-                <th>Total:</th>
-                <td id="gTotal"></td>
+                <!-- <th>Total:</th>
+                <td id="gTotal"></td> -->
               </tr>
             </table>
           </div>
@@ -253,104 +255,74 @@ $TgInvoive = date('ydm');
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function() {
-    $('#table-invoice').DataTable();
-    $.getJSON("<?= BASEAPI ?>/karyawan.php", function(data) {
-      // Membuat opsi pilihan (select option) dengan nama pegawai
-      var selectOptions = $("#nama");
+    function calculateTotal() {
+        var cost = parseFloat($('#cost').val().replace(/[^0-9.-]+/g, ""));
+        var qty = parseInt($('#qty').val() || 0); // Handle empty input
+        var total = cost * qty;
+        $('#total').val(total);
+        
+    }
 
-      data.forEach(function(item) {
-        selectOptions.append($('<option>', {
-          value: item.nama,
-          text: item.nama
-        }));
-      });
+    // Handle input change event for qty
+    $('#qty').on('input', function() {
+        calculateTotal();
     });
-    // $('#nama').on(change, function() {
-    //   console.log('namanya')
-    // })
-    // $('body').addClass('sidebar-mini layout-fixed sidebar-closed sidebar-collapse');
-    // $('.input').on('click', function() {
-    //     $('#card-kiri').show('collapse');
-    //     $('#card-kiri').addClass('animate__slideInRight');
-    // });
+
+    // function saveData() {
+    //     // Get the input values
+    //     let item = document.getElementById('item').value;
+    //     let descripsi = document.getElementById('descripsi').value;
+    //     let cost = document.getElementById('cost').value;
+    //     let qty = document.getElementById('qty').value;
+    //     let total = document.getElementById('total').value;
+
+    //     // Send the data to the backend using AJAX or fetch API
+    // }
+    $('#table-invoice').DataTable();
+
 
     var apiData;
-    $.getJSON("<?= BASEAPI; ?>/karyawan.php", function(data) {
+    $.getJSON("<?= BASEAPI; ?>/imperial.php", function(data) {
       apiData = data;
 
-      $('#nama').change(function() {               
-    var selectedNama = $(this).val();
-    var table = $('#table-invoice').DataTable();
+      $('#nama').change(function() {
+        var selectedNama = $(this).val();
+        var table = $('#table-invoice').DataTable();
 
-    // Set nilai pencarian DataTables dengan nilai terpilih
-    table.search(selectedNama).draw();
+        // Set nilai pencarian DataTables dengan nilai terpilih
+        table.search(selectedNama).draw();
 
-    // Operasi pada kolom total setelah DataTable menggambar ulang
-    var total = table
-        .column(5, { search: 'applied' }) // Sesuaikan indeks kolom total
-        .data()
-        .reduce(function (acc, val) {
+        // Operasi pada kolom total setelah DataTable menggambar ulang
+        var total = table
+          .column(4, {
+            search: 'applied'
+          }) // Sesuaikan indeks kolom total
+          .data()
+          .reduce(function(acc, val) {
             // Bersihkan format angka dan tambahkan ke total
             var cleanTotal = parseFloat(val.replace(/[^0-9.-]+/g, '')) || 0;
             return acc + cleanTotal;
-        }, 0);
+          }, 0);
 
-    // Lakukan sesuatu dengan nilai total, misalnya tampilkan di suatu tempat
-    console.log('Total: ', total);
-// });
-
-        var nm = $(this).val();
-        
-        var ny = $('#namaNya');
-        ny = nm;
-
-        var jab = "";
-        var almt = "";
-        var hp = "";
-        var ml = "";
-        var id = "";
-        var idNya = $('#idNya');
-        var jabatan = $('#jabatan');
-        var alamat = $('#alamat');
-        var phone = $('#tlp');
-        var mail = $('#mail');
-        $('#namaNya').text(ny);
-        apiData.forEach(function(item) {
-          if (item.nama === nm) {
-            jab = item.jabatan;
-            almt = item.alamat;
-            hp = item.telepon;
-            ml = item.email;
-            id = item.id;
-            jabatan.text(jab);
-            alamat.text(almt);
-            phone.text(hp);
-            mail.text(ml);
-            idNya.text(id);
-          }
+        // Lakukan sesuatu dengan nilai total, misalnya tampilkan di suatu tempat
+        console.log('Total: ', total);
+        // });
         });
-      });
     });
 
-    // var table = $('#table-invoice').DataTable({
-    //   "columnDefs": [{
-    //     "targets": [1],
-    //     "searchable": true
-    //   }]
-    // });
-
-    // var namane = $('#nama');
     var subTttl = $('#subTtl');
+    var semuaNya = $('#semua');
 
     function jumlahSubTtlNya() {
       var totalSum = 0;
       $('#table-invoice tbody tr').each(function() {
-        var totalCell = $(this).find('td:eq(4)');
+        var totalCell = $(this).find('td:eq(5)');
         var totalSubNya = parseInt(totalCell.text().replace(/\D/g, ''));
         totalSum += totalSubNya;
       });
       var formatJumlah = "Rp. " + totalSum.toLocaleString("id-ID");
       subTttl.text(formatJumlah);
+      semuaNya.text(formatJumlah);
     }
     jumlahSubTtlNya();
 
@@ -359,16 +331,16 @@ $TgInvoive = date('ydm');
       var apiData;
 
 
-// Fungsi untuk memuat data dari server
-function loadData() {
-    $.getJSON("<?= BASEAPI; ?>/invoice.php", function(data) {
-        apiData = data;
+      // Fungsi untuk memuat data dari server
+      function loadData() {
+        $.getJSON("<?= BASEAPI; ?>/invoice.php", function(data) {
+          apiData = data;
 
-        // Inisialisasi DataTable
-        var table = $('#table-invoice').DataTable();
+          // Inisialisasi DataTable
+          var table = $('#table-invoice').DataTable();
 
-        // Event handler saat #nama berubah
-        $('#nama').change(function() {
+          // Event handler saat #nama berubah
+          $('#nama').change(function() {
             var selectedNama = $(this).val();
 
             // Hapus filter yang ada
@@ -376,12 +348,12 @@ function loadData() {
 
             // Terapkan filter pada kolom 'nama'
             table.column(1).search(selectedNama).draw();
+          });
         });
-    });
-}
+      }
 
-// Memuat data saat halaman pertama kali dimuat
-loadData();
+      // Memuat data saat halaman pertama kali dimuat
+      loadData();
     });
 
     var thd = $('#tHadir');
@@ -401,13 +373,12 @@ loadData();
 
     function hitungJumlahTotal() {
       var subtotal = parseFloat($('#subTtl').text().replace(/\D/g, ''));
-      var tunjanganHadir = parseFloat($('#tHadir').text().replace(/\D/g, ''));
-      var tunjanganLembur = parseFloat($('#tLembur').text().replace(/\D/g, ''));
 
-      var total = subtotal + tunjanganHadir + tunjanganLembur;
-      
+      var total = subtotal;
+
       $('#gTotal').text('Rp. ' + total.toLocaleString("id-ID"));
-      $('#Semua').text('Rp. ' + total.toLocaleString("id-ID"));
+      $('#semua').text('Rp. ' + total.toLocaleString("id-ID"));
+
 
     }
   });

@@ -22,6 +22,14 @@ class Invoice_model {
         $this->db->bind(':today', $today);        
         return $this->db->resultSet();
     }
+    public function getDataImperial() 
+    {
+        $today = date('d-M-Y');
+        // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
+        $this->db->query('SELECT * FROM imperial WHERE tanggal = :today ORDER BY id DESC');
+        $this->db->bind(':today', $today);        
+        return $this->db->resultSet();
+    }
     
 
     public function tambahInvSovana($data)
@@ -51,6 +59,33 @@ class Invoice_model {
         $this->db->execute();
         return $this->db->rowCount();
     }
+    public function tambahInvImperial($data)
+    {
+        $tanggal = $data['tanggal'];
+        $item = $data['item'];
+        $descripsi = $data['descripsi'];
+        $cost = $data['cost'];
+        $qty = $data['qty'];
+        $total = $data['total'];
+        $query = "INSERT INTO imperial (tanggal, item, descripsi, cost, qty, total)
+        VALUES (            
+            :tanggal,
+            :item,
+            :descripsi,
+            :cost,
+            :qty,
+            :total
+        )";
+        $this->db->query($query);
+        $this->db->bind('tanggal', $tanggal);
+        $this->db->bind('item', $item);
+        $this->db->bind('descripsi', $descripsi);
+        $this->db->bind('cost', $cost);
+        $this->db->bind('qty', $qty);
+        $this->db->bind('total', $total);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
     public function hapusDtGaji($id) {
         $query = "DELETE FROM gajian WHERE id = :id";
         $this->db->query($query);
@@ -65,4 +100,13 @@ class Invoice_model {
         return $this->db->rowCount();
     }
 
+    public function getBreakdownToday()
+{
+    $today = date('d-M-Y');
+    // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
+    $this->db->query('SELECT SUM(total) as total FROM invsovana WHERE tanggal = :today');
+    $this->db->bind(':today', $today);
+    $result = $this->db->single(); // Menggunakan single() karena kita hanya mengambil satu nilai total
+    return $result['total'];
+}
 }
