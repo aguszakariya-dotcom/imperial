@@ -31,7 +31,7 @@ class Form extends Controller {
         $data['nama'] = $this->model('User_model')->getUser();
         $data['produksi'] = $this->model('Form_model')->getLimitProduksi();
         $data['invSovana'] = $this->model('Invoice_model')->getInvSovana();
-        $data['totalHariIni'] = $this->model('Form_model')->getTotalGajianToday();
+        $data['totalHariIni'] = $this->model('Invoice_model')->getBreakdownToday();
         $this->view('templates/header2', $data);
         $this->view('templates/sidebar', $data);
         $this->view('form/sovana', $data);
@@ -59,6 +59,16 @@ class Form extends Controller {
             Flasher::setFlash('berhasil', 'dihapus', 'info');
         }
         header('location: ' . BASEURL . '/form/salary_karyawan');
+        exit;
+    }
+    public function hapusBreakdown($id) {
+        $result = $this->model('Form_model')->hapusBreakdownSovana($id);
+        if ($result === 0) {
+            Flasher::setFlash('gagal', 'dihapus: ' . $result, 'danger');
+        } else {
+            Flasher::setFlash('berhasil', 'dihapus', 'info');
+        }
+        header('location: ' . BASEURL . '/form/sovana');
         exit;
     }
 

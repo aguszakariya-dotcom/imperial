@@ -50,7 +50,9 @@
      .table th {
           font-size: 16px;
      }
-
+     .sorting aria-control {
+          display: none;
+     }
      .icon {
           display: none;
           font-size: large;
@@ -93,7 +95,7 @@
                <div class="card-header text-center bg-secondary">
 
                     Input data Salary
-                    <div class="float-right"><i class="fa-solid fa-users-between-lines" id="jumlahGaji"></i> <?= number_format($data['totalHariIni'], 0, ',', '.'); ?></div>
+                    <div class="float-right" id=" "><?= number_format($data['totalHariIni'], 0, ',', '.'); ?></div>
                </div>
                <div class="card-body">
                     <form action="<?= BASEURL; ?>/invoice/tambahInv" method="POST" id="formSalary">
@@ -167,8 +169,7 @@
      <div class="col-lg-5  animate__animated " id="card-kanan">
           <div class="card shadow">               
                <div class="card-header">
-               <div class="float-left text-large text-bold"> <i class="fa-solid fa-user-tie text-primary"></i> <span id="namaNya" class="text-secondary"></span> <span id="totalByNama" class="text-bold"></span></div>
-                    <div class="float-right text-bold"><i class="fa-solid fa-users-between-lines"></i> <?= number_format($data['totalHariIni'], 0, ',', '.'); ?></div>
+                    <div class="text-bold"><i class="fa-solid fa-users-between-lines"></i> <?= number_format($data['totalHariIni'], 0, ',', '.'); ?></div>
                </div>
                <div class="card-body">
                     <table class="table table-striped" id="table-gaji" width="100%">
@@ -192,8 +193,8 @@
                                         <td class="text-capitalize"><?= $invS['description']; ?></td>
                                         <td class="text-bold"><?= number_format($invS['cost'], 0, ',', '.'); ?></td>
                                         <td><?= $invS['qty']; ?></td>
-                                        <td class="text-bold"><?= $invS['total']; ?></td>
-                                        <td><a href="<?= BASEURL; ?>/form/hapusInvSovana/<?= $invS['id']; ?>" class="text-danger delete-icon icon" onclick="return confirm('Yakin Mau menghapus data ini ??');"> <i class="fa-solid fa-user-slash"></i></a></td>
+                                        <td class="text-bold"><?= number_format($invS['total'], 0, ',', '.'); ?></td>
+                                        <td><a href="<?= BASEURL; ?>/form/hapusBreakdown/<?= $invS['id']; ?>" class="text-danger delete-icon icon" onclick="return confirm('Yakin Mau menghapus data ini ??');"> <i class="fa-solid fa-user-slash"></i></a></td>
                                    </tr>
                               <?php endforeach; ?>
                          </tbody>
@@ -233,21 +234,7 @@
 
                // Check the value of #nama
                // Mendapatkan nilai yang dipilih dari dropdown
-               var selectedNama = $("#nama").val();
-
-               // Cek apakah nilai yang dipilih adalah "nama tertentu"
-               if (selectedNama === "Abdullah hafidz") {
-                    harga = naskat;
-
-                    console.log(jmlh)
-               } else if (selectedNama === "Aulia margareta") {
-                    harga = motong;
-                    // qty = qty;
-               } else {
-                    harga = jahit;
-                    $('#qty').addClass('btn-outline-danger shadow text-danger animate__bounce');
-
-               }
+               
 
 
                // Set the values to the input fields
@@ -294,5 +281,19 @@
                calculateTotal();
           });
 
+          var table = $('#table-gaji').DataTable();
+               // var nm = $('#namaNya');
+               var total = table
+               .column(5, { search: 'applied' }) // 5 adalah indeks kolom 'total', sesuaikan jika perlu
+               .data()
+               .reduce(function (acc, val) {
+                    // Bersihkan format angka dan tambahkan ke total
+                    var cleanTotal = parseFloat(val.replace(/[^0-9.-]+/g, '')) || 0;
+                    return acc + cleanTotal;
+               }, 0);
+
+               // Tampilkan total
+               // $('#totalByNama').text(total);
+               $('#jumlahGaji').text(total.toLocaleString('id-ID')); // Format angka sesuai dengan bahasa Indonesia
      });
 </script>

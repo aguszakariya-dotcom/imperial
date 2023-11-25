@@ -100,4 +100,13 @@ class Invoice_model {
         return $this->db->rowCount();
     }
 
+    public function getBreakdownToday()
+{
+    $today = date('d-M-Y');
+    // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
+    $this->db->query('SELECT SUM(total) as total FROM invsovana WHERE tanggal = :today');
+    $this->db->bind(':today', $today);
+    $result = $this->db->single(); // Menggunakan single() karena kita hanya mengambil satu nilai total
+    return $result['total'];
+}
 }

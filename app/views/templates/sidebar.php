@@ -317,7 +317,7 @@
             </a>
           </li>
           <li class="nav-item">
-          <a href="<?= BASEURL; ?>/pages/karyawan.php" class="nav-link <?= (strpos($data['subTitle'], 'Data Karyawan') !== false) ? 'active' : ''; ?>">
+          <a href="<?= BASEURL; ?>/karyawan" class="nav-link <?= (strpos($data['title'], 'Karyawan') !== false) ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Karyawan

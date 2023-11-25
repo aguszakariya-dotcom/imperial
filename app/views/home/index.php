@@ -433,7 +433,8 @@
                 <div class="row">
                   <div class="col-md-8">
                     <div class="chart-responsive">
-                      <canvas id="pieChart" height="150"></canvas>
+                    <canvas id="pieChart" height="120" width="240" style="display: block; width: 240px; height: 120px;" class="chartjs-render-monitor"></canvas>
+
                     </div>
                     <!-- ./chart-responsive -->
                   </div>
@@ -578,7 +579,88 @@
 
 
 <script>
+  function getDataAndCreateChart() {
+  $.ajax({
+  url: '<?= BASEAPI; ?>/produksi.php',
+    method: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      // Handle data
+      console.log(data);
+      // Panggil fungsi untuk membuat chart
+      createChart(data);
+    },
+    error: function(error) {
+      console.error('Error:', error);
+    }
+  });
+}
+function createChart(data) {
+  // Proses data untuk mendapatkan jumlah qty untuk setiap nama_customer
+  const processedData = processData(data);
+
+  // Dapatkan elemen canvas dari HTML
+  const ctx = document.getElementById('pieChart').getContext('2d');
+
+  // Buat pie chart dengan Chart.js
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: processedData.labels,
+      datasets: [{
+        data: processedData.values,
+        backgroundColor: [
+          'red',
+          'green',
+          'yellow',
+          'blue',
+          'purple',
+          'gray'
+        ],
+      }],
+    },
+  });
+
+  // Tambahkan legend pada bagian sebelah kanan chart
+  const legendContainer = $('.chart-legend');
+  legendContainer.empty(); // Hapus elemen-elemen legenda yang sudah ada
+
+  processedData.labels.forEach((customer, index) => {
+    const colorClass = `text-${getRandomColorClass()}`; // Pilih warna secara acak atau sesuaikan dengan kebutuhan
+    const legendItem = `<li><i class="far fa-circle ${colorClass}"></i> ${customer}</li>`;
+    legendContainer.append(legendItem);
+  });
+}
+
+// Fungsi untuk mendapatkan kelas warna secara acak
+function getRandomColorClass() {
+  const colorClasses = ['text-danger', 'text-success', 'text-warning', 'text-info', 'text-primary', 'text-secondary'];
+  const randomIndex = Math.floor(Math.random() * colorClasses.length);
+  return colorClasses[randomIndex];
+}
+
+
+// Fungsi untuk memproses data
+function processData(data) {
+  // Lakukan pengolahan data di sini
+  // Contoh sederhana: Hitung jumlah qty untuk setiap nama_customer
+  const qtyByCustomer = {};
+
+  data.forEach(item => {
+    const customer = item.nama_customer;
+    qtyByCustomer[customer] = qtyByCustomer[customer] ? qtyByCustomer[customer] + parseInt(item.qty) : parseInt(item.qty);
+  });
+
+  return {
+    labels: Object.keys(qtyByCustomer),
+    values: Object.values(qtyByCustomer),
+  };
+}
+
+
+
   $(document).ready(function () {
+    getDataAndCreateChart();
     // URL API yang akan digunakan
     var apiUrl = '<?= BASEAPI; ?>/karyawan.php';
   

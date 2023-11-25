@@ -23,7 +23,7 @@ class Form_model
 
     public function getLimitProduksi()
     {
-        $this->db->query('SELECT * FROM produksi ORDER BY id DESC LIMIT 30');
+        $this->db->query('SELECT * FROM produksi ORDER BY id DESC LIMIT 50');
         return $this->db->resultSet();
     }
     public function getAllPoduksi()
@@ -90,6 +90,19 @@ public function getTotalGajianToday()
     }
     public function hapusDtGaji($id) {
         $query = "DELETE FROM gajian WHERE id = :id";
+        $this->db->query($query);
+        $this->db->bind('id', $id);
+        try {
+            $this->db->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage(); // Tampilkan pesan error lengkap
+            die(); // Hentikan eksekusi skrip
+        }
+
+        return $this->db->rowCount();
+    }
+    public function hapusBreakdownSovana($id) {
+        $query = "DELETE FROM invsovana WHERE id = :id";
         $this->db->query($query);
         $this->db->bind('id', $id);
         try {
