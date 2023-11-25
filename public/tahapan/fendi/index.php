@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 include_once 'koneksi.php';
 
 
@@ -50,6 +50,7 @@ if (isset($_GET['p']) && $_GET['p'] == "hapus" && isset($_GET['id'])) {
         body {
             font-family: 'Quicksand', sans-serif;
             font-size: small;
+            width: 100%;
         }
 
         .lingkaran {
@@ -79,7 +80,7 @@ if (isset($_GET['p']) && $_GET['p'] == "hapus" && isset($_GET['id'])) {
 </head>
 
 <body>
-    <div class="mx-auto px-2 mt-5 text-center">
+    <div class="mx-auto px-5 mt-5 text-center">
         <h1>Celengan</h1>
         <div class="row justify-content-center">
             <div class="col-md-3 col-sm-11 col-md-8 col-xl-3 mt-3 px-2 mx-3">
