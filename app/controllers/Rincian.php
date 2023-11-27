@@ -35,7 +35,7 @@ class Rincian extends Controller {
         if ($result === 0) {
             Flasher::setFlash('gagal', 'dihapus: ' . $result, 'danger');
         } else {
-            Flasher::setFlash('berhasil', 'dihapus', 'info');
+            Flasher::setFlash('berhasil', 'Data Berhasil dihapus', 'btn-outline-info');
         }
         header('location: ' . BASEURL . '/rincian');
         exit;

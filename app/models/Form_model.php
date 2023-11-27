@@ -36,26 +36,6 @@ class Form_model
         $this->db->query('SELECT * FROM gajian ORDER BY id DESC');
         return $this->db->resultSet();
     }
-    public function getAllGajianToday()
-{
-    $today = date('d-M-Y');
-    // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
-    $this->db->query('SELECT * FROM gajian WHERE date = :today ORDER BY id DESC');
-    $this->db->bind(':today', $today);        
-    return $this->db->resultSet();
-}
-
-public function getTotalGajianToday()
-{
-    $today = date('d-M-Y');
-    // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
-    $this->db->query('SELECT SUM(total) as total FROM gajian WHERE date = :today');
-    $this->db->bind(':today', $today);
-    $result = $this->db->single(); // Menggunakan single() karena kita hanya mengambil satu nilai total
-    return $result['total'];
-}
-
-   
 
 
     public function tambahGajiKaryawan($data)

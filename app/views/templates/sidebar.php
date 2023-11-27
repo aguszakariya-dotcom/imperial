@@ -663,7 +663,10 @@
    <!-- Content Wrapper. Contains page content -->
    <div class="content-wrapper">
     <!-- /.content-header -->
+    <div class="float-right mr-5 mt-3">
 
+      <?php Flasher::flash(); ?>
+    </div>
     <!-- Main content -->
     <section class="content py-2">
       <div class="container-fluid mt-5 pb-5 justify-content-center">
