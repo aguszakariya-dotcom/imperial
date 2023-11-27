@@ -64,7 +64,7 @@
 
                             <td></td>
                             <td><?= $mutasi['noAkun3']; ?></td>
-                            <td><?= $mutasi['nama3']; ?></td>
+                            <td></td>
                             <td></td>
                             <td>
                                 <?php
@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-sm-4"></div>
                     <div class="colsm-4 float-right mr-3 animate__animated animate__zoomInRight animate__infinite animate__slower">
-                    <i data-feather="credit-card"></i>Total Debit Rp. <strong><?= number_format($totalKredit, 0, ',', '.'); ?></strong>
+                    <i data-feather="credit-card"></i>Total Kredit Rp. <strong><?= number_format($totalKredit, 0, ',', '.'); ?></strong>
                     </div>
                 </div>
             </div>

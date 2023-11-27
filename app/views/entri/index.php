@@ -129,7 +129,7 @@
                             <tr></tr>
                             <td><?= $data['akhirMutasi']['tanggal']; ?></td>
                             <td><?= $data['akhirMutasi']['noAkun3']; ?></td>
-                            <td><?= $data['akhirMutasi']['nama3']; ?></td>
+                            <td></td>
                             <td></td>
                             <td><?= number_format(floatval($data['akhirMutasi']['debit3']), 0, ',', '.'); ?></td>
                             <td><?= number_format(floatval($data['akhirMutasi']['kredit3']), 0, ',', '.'); ?></td>

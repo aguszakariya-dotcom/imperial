@@ -34,10 +34,11 @@ class Invoice_model {
     public function getAllGajianToday()
     {
         $today = date('d-M-Y');
-        $yesterday = date('d-M-Y', strtotime('-1 day'));
+        // $yesterday = date('d-M-Y', strtotime('-2 day'));
         // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
         $this->db->query('SELECT * FROM gajian WHERE date = :today ORDER BY id DESC');
-        $this->db->bind(':today', $yesterday);        
+        $this->db->bind(':today', $today);        
+        // $this->db->bind(':today', $yesterday);        
         return $this->db->resultSet();
     }
 

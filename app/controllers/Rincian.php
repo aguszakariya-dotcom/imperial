@@ -2,7 +2,7 @@
 class Rincian extends Controller {
     public function index() {
         $data['title'] = 'Akuntansi';
-        $data['subTitle'] = 'Rincian Transaksi';
+        $data['subTitle'] = 'List Rincian Transaksi';
         $data['nama'] = $this->model('User_model')->getUser();
         // Memanggil metode getAllRincianTransaksi() langsung dari model tanpa membuat objek baru
         $data['rincian'] = $this->model('Rincian_model')->getAllPolaTransaksi();

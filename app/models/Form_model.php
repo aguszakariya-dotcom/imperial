@@ -1,7 +1,6 @@
 <?php
 
-class Form_model
-{
+class Form_model {
     private $table = 'karyawan';
     private $db;
 
@@ -26,15 +25,36 @@ class Form_model
         $this->db->query('SELECT * FROM produksi ORDER BY id DESC LIMIT 50');
         return $this->db->resultSet();
     }
+
     public function getAllPoduksi()
     {
         $this->db->query('SELECT * FROM ' . $this->table . ' ORDER BY id DESC');
         return $this->db->resultSet();
     }
+
     public function getAllGajian()
     {
+        
         $this->db->query('SELECT * FROM gajian ORDER BY id DESC');
         return $this->db->resultSet();
+    }
+
+    public function getAllGajianToday()
+    {
+        $today = date('d-M-Y');
+        $this->db->query('SELECT * FROM gajian WHERE date = :today ORDER BY id DESC');
+        $this->db->bind(':today', $today);        
+        return $this->db->resultSet();
+    }
+
+    public function getTotalGajianToday()
+    {
+        $today = date('d-M-Y');
+        // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
+        $this->db->query('SELECT SUM(total) as total FROM gajian WHERE date = :today');
+        $this->db->bind(':today', $today);
+        $result = $this->db->single(); // Menggunakan single() karena kita hanya mengambil satu nilai total
+        return $result['total'];
     }
 
 

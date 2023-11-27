@@ -468,7 +468,7 @@ $tglSekarang = date('d-M-Y');
       var total = subtotal + tunjanganHadir + tunjanganLembur;
 
       $('#gTotal').text('Rp. ' + total.toLocaleString("id-ID"));
-      $('#total').val('Rp. ' + total.toLocaleString("id-ID"));
+      $('#total').val(total);
     }
   });
 </script>

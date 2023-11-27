@@ -11,11 +11,13 @@ class Karyawan extends Controller {
         $this->view('karyawan/index', $data);
         $this->view('templates/footer2', $data);
     }
-    public function list_gaji() {
-        $data['title'] = 'Karyawan';
-        $data['subTitle'] = ' List Gaji';
+    public function daftar_gaji() {
+        $data['title'] = 'Akuntansi';
+        $data['subTitle'] = ' List Gaji Karyawan';
         $data['nama'] = $this->model('User_model')->getUser();
         $data['listGaji'] = $this->model('Karyawan_model')->getAllGajiKaryawan();
+        $data['totalGaji'] = $this->model('Karyawan_model')->totalGajiKaryawan();
+        $data['semingguGaji'] = $this->model('Karyawan_model')->totalSemingguKaryawan();
         $this->view('templates/header2', $data);
         $this->view('templates/sidebar', $data);
         $this->view('karyawan/daftar-gaji', $data);
