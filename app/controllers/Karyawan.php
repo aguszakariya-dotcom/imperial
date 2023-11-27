@@ -15,10 +15,10 @@ class Karyawan extends Controller {
         $data['title'] = 'Karyawan';
         $data['subTitle'] = ' List Gaji';
         $data['nama'] = $this->model('User_model')->getUser();
-        $data['listGaji'] = $this->model('karyawan_model')->getAllGajiKaryawan();
+        $data['listGaji'] = $this->model('Karyawan_model')->getAllGajiKaryawan();
         $this->view('templates/header2', $data);
         $this->view('templates/sidebar', $data);
-        $this->view('karyawan/list_gaji', $data);
+        $this->view('karyawan/daftar-gaji', $data);
         $this->view('templates/footer2', $data);
     }
 }

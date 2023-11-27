@@ -225,13 +225,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= $BASEURL; ?>/laporan" class="nav-link <?= (strpos($data['subTitle'], 'Laporan laba-Rugi') !== false) ? 'active' : ''; ?>">
+                <a href="<?= BASEURL; ?>/laporan" class="nav-link <?= (strpos($data['subTitle'], 'Laporan laba-Rugi') !== false) ? 'active' : ''; ?>">
                   <i class="far fa-circle nav-icon text-fuchsia"></i>
                   <p>Laporan laba-Rugi</p>
                 </a>
               </li>              
               <li class="nav-item">
-                <a href="<?= $BASEURL; ?>/karyawan/list_gaji" class="nav-link <?= (strpos($data['subTitle'], 'List Gaji Karyawan') !== false) ? 'active' : ''; ?>">
+                <a href="<?= BASEURL; ?>/karyawan/list_gaji" class="nav-link <?= (strpos($data['subTitle'], 'List Gaji Karyawan') !== false) ? 'active' : ''; ?>">
                   <i class="far fa-circle nav-icon text-fuchsia"></i>
                   <p>List Gaji Karyawan</p>
                 </a>
