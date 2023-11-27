@@ -43,3 +43,7 @@
                   For more examples look at <a href="https://sweetalert2.github.io/">https://sweetalert2.github.io/</a>
                 </div>
               </div>
+
+Tanggal | Keterangan | Akun | Debet | Kredit
+        |            | Akun | Debit | Kredit
+        |            | Akun | Debit | Kredit

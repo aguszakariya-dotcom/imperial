@@ -56,7 +56,7 @@
                             <td></td>
                             <td><?= $mutasi['noAkun2']; ?></td>
                             <td><?= $mutasi['namAkun2']; ?></td>
-                            <td><?= $mutasi['keterangan']; ?></td>
+                            <td></td>
                             <td><?= number_format(floatval($mutasi['debit2']), 0, ',', '.'); ?></td>
                             <td><?= number_format(floatval($mutasi['kredit2']), 0, ',', '.'); ?></td>
                             <tr id="baris3">

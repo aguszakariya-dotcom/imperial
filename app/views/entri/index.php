@@ -13,7 +13,7 @@
             <div class="card-body">
                 <form action="<?= BASEURL; ?>/entri/tambahMutasi" method="post">
                     <div class="mb-3 row">
-                        <div class="col-sm-4">
+                        <div class="col-sm-2">
                         <label>Tanggal:</label>                        
                         <input type="date" class="form-control datetimepicker-input input-group-append" id="tanggal" name="tanggal">
                         <script>
@@ -22,9 +22,13 @@
                         inputDate.value = formattedDate;
                         </script>
                         </div>
-                        <div class="col-sm-8">
-                            <label for="rincian" class="col-sm-4 form-lable">keterangan Transaksi</label>
-                            <select class="custom-select form-control form-select form-select-sm" aria-label="Small select example" name="pilihRincian" id="pilihRincian">
+                        <div class="col-sm-5">
+                            <label for="rincian" class="col-sm-4 form-lable">Keterangan Transaksi</label>
+                            <input type="text" class="form-control fom-control-sm" aria-label="Small select example" name="keterangan" id="keterangan">
+                        </div>
+                        <div class="col-sm-5">
+                            <label for="rincian" class="col-sm-4 form-lable">Akun Transaksi</label>
+                            <select class="custom-select form-control form-select form-select-sm" aria-label="Small select example" name="pilihan" id="pilihRincian">
                                 <option selected>pilih</option>
                             </select>
                         </div>
@@ -119,14 +123,14 @@
                             <td><?= $data['akhirMutasi']['tanggal']; ?></td>
                             <td><?= $data['akhirMutasi']['noAkun2']; ?></td>
                             <td><?= $data['akhirMutasi']['namAkun2']; ?></td>
-                            <td><?= $data['akhirMutasi']['keterangan']; ?></td>
+                            <td></td>
                             <td><?= number_format(floatval($data['akhirMutasi']['debit2']), 0, ',', '.'); ?></td>
                             <td><?= number_format(floatval($data['akhirMutasi']['kredit2']), 0, ',', '.'); ?></td>
                             <tr></tr>
                             <td><?= $data['akhirMutasi']['tanggal']; ?></td>
                             <td><?= $data['akhirMutasi']['noAkun3']; ?></td>
                             <td><?= $data['akhirMutasi']['nama3']; ?></td>
-                            <td><?= $data['akhirMutasi']['keterangan']; ?></td>
+                            <td></td>
                             <td><?= number_format(floatval($data['akhirMutasi']['debit3']), 0, ',', '.'); ?></td>
                             <td><?= number_format(floatval($data['akhirMutasi']['kredit3']), 0, ',', '.'); ?></td>
                         </tr>
@@ -172,7 +176,7 @@
     $(document).ready(function() {
         var apiData; // Membuat variabel untuk menyimpan data dari API
 
-        $.getJSON("<?= BASEAPI; ?>/pola_Transaksi.php", function(data) {
+        $.getJSON("<?= BASEAPI; ?>/pola_transaksi.php", function(data) {
             apiData = data; // Mengambil data dari API dan menyimpannya dalam variabel apiData
 
             var uniqueValues = [];
