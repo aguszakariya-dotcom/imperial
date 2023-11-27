@@ -13,7 +13,7 @@ class Produksi extends Controller {
     }
     public function pg() {
         $data['title'] = 'Tables';
-        $data['subTitle'] = 'Produksi';
+        $data['subTitle'] = 'Produksi'; 
         $data['nama'] = $this->model('User_model')->getUser();
         // $data['produksi'] = $this->model('Produksi_model')->getAllProduksi();
         $this->view('templates/header2', $data);

@@ -41,9 +41,13 @@
 <script src="<?= BASEURL; ?>/plugins/raphael/raphael.min.js"></script>
 <script src="<?= BASEURL; ?>/plugins/jquery-mapael/jquery.mapael.min.js"></script>
 <script src="<?= BASEURL; ?>/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+<!-- Include SweetAlert2 library -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<?= BASEURL; ?>/plugins/sweetalert2/sweetalert2.min.js"></script>
 <!-- ChartJS -->
 <script src="<?= BASEURL; ?>/plugins/chart.js/Chart.min.js"></script>
 <!-- <script src="<?= BASEURL; ?>/dist/js/pages/dashboard2.js"></script> -->
+
 <script>
   $(function () {
     $('#dataTable').DataTable();
@@ -60,7 +64,10 @@
       "autoWidth": false,
       "responsive": true,
     });
+
+
   });
 </script>
+
 </body>
 </html>

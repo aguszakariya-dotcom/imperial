@@ -112,7 +112,7 @@ $th = date('y');
             <table class="table trans">
               <tr>
                 <th style="width:50%">Total:</th>
-                <td class="" id="subTtl">2000000</td>
+                <td class="text-bold " id="subTtl">2000000</td>
               </tr>
               <!-- <tr>
                 <th>Tunjangan Hadir:</th>
@@ -148,7 +148,12 @@ $th = date('y');
     </div>
   </div>
 </div>
-
+<div class="row mb-5"></div>
+<style>
+  #subTtl {
+    font-size: 16px;
+  }
+</style>
 <script>
   $(document).ready(function() {
     jumlahSubTtlNya()

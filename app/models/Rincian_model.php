@@ -66,9 +66,13 @@ class Rincian_model {
         $query = "DELETE FROM pola_transaksi WHERE id = :id";
         $this->db->query($query);
         $this->db->bind('id', $id);
-        $this->db->execute();
+        try {
+            $this->db->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage(); // Tampilkan pesan error lengkap
+            die(); // Hentikan eksekusi skrip
+        }
 
         return $this->db->rowCount();
-
     }
 }
