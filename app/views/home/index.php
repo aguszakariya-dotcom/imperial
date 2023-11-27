@@ -5,16 +5,23 @@
       <div class="container-fluid">
         <!-- Info boxes -->
         <div class="row">
+                    <!-- Tambah bagian untuk menampilkan Saldo -->
+        <?php
+        // Ambil nilai Kredit dan Debet dari $data
+        $totalKredit = isset($data['jumKreditSkrg']['total_kredit']) ? $data['jumKreditSkrg']['total_kredit'] : 0;
+        $totalDebet = isset($data['jumKasSkrg']['total_kas']) ? $data['jumKasSkrg']['total_kas'] : 0;
+
+        // Hitung saldo (Debet dikurangi Kredit)
+        $saldo = $totalDebet - $totalKredit;
+        $trafic = $totalDebet + $totalKredit;
+        ?>
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box">
-              <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+              <span class="info-box-icon bg-info elevation-1"><i class="fa-solid fa-recycle"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">CPU Traffic</span>
-                <span class="info-box-number">
-                  10
-                  <small>%</small>
-                </span>
+              <a href="<?= BASEURL; ?>/mutasi"> <span class="info-box-text text-light">Traffic Mutasi</span></a>
+                <span class="info-box-number">Rp. <?= number_format($trafic, 0, ',', '.'); ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -23,11 +30,11 @@
           <!-- /.col -->
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+              <span class="info-box-icon bg-danger elevation-1"><i class="fa-solid fa-person-chalkboard"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Likes</span>
-                <span class="info-box-number">41,410</span>
+                <span class="info-box-text">Kredit</span>
+                <span class="info-box-number">Rp. <?= number_format($data['jumKreditSkrg']['total_kredit'], 0, ',', '.'); ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -43,21 +50,22 @@
               <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">Sales</span>
-                <span class="info-box-number">760</span>
+                <span class="info-box-text">Debet</span>
+                <span class="info-box-number">Rp. <?= number_format($data['jumKasSkrg']['total_kas'], 0, ',', '.'); ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
             <!-- /.info-box -->
           </div>
           <!-- /.col -->
+
           <div class="col-12 col-sm-6 col-md-3">
             <div class="info-box mb-3">
-              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+              <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
               <div class="info-box-content">
-                <span class="info-box-text">New Members</span>
-                <span class="info-box-number">2,000</span>
+                <span class="info-box-text">Saldo</span>
+                <span class="info-box-number">Rp. <?= number_format($saldo, 0, ',', '.'); ?></span>
               </div>
               <!-- /.info-box-content -->
             </div>
@@ -434,7 +442,46 @@
                   <div class="col-md-8">
                     <div class="chart-responsive">
                     <canvas id="pieChart" height="120" width="240" style="display: block; width: 240px; height: 120px;" class="chartjs-render-monitor"></canvas>
-
+                        <script>
+                          const config = {
+                            type: 'bar',
+                            data: data,
+                            options: {
+                              scales: {
+                                y: {
+                                  beginAtZero: true
+                                }
+                              }
+                            },
+                          };
+                          const labels = Utils.months({count: 7});
+                          const data = {
+                            labels: labels,
+                            datasets: [{
+                              label: 'My First Dataset',
+                              data: [65, 59, 80, 81, 56, 55, 40],
+                              backgroundColor: [
+                                'rgba(255, 99, 132, 0.2)',
+                                'rgba(255, 159, 64, 0.2)',
+                                'rgba(255, 205, 86, 0.2)',
+                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(54, 162, 235, 0.2)',
+                                'rgba(153, 102, 255, 0.2)',
+                                'rgba(201, 203, 207, 0.2)'
+                              ],
+                              borderColor: [
+                                'rgb(255, 99, 132)',
+                                'rgb(255, 159, 64)',
+                                'rgb(255, 205, 86)',
+                                'rgb(75, 192, 192)',
+                                'rgb(54, 162, 235)',
+                                'rgb(153, 102, 255)',
+                                'rgb(201, 203, 207)'
+                              ],
+                              borderWidth: 1
+                            }]
+                          };
+                        </script>
                     </div>
                     <!-- ./chart-responsive -->
                   </div>
@@ -579,84 +626,6 @@
 
 
 <script>
-  function getDataAndCreateChart() {
-  $.ajax({
-  url: '<?= BASEAPI; ?>/produksi.php',
-    method: 'GET',
-    dataType: 'json',
-    success: function(data) {
-      // Handle data
-      console.log(data);
-      // Panggil fungsi untuk membuat chart
-      createChart(data);
-    },
-    error: function(error) {
-      console.error('Error:', error);
-    }
-  });
-}
-function createChart(data) {
-  // Proses data untuk mendapatkan jumlah qty untuk setiap nama_customer
-  const processedData = processData(data);
-
-  // Dapatkan elemen canvas dari HTML
-  const ctx = document.getElementById('pieChart').getContext('2d');
-
-  // Buat pie chart dengan Chart.js
-  new Chart(ctx, {
-    type: 'pie',
-    data: {
-      labels: processedData.labels,
-      datasets: [{
-        data: processedData.values,
-        backgroundColor: [
-          'red',
-          'green',
-          'yellow',
-          'blue',
-          'purple',
-          'gray'
-        ],
-      }],
-    },
-  });
-
-  // Tambahkan legend pada bagian sebelah kanan chart
-  const legendContainer = $('.chart-legend');
-  legendContainer.empty(); // Hapus elemen-elemen legenda yang sudah ada
-
-  processedData.labels.forEach((customer, index) => {
-    const colorClass = `text-${getRandomColorClass()}`; // Pilih warna secara acak atau sesuaikan dengan kebutuhan
-    const legendItem = `<li><i class="far fa-circle ${colorClass}"></i> ${customer}</li>`;
-    legendContainer.append(legendItem);
-  });
-}
-
-// Fungsi untuk mendapatkan kelas warna secara acak
-function getRandomColorClass() {
-  const colorClasses = ['text-danger', 'text-success', 'text-warning', 'text-info', 'text-primary', 'text-secondary'];
-  const randomIndex = Math.floor(Math.random() * colorClasses.length);
-  return colorClasses[randomIndex];
-}
-
-
-// Fungsi untuk memproses data
-function processData(data) {
-  // Lakukan pengolahan data di sini
-  // Contoh sederhana: Hitung jumlah qty untuk setiap nama_customer
-  const qtyByCustomer = {};
-
-  data.forEach(item => {
-    const customer = item.nama_customer;
-    qtyByCustomer[customer] = qtyByCustomer[customer] ? qtyByCustomer[customer] + parseInt(item.qty) : parseInt(item.qty);
-  });
-
-  return {
-    labels: Object.keys(qtyByCustomer),
-    values: Object.values(qtyByCustomer),
-  };
-}
-
 
 
   $(document).ready(function () {

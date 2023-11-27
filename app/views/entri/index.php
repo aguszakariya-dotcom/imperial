@@ -34,7 +34,7 @@
                         </div>
 
                     </div>
-                    <div class="row mb-3 px-2 animate__animated animate__bounceOut" id="ke1">
+                    <div class="row mb-3 px-2 collapse" id="ke1">
                         <div class="col-sm-6">
                             <label for="namaAkun">Nama Akun</label><span id="saldo1" class="float-right cilik "></span>
                             <input type="text" class="form-control form-control-sm" name="namaAkun1" id="namaAkun1">
@@ -54,7 +54,7 @@
 
                     </div>
                     <!-- Baris ke2 -->
-                    <div class="row mb3 px-2 animate__animated animate__bounceOutUp" id="ke2">
+                    <div class="row mb3 px-2 collapse" id="ke2">
                         <div class="col-sm-6">
                             <label for="namaAkun">Nama Akun</label><span id="saldo2" class="float-right cilik "></span>
                             <input type="text" name="namaAkun2" id="namaAkun2" class="form-control form-control-sm">
@@ -74,7 +74,7 @@
                         <div class="col-sm-2"></div>
                     </div>
                     <!-- Baris ke 3 -->
-                    <div class="row mb3 px-2 animate__animated animate__bounceOut" id="ke3">
+                    <div class="row mb3 px-2 collapse" id="ke3">
                         <div class="col-sm-6">
                             <label for="nama3">Nama Akun</label><span id="saldo3" class="float-right cilik "></span>
                             <input type="text" name="nama3" id="nama3" class="form-control form-control-sm">
@@ -276,13 +276,13 @@
             var isi3 = $("#noAkun3").val();
 
             if (isi1.trim() !== "") {
-                $("#ke1").removeClass("animate__animated animate__bounceOut")
-                $("#ke2").removeClass("animate__animated animate__bounceOutUp")
+                $("#ke1").removeClass("collapse")
+                $("#ke2").removeClass("collapse")
             }
             if (isi3.trim() !== "") {
-                $("#ke3").removeClass("animate__animated animate__bounceOut")
+                $("#ke3").removeClass("collapse")
             } else {
-                $("#ke3").addClass("animate__animated animate__bounceOut")
+                $("#ke3").addClass("collapse")
 
             }
 
