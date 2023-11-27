@@ -1,4 +1,5 @@
 <?php
+$koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', 'akuntansi');
   function tgl_kita($tanggal) {
     $bulan = array(
       1 =>   'Jan',
