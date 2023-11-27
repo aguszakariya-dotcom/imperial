@@ -135,16 +135,16 @@
         }).on('mouseleave', 'tr', function () {
             $(this).find('.icon').hide();
         });
-        $('#delete-polaTransaksi').on('click', function(e) {
-            e.preventDefault();
-            var id = $(this).data('id');
-            $.ajax({
-                type: 'POST',
-                url: '<?= BASEURL; ?>/rincian/hapusPola',
-                success: function (response) {
-                }
-            })
-        })
+        // $('#delete-polaTransaksi').on('click', function(e) {
+        //     e.preventDefault();
+        //     var id = $(this).data('id');
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '<?= BASEURL; ?>/rincian/hapusPola',
+        //         success: function (response) {
+        //         }
+        //     })
+        // })
   })
 </script>
     <!-- /.row -->
