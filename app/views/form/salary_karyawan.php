@@ -19,7 +19,7 @@
      #card-kanan .card-body {
           max-height: 600px;
           overflow-y: auto;
-          /* Menambahkan scrollbar jika kontennya lebih panjang dari max-height */
+          
      }
 
      .card-header {
@@ -228,6 +228,7 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <script>
      $(document).ready(function() {
+          
           $('body').addClass('sidebar-mini layout-fixed sidebar-closed sidebar-collapse');
           $('#table-gaji').DataTable();
           $('#table-gaji').on('mouseenter', 'tr', function() {
