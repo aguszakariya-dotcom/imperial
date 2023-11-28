@@ -44,6 +44,20 @@
                 </div>
               </div>
 
-Tanggal | Keterangan | Akun | Debet | Kredit
-        |            | Akun | Debit | Kredit
-        |            | Akun | Debit | Kredit
+- folder project /
+-app/
+--/config/
+--/controllers/
+--/core/
+--/moddels/
+--/views/
+--/init.php
+--/.htaccess
+
+-public/
+--/api/
+--/css/
+--/js/
+--/img/
+--/index.php
+--/.htaccess
