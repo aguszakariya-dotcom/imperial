@@ -248,19 +248,20 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="<?= BASEURL; ?>/pages" class="nav-link <?= (strpos($subTitle, 'Animasi') !== false) ? 'active' : ''; ?>">
+
+            <a href="<?= BASEURL; ?>/pages" class="nav-link <?= (strpos($data['subTitle'], 'Animasi') !== false) ? 'active' : ''; ?>">
                 <i class="nav-icon far fa-circle text-danger"></i>
                 <p class="text">Animasi</p>
               </a>
             </li>
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/pages/fendi" class="nav-link <?= (strpos($subTitle, 'Tahapan Fendi') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/pages/fendi" class="nav-link <?= (strpos($data['subTitle'], 'Tahapan Fendi') !== false) ? 'active' : ''; ?>">
                 <i class="nav-icon far fa-circle text-success"></i>
                 <p class="text">Fendi</p>
               </a>
               </li>
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/pages/hafidz" class="nav-link <?= (strpos($subTitle, 'Tahapan Hafidz') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/pages/hafidz" class="nav-link <?= (strpos($data['subTitle'], 'Tahapan Hafidz') !== false) ? 'active' : ''; ?>">
                 <i class="nav-icon far fa-circle text-warning"></i>
                 <p class="text">Hafidz</p>
               </a>
@@ -480,7 +481,7 @@
           </li>
           <li class="nav-header">EXTRAS</li>
           <li class="nav-item">
-          <a href="<?= BASEURL; ?>/pages" class="nav-link <?= (strpos($subTitle, 'Animasi') !== false) ? 'active' : ''; ?>">
+          <a href="<?= BASEURL; ?>/pages" class="nav-link <?= (strpos($data['subTitle'], 'Animasi') !== false) ? 'active' : ''; ?>">
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">Animasi</p>
             </a>
