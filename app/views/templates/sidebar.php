@@ -255,13 +255,13 @@
               </a>
             </li>
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/pages/fendi" class="nav-link <?= (strpos($data['subTitle'], 'Tahapan Fendi') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/tahapan/fendi" class="nav-link <?= (strpos($data['subTitle'], 'Tahapan Fendi') !== false) ? 'active' : ''; ?>">
                 <i class="nav-icon far fa-circle text-success"></i>
                 <p class="text">Fendi</p>
               </a>
               </li>
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/pages/hafidz" class="nav-link <?= (strpos($data['subTitle'], 'Tahapan Hafidz') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/tahapan/hafidz" class="nav-link <?= (strpos($data['subTitle'], 'Tahapan Hafidz') !== false) ? 'active' : ''; ?>">
                 <i class="nav-icon far fa-circle text-warning"></i>
                 <p class="text">Hafidz</p>
               </a>

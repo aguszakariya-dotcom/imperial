@@ -15,20 +15,20 @@ $queryTotalSetor = mysqli_query($koneksi, 'SELECT SUM(setor) AS totalSetor FROM 
 $totalSetor = mysqli_fetch_assoc($queryTotalSetor)['totalSetor'];
 
 ?>
-    <?php
-    if (isset($_GET['p']) && $_GET['p'] == "hapus" && isset($_GET['id'])) {
-        $hapus = mysqli_query($koneksi, "DELETE FROM hfd WHERE id = '" . $_GET['id'] . "'");
-        if ($hapus) {
-            $_SESSION['sukses'] = "Data berhasil dihapus";
-            echo '<script>window.location.href="index.php";</script>';
-            exit;
-        } else {
-            $_SESSION['gagal'] = "Data gagal dihapus";
-            echo '<script>window.location.href="index.php";</script>';
-            exit;
-        }
+<?php
+if (isset($_GET['p']) && $_GET['p'] == "hapus" && isset($_GET['id'])) {
+    $hapus = mysqli_query($koneksi, "DELETE FROM hfd WHERE id = '" . $_GET['id'] . "'");
+    if ($hapus) {
+        $_SESSION['sukses'] = "Data berhasil dihapus";
+        echo '<script>window.location.href="index.php";</script>';
+        exit;
+    } else {
+        $_SESSION['gagal'] = "Data gagal dihapus";
+        echo '<script>window.location.href="index.php";</script>';
+        exit;
     }
-    ?>
+}
+?>
 <!-- html bootstrap 5.2 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -205,30 +205,30 @@ $totalSetor = mysqli_fetch_assoc($queryTotalSetor)['totalSetor'];
                     // Event listener saat form di-submit
                     document.querySelector("form").addEventListener("submit", function(e) {
                         e.preventDefault(); // Mencegah refresh halaman
-                                   // Update saldo
-                            calculateSaldo();
-                            // Submit form using AJAX
-                            $.ajax({
-                                url: 'save_data.php',
-                                type: 'POST',
-                                data: $(this).serialize(),
-                                success: function(response) {
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: 'Data berhasil disimpan',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    }).then((result) => {
-                                        if (result.dismiss === Swal.DismissReason.timer) {
-                                            window.location.href = 'index.php';
-                                        }
-                                    });
-                                },
-                                error: function(xhr, status, error) {
-                                    console.log(xhr.responseText);
-                                }
-                            });
+                        // Update saldo
+                        calculateSaldo();
+                        // Submit form using AJAX
+                        $.ajax({
+                            url: 'save_data.php',
+                            type: 'POST',
+                            data: $(this).serialize(),
+                            success: function(response) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Data berhasil disimpan',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then((result) => {
+                                    if (result.dismiss === Swal.DismissReason.timer) {
+                                        window.location.href = 'index.php';
+                                    }
+                                });
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(xhr.responseText);
+                            }
+                        });
                     });
                 });
             </script>
@@ -246,7 +246,7 @@ $totalSetor = mysqli_fetch_assoc($queryTotalSetor)['totalSetor'];
                         $totalPenarikan = mysqli_fetch_assoc($queryPenarikan)['totalTarik'];
                         ?>
                         <table>
-                            
+
                             <tr>
                                 <th></th>
                                 <th><i data-feather="battery-charging"></i>Pinjaman</th>
@@ -269,55 +269,55 @@ $totalSetor = mysqli_fetch_assoc($queryTotalSetor)['totalSetor'];
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                        <table class="table table-sm table-striped">
-                        <thead>
-                                <tr">
-                                    <th class="col-sm-1">No.</th>
-                                    <th class="col-sm-2">Tanggal</th>
-                                    <th class="col-sm-3">Keterangan</th>
-                                    <th class="col-sm-2">Penarikan</th>
-                                    <th class="col-sm-2">Setoran</th>
-                                    <th class="col-sm-2">Saldo</th>
-                                    <th>Aksi</th>
-                                </tr>
-                        </thead>
-                        <tbody class="isi-table">
-                            <?php
-                            $no = 1;
-                            $query = mysqli_query($koneksi, 'SELECT * FROM hfd ORDER BY id ASC');
-                            while ($row = mysqli_fetch_assoc($query)) {
-                            ?>
-                                <tr style="font-size: smaller;">
-                                    <td><?= $no++; ?></td>
-                                    <td><?= $row['tanggal']; ?></td>
-                                    <td><?= $row['keterangan']; ?></td>
-                                    <td class="text-danger"><?=number_format( $row['tarik'],0, ',', '.'); ?></td>
-                                    <td class="text-primary"><?=number_format( $row['setor'],0, ',', '.'); ?></td>
-                                    <td class="fw-bold">Rp. <?=number_format( $row['saldo'],0, ',', '.'); ?></td>
-                                    <td>
-                                            <a href="index.php?p=hapus&id=<?= $row['id']; ?>" class="btn btn-sm btn-outline-danger " id="hapusData"><i class="fa-solid fa-trash-can"></i></a>
-                                        </td>
-                                </tr>
-                            <?php }; ?>
-                        </tbody>
-                    </table>
+                            <table class="table table-sm table-striped">
+                                <thead>
+                                    <tr">
+                                        <th class="col-sm-1">No.</th>
+                                        <th class="col-sm-2">Tanggal</th>
+                                        <th class="col-sm-3">Keterangan</th>
+                                        <th class="col-sm-2">Penarikan</th>
+                                        <th class="col-sm-2">Setoran</th>
+                                        <th class="col-sm-2">Saldo</th>
+                                        <th>Aksi</th>
+                                        </tr>
+                                </thead>
+                                <tbody class="isi-table">
+                                    <?php
+                                    $no = 1;
+                                    $query = mysqli_query($koneksi, 'SELECT * FROM hfd ORDER BY id ASC');
+                                    while ($row = mysqli_fetch_assoc($query)) {
+                                    ?>
+                                        <tr style="font-size: smaller;">
+                                            <td><?= $no++; ?></td>
+                                            <td><?= $row['tanggal']; ?></td>
+                                            <td><?= $row['keterangan']; ?></td>
+                                            <td class="text-danger"><?= number_format($row['tarik'], 0, ',', '.'); ?></td>
+                                            <td class="text-primary"><?= number_format($row['setor'], 0, ',', '.'); ?></td>
+                                            <td class="fw-bold">Rp. <?= number_format($row['saldo'], 0, ',', '.'); ?></td>
+                                            <td>
+                                                <a href="index.php?p=hapus&id=<?= $row['id']; ?>" class="btn btn-sm btn-outline-danger " id="hapusData"><i class="fa-solid fa-trash-can"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php }; ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
 
-    <script>
-        feather.replace()
-        function scrollToBottom() {
-  var tbody = document.querySelector("tbody");
-  tbody.scrollIntoView({
-    behavior: "smooth",
-  });
-}
+            <script>
+                feather.replace()
 
-document.addEventListener("DOMContentLoaded", scrollToBottom);
+                function scrollToBottom() {
+                    var tbody = document.querySelector("tbody");
+                    tbody.scrollIntoView({
+                        behavior: "smooth",
+                    });
+                }
 
-    </script>
+                document.addEventListener("DOMContentLoaded", scrollToBottom);
+            </script>
 
             <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
