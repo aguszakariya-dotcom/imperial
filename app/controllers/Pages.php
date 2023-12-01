@@ -16,7 +16,7 @@ class Pages extends Controller {
         $data['nama'] = $this->model('User_model')->getUser();
         $this->view('templates/header2', $data);
         $this->view('templates/sidebar', $data);
-        $this->view('pages/fendi', $data);
+        $this->view('pages/fendi');
         $this->view('templates/footer2');
     }
     public function hafidz() {
