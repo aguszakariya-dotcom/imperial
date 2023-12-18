@@ -31,6 +31,26 @@ class Invoice_model {
         return $this->db->resultSet();
     }
     
+    public function getAllGajianToday()
+    {
+        $today = date('d-M-Y');
+        // $yesterday = date('d-M-Y', strtotime('-2 day'));
+        // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
+        $this->db->query('SELECT * FROM gajian WHERE date = :today ORDER BY id DESC');
+        $this->db->bind(':today', $today);        
+        // $this->db->bind(':today', $yesterday);        
+        return $this->db->resultSet();
+    }
+
+    public function getTotalGajianToday()
+    {
+        $today = date('d-M-Y');
+        // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
+        $this->db->query('SELECT SUM(total) as total FROM gajian WHERE date = :today');
+        $this->db->bind(':today', $today);
+        $result = $this->db->single(); // Menggunakan single() karena kita hanya mengambil satu nilai total
+        return $result['total'];
+    }
 
     public function tambahInvSovana($data)
     {
@@ -86,7 +106,7 @@ class Invoice_model {
         $this->db->execute();
         return $this->db->rowCount();
     }
-    public function hapusDtGaji($id) {
+    public function hapusDataGajian($id) {
         $query = "DELETE FROM gajian WHERE id = :id";
         $this->db->query($query);
         $this->db->bind('id', $id);
@@ -101,12 +121,42 @@ class Invoice_model {
     }
 
     public function getBreakdownToday()
-{
-    $today = date('d-M-Y');
-    // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
-    $this->db->query('SELECT SUM(total) as total FROM invsovana WHERE tanggal = :today');
-    $this->db->bind(':today', $today);
-    $result = $this->db->single(); // Menggunakan single() karena kita hanya mengambil satu nilai total
-    return $result['total'];
+    {
+        $today = date('d-M-Y');
+        // Menggunakan klausa WHERE untuk membatasi hasil hanya pada tanggal hari ini
+        $this->db->query('SELECT SUM(total) as total FROM invsovana WHERE tanggal = :today');
+        $this->db->bind(':today', $today);
+        $result = $this->db->single(); // Menggunakan single() karena kita hanya mengambil satu nilai total
+        return $result['total'];
+    }
+
+    public function inputDataGajian($data)
+    {
+        $tanggal = $data['tanggal'];
+        $nama = $data['nama'];
+        $hadir = $data['hadir'];
+        $lembur = $data['lembur'];
+        $salary = $data['salary'];
+        $total = $data['total'];
+        $query = "INSERT INTO daftar_gaji (tanggal, nama, hadir, lembur, salary, total)
+        VALUES (            
+            :tanggal,
+            :nama,
+            :hadir,
+            :lembur,
+            :salary,
+            :total
+        )";
+        $this->db->query($query);
+        $this->db->bind('tanggal', $tanggal);
+        $this->db->bind('nama', $nama);
+        $this->db->bind('hadir', $hadir);
+        $this->db->bind('lembur', $lembur);
+        $this->db->bind('salary', $salary);
+        $this->db->bind('total', $total);
+        $this->db->execute();
+        return $this->db->rowCount();
+    }
+
 }
-}
+

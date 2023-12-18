@@ -4,13 +4,28 @@ $tanggal = date('d/m/Y'); // Format: YYYY-MM-DD
 $TgInvoive = date('ydm');
 $bulan = date('F');
 $bln = date('m');
-$th = date('y')
+$th = date('y');
+$tglSekarang = date('d-M-Y');
 ?>
 <style>
+  body {
+    background-color: white;
+  }
+
   @media print {
     body {
       font-size: 16px;
+      background-color: white;
       /* Sesuaikan ukuran font sesuai kebutuhan */
+    }
+
+    /* Menonaktifkan background pada elemen lain jika diperlukan */
+    /* Misalnya, jika ada elemen lain yang memiliki background */
+    /* yang tidak ingin dicetak, Anda dapat menonaktifkannya di sini */
+
+    /* Contoh menonaktifkan background pada elemen dengan class 'no-print-background' */
+    .no-print-background {
+      background-color: transparent !important;
     }
 
     .table td {
@@ -68,57 +83,72 @@ $th = date('y')
   <!-- Main content -->
   <div class="col-lg-3 d-print-none">
     <div class="card mt-5">
-      <div class="card-header bg-gradient-secondary">
-        <div class="text-bold text-center">Grand Total = <span id="Semua"></span></div>
-      </div>
-      <div class="card-body">
-        <div class="mb-3 row">
-          <label for="nama" class="col-sm-3 col-form-label">Nama</label>
-          <div class="col-sm-9">
-            <select class="form-select form-control" id="nama">
-              <option>Pilih Nama Pegawai</option>
-            </select>
-          </div>
-        </div>
+      <form action="<?= BASEURL; ?>/invoice/tambahDGaji" method="post">
+        <div class="card-header bg-gradient-secondary">
 
-        <div class="mb-3 row">
-          <label class="col-sm-5" for="hadir">Hadir</label>
-          <div class="col-sm-7">
-            <select class="form-control form-control-border border-width-2 select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="hadir">
-              <option selected="selected">Pilih</option>
-              <option value="0">Tidak hadir</option>
-              <option value="10000">1 Hari</option>
-              <option value="20000">2 Hari</option>
-              <option value="30000">3 Hari</option>
-              <option value="40000">4 Hari</option>
-              <option value="50000">5 Hari</option>
-              <option value="60000">6 Hari</option>
-              <option value="70000">7 Hari</option>
-            </select>
-          </div>
+          <!-- <div class="text-bold text-center"> = <span id="Semua" name="total"></span></div> -->
         </div>
-        <div class="mb-3 row">
-          <label class="col-sm-5" for="lembur">Lembur</label>
-          <div class="col-sm-7">
-            <select class="form-control form-control-border border-width-2 select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="lembur">
-              <option selected="selected">Pilih</option>
-              <option value="0">Tidak ada lembur</option>
-              <option value="10000">1 X</option>
-              <option value="20000">2 X</option>
-              <option value="30000">3 X</option>
-              <option value="40000">4 X</option>
-              <option value="50000">5 X</option>
-              <option value="60000">6 X</option>
-              <option value="70000">7 X</option>
-            </select>
+        <div class="card-body">
+          <input type="hidden" name="tanggal" value="<?= $tglSekarang; ?>">
+          <div class="mb-3 row">
+            <label for="nama" class="col-sm-3 col-form-label">Nama</label>
+            <div class="col-sm-9">
+              <select class="form-select form-control" id="nama" name="nama">
+                <option>Pilih Nama Pegawai</option>
+              </select>
+            </div>
           </div>
+
+          <div class="mb-3 row">
+            <label class="col-sm-5" for="hadir">Hadir</label>
+            <div class="col-sm-7">
+              <select class="form-control form-control-border border-width-2 select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="hadir" name="hadir">
+                <option selected="selected">Pilih</option>
+                <option value="0">Tidak hadir</option>
+                <option value="10000">1 Hari</option>
+                <option value="20000">2 Hari</option>
+                <option value="30000">3 Hari</option>
+                <option value="40000">4 Hari</option>
+                <option value="50000">5 Hari</option>
+                <option value="60000">6 Hari</option>
+                <option value="70000">7 Hari</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-5" for="lembur">Lembur</label>
+            <div class="col-sm-7">
+              <select class="form-control form-control-border border-width-2 select2bs4 select2-hidden-accessible" style="width: 100%;" data-select2-id="1" tabindex="-1" aria-hidden="true" id="lembur" name="lembur">
+                <option selected="selected">Pilih</option>
+                <option value="0">Tidak ada lembur</option>
+                <option value="10000">1 X</option>
+                <option value="20000">2 X</option>
+                <option value="30000">3 X</option>
+                <option value="40000">4 X</option>
+                <option value="50000">5 X</option>
+                <option value="60000">6 X</option>
+                <option value="70000">7 X</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-5" for="salary">Salary</label>
+            <div class="col-sm-7">
+              <input type="text" class="form-select form-control" id="salary" name="salary">
+            </div>
+          </div>
+          <div class="mb-3 row">
+        <label class="col-sm-5" for="total">Grand Total</label>
+        <div class="col-sm-7">
+          <input type="text" class="form-control form-control btn-outline-primary" id="total" name="total">
         </div>
-
-      </div>
-      <div class="card-footer">
-
-      </div>
+        </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline-info">Simpan Gaji</button>
+        </div>
     </div>
+    </form>
   </div>
   <div class="col-lg-8 px-3 mb-5">
     <div class="invoice p-3 mb-3 mt-1 card-bg">
@@ -262,12 +292,17 @@ $th = date('y')
   </div>
   <!-- /.invoice -->
 </div>
+<div class="row mb-5"></div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- <script>
+
+<script>
   $(document).ready(function() {
-    $('#table-invoice').DataTable();
+    // Inisialisasi DataTable pada tabel invoice
+    var table = $('#table-invoice').DataTable();
+
+    // Memuat data karyawan dan mengisi opsi dropdown
+    var apiData;
     $.getJSON("<?= BASEAPI ?>/karyawan.php", function(data) {
-      // Membuat opsi pilihan (select option) dengan nama pegawai
       var selectOptions = $("#nama");
 
       data.forEach(function(item) {
@@ -277,7 +312,7 @@ $th = date('y')
         }));
       });
     });
-    var apiData;
+
     $.getJSON("<?= BASEAPI; ?>/karyawan.php", function(data) {
       apiData = data;
 
@@ -302,163 +337,7 @@ $th = date('y')
           }, 0);
 
         // Lakukan sesuatu dengan nilai total, misalnya tampilkan di suatu tempat
-        console.log('Total: ', total);
-
-        var nm = $(this).val();
-
-        var ny = $('#namaNya');
-        ny = nm;
-
-        var jab = "";
-        var almt = "";
-        var hp = "";
-        var ml = "";
-        var id = "";
-        var idNya = $('#idNya');
-        var jabatan = $('#jabatan');
-        var alamat = $('#alamat');
-        var phone = $('#tlp');
-        var mail = $('#mail');
-        $('#namaNya').text(ny);
-        apiData.forEach(function(item) {
-          if (item.nama === nm) {
-            jab = item.jabatan;
-            almt = item.alamat;
-            hp = item.telepon;
-            ml = item.email;
-            id = item.id;
-            jabatan.text(jab);
-            alamat.text(almt);
-            phone.text(hp);
-            mail.text(ml);
-            idNya.text(id);
-          }
-        });
-      });
-    });
-
-    // var table = $('#table-invoice').DataTable({
-    //   "columnDefs": [{
-    //     "targets": [1],
-    //     "searchable": true
-    //   }]
-    // });
-
-    // var namane = $('#nama');
-    var subTttl = $('#subTtl');
-
-    function jumlahSubTtlNya() {
-      var totalSum = 0;
-      $('#table-invoice tbody tr').each(function() {
-        var totalCell = $(this).find('td:eq(5)');
-        var totalSubNya = parseInt(totalCell.text().replace(/\D/g, ''));
-        totalSum += totalSubNya;
-      });
-      var formatJumlah = "Rp. " + totalSum.toLocaleString("id-ID");
-      subTttl.text(formatJumlah);
-    }
-    jumlahSubTtlNya();
-
-    $('#nama').change(function() {
-      var selectedNama = $(this).val();
-      var apiData;
-
-
-      // Fungsi untuk memuat data dari server
-      function loadData() {
-        $.getJSON("<?= BASEAPI; ?>/invoice.php", function(data) {
-          apiData = data;
-
-          // Inisialisasi DataTable
-          var table = $('#table-invoice').DataTable();
-
-          // Event handler saat #nama berubah
-          $('#nama').change(function() {
-            var selectedNama = $(this).val();
-
-            // Hapus filter yang ada
-            table.search('').draw();
-
-            // Terapkan filter pada kolom 'nama'
-            table.column(0).search(selectedNama).draw();
-          });
-        });
-      }
-
-      // Memuat data saat halaman pertama kali dimuat
-      loadData();
-    });
-
-    var thd = $('#tHadir');
-    var tlb = $('#tLembur');
-
-    $('#hadir').on('change', function() {
-      var hr = parseFloat($(this).val());
-      thd.text('Rp. ' + hr.toLocaleString("id-ID"));
-      hitungJumlahTotal();
-    });
-
-    $('#lembur').on('change', function() {
-      var lb = parseFloat($(this).val());
-      tlb.text('Rp. ' + lb.toLocaleString("id-ID"));
-      hitungJumlahTotal();
-    });
-
-    function hitungJumlahTotal() {
-      var subtotal = parseFloat($('#subTtl').text().replace(/\D/g, ''));
-      var tunjanganHadir = parseFloat($('#tHadir').text().replace(/\D/g, ''));
-      var tunjanganLembur = parseFloat($('#tLembur').text().replace(/\D/g, ''));
-
-      var total = subtotal + tunjanganHadir + tunjanganLembur;
-
-      $('#gTotal').text('Rp. ' + total.toLocaleString("id-ID"));
-      $('#Semua').text('Rp. ' + total.toLocaleString("id-ID"));
-
-    }
-  });
-</script> -->
-<script>
-  $(document).ready(function() {
-    // Inisialisasi DataTable pada tabel invoice
-    var table = $('#table-invoice').DataTable();
-
-    // Memuat data karyawan dan mengisi opsi dropdown
-    $.getJSON("<?= BASEAPI ?>/karyawan.php", function(data) {
-        var selectOptions = $("#nama");
-
-        data.forEach(function(item) {
-            selectOptions.append($('<option>', {
-                value: item.nama,
-                text: item.nama
-            }));
-        });
-    });
-    var apiData;
-    $.getJSON("<?= BASEAPI; ?>/karyawan.php", function(data) {
-      apiData = data;
-
-      $('#nama').change(function() {
-
-        var selectedNama = $(this).val();
-        var table = $('#table-invoice').DataTable();
-
-        // Set nilai pencarian DataTables dengan nilai terpilih
-        table.search(selectedNama).draw();
-
-        // Operasi pada kolom total setelah DataTable menggambar ulang
-        var total = table
-          .column(5, {
-            search: 'applied'
-          }) // Sesuaikan indeks kolom total
-          .data()
-          .reduce(function(acc, val) {
-            // Bersihkan format angka dan tambahkan ke total
-            var cleanTotal = parseFloat(val.replace(/[^0-9.-]+/g, '')) || 0;
-            return acc + cleanTotal;
-          }, 0);
-
-        // Lakukan sesuatu dengan nilai total, misalnya tampilkan di suatu tempat
-        console.log('Total: ', total);
+        // console.log('Total: ', total);
 
         var nm = $(this).val();
 
@@ -494,62 +373,68 @@ $th = date('y')
     });
     // Fungsi untuk menghitung total setelah DataTable menggambar ulang
     function hitungTotal() {
-        // Operasi pada kolom total setelah DataTable menggambar ulang
-        var total = table
-            .column(5, { search: 'applied' }) // Sesuaikan indeks kolom total
-            .data()
-            .reduce(function (acc, val) {
-                // Bersihkan format angka dan tambahkan ke total
-                var cleanTotal = parseFloat(val.replace(/[^0-9.-]+/g, '')) || 0;
-                return acc + cleanTotal;
-            }, 0);
+      // Operasi pada kolom total setelah DataTable menggambar ulang
+      var total = table
+        .column(5, {
+          search: 'applied'
+        }) // Sesuaikan indeks kolom total
+        .data()
+        .reduce(function(acc, val) {
+          // Bersihkan format angka dan tambahkan ke total
+          var cleanTotal = parseFloat(val.replace(/[^0-9.-]+/g, '')) || 0;
+          return acc + cleanTotal;
+        }, 0);
 
-        // Lakukan sesuatu dengan nilai total, misalnya tampilkan di suatu tempat
-        console.log('Total: ', total);
+      // Lakukan sesuatu dengan nilai total, misalnya tampilkan di suatu tempat
+      console.log('Total: ', total);
+      $('#salary').val('Rp. ' + total.toLocaleString("id-ID"));
 
-        // Set nilai pada elemen dengan ID subTtl
-        $('#subTtl').text('Rp. ' + total.toLocaleString("id-ID"));
+      // Set nilai pada elemen dengan ID subTtl
+      $('#subTtl').text('Rp. ' + total.toLocaleString("id-ID"));
+
     }
 
     // Event handler saat dropdown #nama berubah
     $('#nama').change(function() {
-        var selectedNama = $(this).val();
+      var selectedNama = $(this).val();
 
-        // Set nilai pencarian DataTables dengan nilai terpilih
-        table.search(selectedNama).draw();
+      // Set nilai pencarian DataTables dengan nilai terpilih
+      table.search(selectedNama).draw();
 
-        // Memanggil fungsi hitungTotal
-        hitungTotal();
+      // Memanggil fungsi hitungTotal
+      hitungTotal();
 
-        // Menampilkan informasi karyawan terpilih
-        var karyawan = apiData.find(function(item) {
-            return item.nama === selectedNama;
-        });
+      // Menampilkan informasi karyawan terpilih
+      var karyawan = apiData.find(function(item) {
+        return item.nama === selectedNama;
+      });
 
-        // Update informasi karyawan pada halaman
-        if (karyawan) {
-            $('#namaNya').text(karyawan.nama);
-            $('#jabatan').text(karyawan.jabatan);
-            $('#alamat').text(karyawan.alamat);
-            $('#tlp').text(karyawan.telepon);
-            $('#mail').text(karyawan.email);
-            $('#idNya').text(karyawan.id);
-        }
+      // Update informasi karyawan pada halaman
+      if (karyawan) {
+        $('#namaNya').text(karyawan.nama);
+        $('#jabatan').text(karyawan.jabatan);
+        $('#alamat').text(karyawan.alamat);
+        $('#tlp').text(karyawan.telepon);
+        $('#mail').text(karyawan.email);
+        $('#idNya').text(karyawan.id);
+      }
+      // hitungJumlahTotal();
     });
 
     // Fungsi untuk menghitung subtotal dari tabel-invoice
     function jumlahSubTtlNya() {
-        var totalSum = 0;
+      var totalSum = 0;
 
-        // Loop melalui setiap baris pada tbody tabel-invoice
-        $('#table-invoice tbody tr').each(function() {
-            var totalCell = $(this).find('td:eq(4)');
-            var totalSubNya = parseInt(totalCell.text().replace(/\D/g, '')) || 0;
-            totalSum += totalSubNya;
-        });
+      // Loop melalui setiap baris pada tbody tabel-invoice
+      $('#table-invoice tbody tr').each(function() {
+        var totalCell = $(this).find('td:eq(4)');
+        var totalSubNya = parseInt(totalCell.text().replace(/\D/g, '')) || 0;
+        totalSum += totalSubNya;
+      });
 
-        // Set nilai pada elemen dengan ID subTtl
-        $('#subTtl').text('Rp. ' + totalSum.toLocaleString("id-ID"));
+      // Set nilai pada elemen dengan ID subTtl
+      $('#subTtl').text('Rp. ' + totalSum.toLocaleString("id-ID"));
+
     }
 
     // Memanggil fungsi jumlahSubTtlNya
@@ -558,9 +443,10 @@ $th = date('y')
     // Memanggil fungsi hitungTotal saat halaman dimuat
     hitungTotal();
 
-    
+
     var thd = $('#tHadir');
     var tlb = $('#tLembur');
+
 
     $('#hadir').on('change', function() {
       var hr = parseFloat($(this).val());
@@ -582,7 +468,7 @@ $th = date('y')
       var total = subtotal + tunjanganHadir + tunjanganLembur;
 
       $('#gTotal').text('Rp. ' + total.toLocaleString("id-ID"));
-      $('#Semua').text('Rp. ' + total.toLocaleString("id-ID"));
+      $('#total').val(total);
     }
   });
 </script>

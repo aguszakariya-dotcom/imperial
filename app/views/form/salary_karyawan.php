@@ -1,3 +1,6 @@
+<?php 
+
+?>
 <style>
      .content {
           /* font-size: smaller; */
@@ -19,7 +22,7 @@
      #card-kanan .card-body {
           max-height: 600px;
           overflow-y: auto;
-          /* Menambahkan scrollbar jika kontennya lebih panjang dari max-height */
+          
      }
 
      .card-header {
@@ -44,7 +47,7 @@
      }
 
      .table td {
-          font-size: 14px;
+          font-size: 12px;
      }
 
      .table th {
@@ -178,16 +181,29 @@
                          </div>
                          <hr>
                          <div class="text-center">                              
-                              <button type="submit" class="btn btn-sm btn-info float-left" name="save" id="save">Submit</button>
+                              <button type="submit" class="btn btn-sm btn-outline-info float-left animate__animated simpan" name="save" id="save">Submit</button>
                               <a class="btn btn-sm btn-outline-info float-right" href="<?= BASEURL; ?>/invoice/karyawan">Cetak</a>
                               <!-- <button type="button" class="btn btn-sm btn-outline-danger float-start" id="hapusData">Hapus</button> -->
                          </div>
                     </form>
                </div>
           </div>
+          <!-- Button for testing SweetAlert2 -->
+<button onclick="testSweetAlert()">Test SweetAlert2</button>
+
+<script>
+    // Function to test SweetAlert2
+    function testSweetAlert() {
+        Swal.fire({
+            icon: 'success',
+            title: 'SweetAlert2 Berfungsi!',
+            text: 'Ini adalah pesan dari SweetAlert2.'
+        });
+    }
+</script>
      </div>
      <!-- kanan -->
-     <div class="col-lg-5  animate__animated " id="card-kanan">
+     <div class="col-lg-5 animate__animated " id="card-kanan">
           <div class="card shadow">               
                <div class="card-header">
                <div class="float-left text-large text-bold"> <i class="fa-solid fa-user-tie text-primary"></i> <span id="namaNya" class="text-secondary"></span> <span id="totalByNama" class="text-bold"></span></div>
@@ -198,7 +214,7 @@
                          <thead>
                               <tr>
                                    <th class="col-sm-2">Nama</th>
-                                   <th class="col-sm-2">Item</th>
+                                   <th class="col-sm-1">Item</th>
                                    <th class="col-sm-3">Description</th>
                                    <th>Cost</th>
                                    <th>Qty</th>
@@ -228,6 +244,7 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <script>
      $(document).ready(function() {
+          
           $('body').addClass('sidebar-mini layout-fixed sidebar-closed sidebar-collapse');
           $('#table-gaji').DataTable();
           $('#table-gaji').on('mouseenter', 'tr', function() {
@@ -264,6 +281,7 @@
 
 
           $('#table-data tbody').on('click', 'tr', function() {
+          
                // Get data from the clicked row
                var customer = $(this).data('nama_customer');
                var style = $(this).data('style');
@@ -281,7 +299,7 @@
                // Check the value of #nama
                // Mendapatkan nilai yang dipilih dari dropdown
                var selectedNama = $("#nama").val();
-
+               
                // Cek apakah nilai yang dipilih adalah "nama tertentu"
                if (selectedNama === "Abdullah hafidz") {
                     harga = naskat;
@@ -289,9 +307,8 @@
                     console.log(jmlh)
                } else if (selectedNama === "Aulia margareta") {
                     harga = motong;
-               // } else if (selectedNama === "Noor efendi zakariya") {
-               //      harga = 7000;
-                    // qty = qty;
+               
+                    
                } else {
                     harga = jahit;
                     $('#qty').addClass('btn-outline-danger shadow text-primary animate__bounce');
@@ -342,6 +359,13 @@
           $('#qty, #harga').on('input', function() {
                calculateTotal();
           });
-
+          $("#size").change(function() {
+               $("#qty").focus()
+               $("#qty").removeClass('btn-outline-danger shadow text-primary')
+               $("#qty").addClass('bg-primary btn-outline-danger')
+          })
+          $("#save").focus(function() {
+               $(".simpan").addClass('bounce bg-primary')
+          })
      });
 </script>

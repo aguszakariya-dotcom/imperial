@@ -1,4 +1,5 @@
 <?php
+$koneksi = mysqli_connect('becik.my.id:3306', 'akuntansi_ok', '123/akuntansi', 'akuntansi');
   function tgl_kita($tanggal) {
     $bulan = array(
       1 =>   'Jan',
@@ -55,6 +56,8 @@
   <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
+  <!-- Toastr -->
+  <link rel="stylesheet" href="<?= BASEURL; ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <!-- Theme style -->
   <link rel="apple-touch-icon" sizes="180x180" href="<?= BASEURL; ?>/images/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="<?= BASEURL; ?>/images/favicon-32x32.png">

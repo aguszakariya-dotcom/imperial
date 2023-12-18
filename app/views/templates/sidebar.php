@@ -54,169 +54,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Layout Options
-                <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Top Navigation + Sidebar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/boxed.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Boxed</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Sidebar <small>+ Custom Area</small></p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-topnav.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Navbar</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/fixed-footer.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Fixed Footer</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Collapsed Sidebar</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Charts
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/charts/chartjs.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>ChartJS</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/flot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Flot</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/inline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inline</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/charts/uplot.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>uPlot</p>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-tree"></i>
-              <p>
-                UI Elements
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/UI/general.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>General</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/icons.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Icons</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/buttons.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Buttons</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/sliders.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Sliders</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/modals.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Modals & Alerts</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/navbar.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Navbar & Tabs</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/timeline.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Timeline</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/UI/ribbons.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Ribbons</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+
           <li class="nav-item">
             <a href="#" class="nav-link <?= (strpos($data['title'], 'Forms') !== false) ? 'active' : ''; ?>">
               <i class="nav-icon fas fa-edit"></i>
@@ -381,15 +219,21 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= BASEURL; ?>akuntansi/rincian" class="nav-link <?= (strpos($data['subTitle'], 'List Rincian Transaksi') !== false) ? 'active' : ''; ?>">
+                <a href="<?= BASEURL; ?>/rincian" class="nav-link <?= (strpos($data['subTitle'], 'List Rincian Transaksi') !== false) ? 'active' : ''; ?>">
                   <i class="far fa-circle nav-icon text-info"></i>
                   <p>List Rincian Transaksi</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="<?= $BASEURL; ?>/laporan" class="nav-link <?= (strpos($data['subTitle'], 'Laporan laba-Rugi') !== false) ? 'active' : ''; ?>">
+                <a href="<?= BASEURL; ?>/laporan/laba" class="nav-link <?= (strpos($data['subTitle'], 'Laporan Laba-Rugi') !== false) ? 'active' : ''; ?>">
+                  <i class="far fa-circle nav-icon text-primary"></i>
+                  <p>Laporan Laba-Rugi</p>
+                </a>
+              </li>              
+              <li class="nav-item">
+                <a href="<?= BASEURL; ?>/karyawan/daftar_gaji" class="nav-link <?= (strpos($data['subTitle'], 'List Gaji Karyawan') !== false) ? 'active' : ''; ?>">
                   <i class="far fa-circle nav-icon text-fuchsia"></i>
-                  <p>Laporan laba-Rugi</p>
+                  <p>List Gaji Karyawan</p>
                 </a>
               </li>              
             </ul>
@@ -404,19 +248,20 @@
             </a>
             <ul class="nav nav-treeview">
             <li class="nav-item">
-            <a href="<?= BASEURL; ?>/pages" class="nav-link <?= (strpos($subTitle, 'Animasi') !== false) ? 'active' : ''; ?>">
+
+            <a href="<?= BASEURL; ?>/pages" class="nav-link <?= (strpos($data['subTitle'], 'Animasi') !== false) ? 'active' : ''; ?>">
                 <i class="nav-icon far fa-circle text-danger"></i>
                 <p class="text">Animasi</p>
               </a>
             </li>
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/pages/fendi" class="nav-link <?= (strpos($subTitle, 'Tahapan Fendi') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/tahapan/fendi" class="nav-link <?= (strpos($data['subTitle'], 'Tahapan Fendi') !== false) ? 'active' : ''; ?>">
                 <i class="nav-icon far fa-circle text-success"></i>
                 <p class="text">Fendi</p>
               </a>
               </li>
               <li class="nav-item">
-              <a href="<?= BASEURL; ?>/pages/hafidz" class="nav-link <?= (strpos($subTitle, 'Tahapan Hafidz') !== false) ? 'active' : ''; ?>">
+              <a href="<?= BASEURL; ?>/tahapan/hafidz" class="nav-link <?= (strpos($data['subTitle'], 'Tahapan Hafidz') !== false) ? 'active' : ''; ?>">
                 <i class="nav-icon far fa-circle text-warning"></i>
                 <p class="text">Hafidz</p>
               </a>
@@ -636,7 +481,7 @@
           </li>
           <li class="nav-header">EXTRAS</li>
           <li class="nav-item">
-          <a href="<?= BASEURL; ?>/pages" class="nav-link <?= (strpos($subTitle, 'Animasi') !== false) ? 'active' : ''; ?>">
+          <a href="<?= BASEURL; ?>/pages" class="nav-link <?= (strpos($data['subTitle'], 'Animasi') !== false) ? 'active' : ''; ?>">
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">Animasi</p>
             </a>
@@ -663,7 +508,10 @@
    <!-- Content Wrapper. Contains page content -->
    <div class="content-wrapper">
     <!-- /.content-header -->
+    <div class="float-right mr-5 mt-3">
 
+      <?php Flasher::flash(); ?>
+    </div>
     <!-- Main content -->
     <section class="content py-2">
       <div class="container-fluid mt-5 pb-5 justify-content-center">

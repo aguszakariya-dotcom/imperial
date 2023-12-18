@@ -43,12 +43,14 @@ class Form extends Controller {
     public function tambahGaji() {
         if( $this->model('Form_model')->tambahGajiKaryawan($_POST) > 0 ) {
             Flasher::setFlash('berhasil', 'ditambahkan', 'info');
+            // Flasher::setSweetAlertNotification('Data berhasil ditambahkan.', 'success');
             header('location: ' . BASEURL . '/form/salary_karyawan');
             exit;
         } else {
             Flasher::setFlash('gagal', 'ditambahkan', 'danger');
+            // Flasher::setSweetAlertNotification('Gagal menambahkan data.', 'error');
             header('location: ' . BASEURL . '/form/salary_karyawan');
-            exit;            
+            exit;
         }
     }
     public function hapusGaji($id) {

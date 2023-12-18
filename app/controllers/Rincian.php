@@ -2,7 +2,7 @@
 class Rincian extends Controller {
     public function index() {
         $data['title'] = 'Akuntansi';
-        $data['subTitle'] = 'Rincian Transaksi';
+        $data['subTitle'] = 'List Rincian Transaksi';
         $data['nama'] = $this->model('User_model')->getUser();
         // Memanggil metode getAllRincianTransaksi() langsung dari model tanpa membuat objek baru
         $data['rincian'] = $this->model('Rincian_model')->getAllPolaTransaksi();
@@ -35,7 +35,7 @@ class Rincian extends Controller {
         if ($result === 0) {
             Flasher::setFlash('gagal', 'dihapus: ' . $result, 'danger');
         } else {
-            Flasher::setFlash('berhasil', 'dihapus', 'info');
+            Flasher::setFlash('berhasil', 'Data Berhasil dihapus', 'btn-outline-info');
         }
         header('location: ' . BASEURL . '/rincian');
         exit;

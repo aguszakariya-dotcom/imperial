@@ -2,7 +2,7 @@
 
 
 <div class="row mt-5 mb-5 justify-content-center animate__animated fadeIndownBig">
-    <div class="col-lg-8 ">
+    <div class="col-lg-5 ">
         <div class="card card-secondary">
             <div class="card-header "><i data-feather="plus-circle" class="text-light tambahAkun"></i></div>
             <div class="card-body">

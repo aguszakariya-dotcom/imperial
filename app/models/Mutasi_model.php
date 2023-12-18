@@ -42,7 +42,7 @@ class Mutasi_model {
         $tanggal = $data['tanggal'];
         $namaAkun1 = ucwords($data['namaAkun1']);
         $namaAkun2 = ucwords($data['namaAkun2']);
-        $nama3 = ucwords($data['nama3']);
+        // $nama3 = ucwords($data['nama3']);
         $noAkun1 = $data['noAkun1'];
         $noAkun2 = $data['noAkun2'];
         $noAkun3 = $data['noAkun3'];
@@ -59,7 +59,7 @@ class Mutasi_model {
                     :tanggal,
                     :namaAkun1,
                     :namaAkun2,
-                    :nama3,
+                    -- :nama3,/
                     :noAkun1,
                     :noAkun2,
                     :noAkun3,
@@ -75,7 +75,7 @@ class Mutasi_model {
         $this->db->bind('tanggal', $tanggal);
         $this->db->bind('namaAkun1', $namaAkun1);
         $this->db->bind('namaAkun2', $namaAkun2);
-        $this->db->bind('nama3', $nama3);
+        // $this->db->bind('nama3', $nama3);
         $this->db->bind('noAkun1', $noAkun1);
         $this->db->bind('noAkun2', $noAkun2);
         $this->db->bind('noAkun3', $noAkun3);
